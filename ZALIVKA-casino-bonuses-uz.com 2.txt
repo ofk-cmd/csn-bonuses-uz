@@ -1,0 +1,10 @@
+Домен: casino-bonuses-uz.com
+Сборка: 2026-06-17 (rating, light theme)
+
+Локальная проверка:
+  cd /Users/vv/Desktop/casino-bonuses-uz
+  python3 -m http.server 8767
+
+URL: http://localhost:8767/
+
+Архив: ~/Desktop/casino-bonuses-uz-com-last.zip
