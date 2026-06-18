@@ -32,7 +32,7 @@ SITES = {
         "legal_clean": False,
     },
     "prometey-b.kz": {
-        "root": Path("/Users/vv/Desktop/prometey-b"),
+        "root": Path("/Users/vv/Desktop/ofk-cmd-aviator"),
         "domain": "https://prometey-b.kz",
         "legal_clean": False,
     },
