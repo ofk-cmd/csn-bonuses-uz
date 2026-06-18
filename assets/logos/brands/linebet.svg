@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
-<rect width="64" height="64" rx="12" fill="#4f46e5"/>
-<text x="32" y="38" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="22" font-weight="700">L</text>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="linebet">
+<rect width="64" height="64" rx="12" fill="#ffffff"/>
+<image xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABXUlEQVQ4jaXTP2tUURAF8N+9+1jWJTzDgssaFgySYNRGBItoYyFWVqKNWNjZ6YcQtPIz2CYgWtnZ2FjbiaZJIRgWFJEI6/Nlr4VX8lifIuzAcJk/5zAzhxtSShaxuBAa4T96rmANQxzHCCVe4aEcXMU19FsIXuAj0px/w2W41UiO5sARnxr1d9jBQY63I4rc/BlVywRf8nsXp7CO9zk3KVDnYPa3I2Q7m6fdxEm8wf3Cv5WIDeJ7c7UuzjXBs5YpZg5XfIqbuIQtnMHz2JigdrhvG8GTTPK60VcWjeYurmfAGo5l0ARjPMaDXCsz5hnc8afGv/0G3rbkd/Q9Mo4K9DLbvl9STrBnEHYFL7Gv1pfshfVQKUPXgamjYWIQzodwobOKi6KvqH1PlV7oWQ1D0Wn0/VCqDRwx1AkjjE1TVBHC7XyGjhWsqAwlY9EJbGAJS5Jl04ZOQRcfwqLf+Sei/2Foh2Q8vQAAAABJRU5ErkJggg==" x="4" y="4" width="56" height="56" preserveAspectRatio="xMidYMid meet"/>
 </svg>

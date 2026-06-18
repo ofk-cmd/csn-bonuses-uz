@@ -12,7 +12,7 @@ from index_expand_2000 import index_extra_sections
 
 ROOT = Path(__file__).resolve().parent.parent
 DOMAIN = "https://casino-bonuses-uz.com"
-CSS_V = "20260618b"
+CSS_V = "20260618c"
 PARTNER = "https://bobaffs.org/click?o=1603&a=189"
 
 # 20 brands popular in Google UZ (casino + BK)
@@ -207,9 +207,71 @@ def rel_prefix(lang: str) -> str:
     return "../" if lang == "ru" else ""
 
 
+def site_root_prefix(lang: str, depth: int = 0) -> str:
+    """Path from HTML file to site root. depth 0=index, 1=brand/hub nested."""
+    if lang == "ru":
+        return "../" if depth == 0 else "../../"
+    return "" if depth == 0 else "../"
+
+
+def css_href(lang: str, depth: int = 0) -> str:
+    p = site_root_prefix(lang, depth)
+    return f"{p}css" if p else "css"
+
+
+def assets_href(lang: str, depth: int = 0) -> str:
+    p = site_root_prefix(lang, depth)
+    return f"{p}assets" if p else "assets"
+
+
+def js_href(lang: str, depth: int = 0) -> str:
+    p = site_root_prefix(lang, depth)
+    return f"{p}js" if p else "js"
+
+
+def css_links(lang: str, depth: int = 0, extra: str = "") -> str:
+    base = css_href(lang, depth)
+    v = CSS_V
+    return f'''<link rel="stylesheet" href="{base}/style.css?v={v}" />
+  <link rel="stylesheet" href="{base}/fairpari-light-theme.css?v={v}" />
+  <link rel="stylesheet" href="{base}/fairpari-v2.css?v={v}" />
+  <link rel="stylesheet" href="{base}/rating-cards.css?v={v}" />
+  <link rel="stylesheet" href="{base}/rating-site-ui.css?v={v}" />
+  {extra}'''
+
+
+def header_block(lang: str, depth: int = 0) -> str:
+    assets = assets_href(lang, depth)
+    home = "/ru/" if lang == "ru" else "/"
+    if lang == "ru":
+        nav = (
+            '<a href="/ru/#rating">Рейтинг</a>'
+            '<a href="/ru/kazino-bonuslari/">Типы бонусов</a>'
+            '<a href="/ru/fairpari/">FairPari</a>'
+            '<a href="/ru/faq/">FAQ</a>'
+        )
+        cta = "Получить бонус"
+        switch_href, switch_label, switch_lang = "/", "UZ", "uz-UZ"
+    else:
+        nav = (
+            '<a href="/#rating">Reyting</a>'
+            '<a href="/kazino-bonuslari/">Bonus turlari</a>'
+            '<a href="/fairpari/">FairPari</a>'
+            '<a href="/faq/">FAQ</a>'
+        )
+        cta = "Bonus olish"
+        switch_href, switch_label, switch_lang = "/ru/", "RU", "ru-UZ"
+    nav_aria = "Разделы" if lang == "ru" else "Sayt bo'limlari"
+    return f'''<header class="site-header"><div class="site-header__inner">
+  <a class="brand" href="{home}"><img class="brand__logo-img" src="{assets}/logo-casino-bonuses-uz.svg" alt="Casino Bonuses UZ" width="180" height="32" loading="eager" /></a>
+  <nav class="nav-desktop" aria-label="{nav_aria}">{nav}<a class="lang-switch" href="{switch_href}" hreflang="{switch_lang}" style="margin-left:12px;font-weight:600">{switch_label}</a></nav>
+  <button type="button" class="btn btn--gold js-go-partner">{cta}</button>
+</div></header>'''
+
+
 def card_html(b: dict, rank: int, lang: str) -> str:
     prefix = "/ru/" if lang == "ru" else "/"
-    logo = f"{'../' if lang == 'ru' else ''}{logo_path(b['slug'])}"
+    logo = f"{assets_href(lang, 0)}/logos/brands/{b['slug']}.svg"
     welcome = b["welcome_ru"] if lang == "ru" else b["welcome_uz"]
     pros = b["pros_ru"] if lang == "ru" else b["pros_uz"]
     cons = b["cons_ru"] if lang == "ru" else b["cons_uz"]
@@ -286,7 +348,7 @@ def rating_section(lang: str) -> str:
 </section>'''
 
 
-def head_block(lang: str, title: str, desc: str, url: str, extra_css: str = "", href_uz: str = "", href_ru: str = "") -> str:
+def head_block(lang: str, title: str, desc: str, url: str, extra_css: str = "", href_uz: str = "", href_ru: str = "", depth: int = 0, extra_head: str = "") -> str:
     if not href_uz:
         href_uz = f"{DOMAIN}/"
     if not href_ru:
@@ -294,23 +356,12 @@ def head_block(lang: str, title: str, desc: str, url: str, extra_css: str = "", 
     canonical = url
     og_loc = "ru_UZ" if lang == "ru" else "uz_UZ"
     html_lang = "ru-UZ" if lang == "ru" else "uz-UZ"
-    switch_href = "/" if lang == "ru" else "/ru/"
-    switch_label = "UZ" if lang == "ru" else "RU"
-    switch_lang = "uz-UZ" if lang == "ru" else "ru-UZ"
-    if lang == "ru":
-        nav = '<a href="/ru/#rating">Рейтинг</a><a href="/ru/kazino-bonuslari/">Типы бонусов</a><a href="/ru/fairpari/">FairPari</a><a href="/ru/faq/">FAQ</a>'
-        home = "/ru/"
-        cta = "Получить бонус"
-        brand_alt = "Casino Bonuses UZ"
-    else:
-        nav = '<a href="#rating">Reyting</a><a href="kazino-bonuslari/">Bonus turlari</a><a href="fairpari/">FairPari</a><a href="faq/">FAQ</a>'
-        home = "/"
-        cta = "Bonus olish"
-        brand_alt = "Casino Bonuses UZ"
-    css_base = f'../css' if lang == "ru" else 'css'
-    assets = f'{css_base}/../assets' if lang == "ru" else 'assets'
+    assets = assets_href(lang, depth)
+    skip = ""
+    if lang != "ru":
+        skip = '<a class="skip-link" href="#main">Asosiy kontentga o\'tish</a>\n'
     return f'''<!DOCTYPE html>
-<html lang="{html_lang}" data-site="rating-light">
+<html lang="{html_lang}" data-site="rating-light" data-template="v2">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -319,10 +370,7 @@ def head_block(lang: str, title: str, desc: str, url: str, extra_css: str = "", 
   <title>{escape(title)}</title>
   <meta name="description" content="{escape(desc)}" />
   <link rel="icon" href="{assets}/favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="{css_base}/style.css?v={CSS_V}" />
-  <link rel="stylesheet" href="{css_base}/fairpari-light-theme.css?v={CSS_V}" />
-  <link rel="stylesheet" href="{css_base}/rating-cards.css?v={CSS_V}" />
-  {extra_css}
+  {css_links(lang, depth, extra_css)}
   <link rel="canonical" href="{canonical}" />
   <link rel="alternate" hreflang="uz-UZ" href="{href_uz}" />
   <link rel="alternate" hreflang="ru-UZ" href="{href_ru}" />
@@ -333,67 +381,68 @@ def head_block(lang: str, title: str, desc: str, url: str, extra_css: str = "", 
   <meta property="og:description" content="{escape(desc)}" />
   <meta property="og:url" content="{canonical}" />
   <meta property="og:image" content="{DOMAIN}/assets/hero-bonus-light.webp" />
-  <meta property="og:image:alt" content="{escape(brand_alt)}" />
+  <meta property="og:image:alt" content="Casino Bonuses UZ" />
   <meta property="og:locale" content="{og_loc}" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="{escape(title)}" />
   <meta name="twitter:description" content="{escape(desc)}" />
   <meta name="twitter:image" content="{DOMAIN}/assets/hero-bonus-light.webp" />
+  {extra_head}
 </head>
 <body class="site-fairpari-light">
-<header class="site-header"><div class="site-header__inner">
-  <a class="brand" href="{home}"><img src="{assets}/logo-fairpari.svg" alt="{brand_alt}" width="132" height="20" /></a>
-  <nav class="nav-desktop">{nav}<a class="lang-switch" href="{switch_href}" hreflang="{switch_lang}" style="margin-left:12px;font-weight:600">{switch_label}</a></nav>
-  <button type="button" class="btn btn--gold js-go-partner">{cta}</button>
-</div></header>'''
+{skip}{header_block(lang, depth)}'''
 
 
-def footer_block(lang: str) -> str:
-    css_base = "../css" if lang == "ru" else "css"
+def footer_block(lang: str, depth: int = 0) -> str:
+    assets = assets_href(lang, depth)
+    js = js_href(lang, depth)
     if lang == "ru":
-        links = '''<a href="/ru/">Главная</a>
+        nav_links = '''<a href="/ru/#rating">Рейтинг</a>
 <a href="/ru/kazino-bonuslari/">Типы бонусов</a>
+<a href="/ru/welcome-bonus/">Welcome</a>
 <a href="/ru/fairpari/">FairPari</a>
 <a href="/ru/faq/">FAQ</a>'''
         legal = '''<a href="/ru/politika-konfidentsialnosti">Конфиденциальность</a>
 <a href="/ru/usloviya-ispolzovaniya">Условия</a>
 <a href="/ru/politika-cookie">Cookie</a>
-<a href="/ru/otvetstvennaya-igra">Ответственная игра</a>'''
-        disc = "18+. casino-bonuses-uz.com — независимый рейтинг. Не оператор."
-        sticky = ("Стартовый пакет:", "20,2 млн UZS + 150 фриспинов", "Активировать", "Закрыть")
-        skip = ""
-        nav_aria = "Разделы"
+<a href="/ru/otvetstvennaya-igra">Ответственная игра</a>
+<a class="footer-lang" href="/">O'zbekcha</a>'''
+        disc = "Независимый рейтинг казино и БК Узбекистана. Материалы носят информационный характер и не являются приглашением к игре."
+        sticky_title = 'Стартовый пакет FairPari <span class="bonus">20,2 млн UZS + 150 FS</span>'
+        sticky_btn = "Активировать"
+        badge_alt = ("eCOGRA", "DMCA", "BeGambleAware")
     else:
-        links = '''<a href="/">Bosh sahifa</a>
-<a href="kazino-bonuslari/">Kazino bonuslari</a>
-<a href="fairpari/">FairPari</a>
-<a href="faq/">FAQ</a>'''
+        nav_links = '''<a href="/#rating">Reyting</a>
+<a href="/kazino-bonuslari/">Kazino bonuslari</a>
+<a href="/welcome-bonus/">Welcome</a>
+<a href="/fairpari/">FairPari</a>
+<a href="/faq/">FAQ</a>'''
         legal = '''<a href="/maxfiylik-siyosati">Maxfiylik</a>
 <a href="/foydalanish-shartlari">Shartlar</a>
 <a href="/cookie-siyosati">Cookie</a>
-<a href="/masuliyatli-oyin">Mas'uliyatli o'yin</a>'''
-        disc = "18+. casino-bonuses-uz.com — mustaqil reyting. Operator emas."
-        sticky = ("Start paketi:", "20,2 mln UZS + 150 frispin", "Faollashtirish", "Yopish")
-        skip_label = "Asosiy kontentga o'tish"
-        skip = f'<a class="skip-link" href="#main">{skip_label}</a>\n'
-        nav_aria = "Sayt bo'limlari"
-    return f'''{skip}<nav class="footer-links footer-links--audit" aria-label="{nav_aria}">
-{links}
-</nav>
-<footer class="site-footer"><div class="container">
-  <nav class="footer-legal">{legal}</nav>
-  <p class="footer-disclaimer">{disc}</p>
-</div></footer>
-<script src="{css_base}/../js/partner.js?v={CSS_V}"></script>
-<script src="{css_base}/../js/main.js?v={CSS_V}"></script>
-<script src="{css_base}/../js/rating-filter.js?v={CSS_V}"></script>
-<aside class="sticky-cta sticky-cta--dock" id="sticky-cta" role="complementary">
-  <div class="sticky-cta__panel">
-    <p class="sticky-cta__text"><span class="sticky-cta__prefix">{sticky[0]}</span> <strong class="sticky-cta__highlight">{sticky[1]}</strong></p>
-    <button type="button" class="btn btn--gold sticky-cta__btn js-go-partner">{sticky[2]}</button>
-    <button type="button" class="sticky-cta__close" aria-label="{sticky[3]}">×</button>
+<a href="/masuliyatli-oyin">Mas'uliyatli o'yin</a>
+<a class="footer-lang" href="/ru/">Русская версия</a>'''
+        disc = "O'zbekiston uchun mustaqil kazino va BK reytingi. Materiallar axborot xarakterida; bu tikish yoki o'ynashga chaqiruv emas."
+        sticky_title = 'FairPari start paketi <span class="bonus">20,2 mln UZS + 150 FS</span>'
+        sticky_btn = "Faollashtirish"
+        badge_alt = ("eCOGRA sertifikat", "DMCA himoya", "BeGambleAware")
+    return f'''<footer class="site-footer"><div class="container">
+  <nav class="footer-nav" aria-label="Footer">{nav_links}</nav>
+  <div class="footer-badges">
+    <img class="footer-badge-img" src="{assets}/logos/footer/ecogra.svg" alt="{badge_alt[0]}" width="88" height="32" loading="lazy" />
+    <img class="footer-badge-img" src="{assets}/logos/footer/dmca.svg" alt="{badge_alt[1]}" width="88" height="32" loading="lazy" />
+    <img class="footer-badge-img" src="{assets}/logos/footer/begambleaware.svg" alt="{badge_alt[2]}" width="120" height="32" loading="lazy" />
   </div>
-</aside>
+  <nav class="footer-legal-nav">{legal}</nav>
+  <p class="footer-disclaimer"><span class="age">18+</span>. {disc}</p>
+</div></footer>
+<script src="{js}/partner.js?v={CSS_V}"></script>
+<script src="{js}/main.js?v={CSS_V}"></script>
+<script src="{js}/rating-filter.js?v={CSS_V}"></script>
+<div class="sticky-banner" id="sticky-banner" role="complementary" aria-label="Bonus">
+  <p class="sticky-banner-title">{sticky_title}</p>
+  <button type="button" class="btn btn--gold js-go-partner">{sticky_btn}</button>
+</div>
 </body></html>'''
 
 
@@ -478,45 +527,26 @@ def build_index(lang: str):
 
 def build_review(b: dict, rank: int, lang: str):
     slug = b["slug"]
-    prefix = "../" if lang == "ru" else ""
+    depth = 1
     base = ROOT / ("ru" if lang == "ru" else "") / slug
     base.mkdir(parents=True, exist_ok=True)
     path = base / "index.html"
     welcome = b["welcome_ru"] if lang == "ru" else b["welcome_uz"]
-    pros = b["pros_ru"] if lang == "ru" else b["pros_uz"]
-    cons = b["cons_ru"] if lang == "ru" else b["cons_uz"]
-    alt_lang = "uz" if lang == "ru" else "ru"
-    alt_path = f"/{slug}/" if lang == "ru" else f"/ru/{slug}/"
     canonical = f"{DOMAIN}/{'ru/' if lang == 'ru' else ''}{slug}/"
+    hreflang_uz = f"{DOMAIN}/{slug}/"
+    hreflang_ru = f"{DOMAIN}/ru/{slug}/"
 
     if lang == "ru":
         title = f"{b['name']} бонус — обзор казино/БК #{rank} Узбекистан 2026"
         desc = f"{b['name']} в Узбекистане: welcome {welcome}, wagering {b['wagering']}, {b['pay']}. Независимый обзор #{rank}, 18+."
-        h1 = f"{b['name']} — обзор бонусов (#{rank})"
-        crumb_home, crumb = "Главная", b["name"]
-        rank_lbl, welcome_lbl, wag_lbl, pay_lbl = "Позиция", "Welcome", "Вейджер", "Платёж"
-        pros_h, cons_h = "Плюсы", "Минусы"
-        cta = "Получить бонус"
-        back = f'<a href="/ru/#rating">← К рейтингу</a>'
-        compare = f'Сравните с <a href="/ru/fairpari/">FairPari №1</a> — 20,2 млн UZS + 150 FS.'
-        body_intro = f"<strong>{b['name']}</strong> в нашем рейтинге <strong>#{rank}</strong>. Welcome: <strong>{welcome}</strong>, вейджер <strong>{b['wagering']}</strong>."
-        switch_href, switch = f"/{slug}/", "UZ"
+        crumb_home = "Главная"
     else:
         title = f"{b['name']} kazino bonusi — #{rank} sharh O'zbekiston 2026"
         desc = f"{b['name']} O'zbekistonda: welcome {welcome}, wagering {b['wagering']}, {b['pay']}. Mustaqil #{rank} sharh, 18+."
-        h1 = f"{b['name']} — bonus sharhi (#{rank})"
-        crumb_home, crumb = "Bosh sahifa", b["name"]
-        rank_lbl, welcome_lbl, wag_lbl, pay_lbl = "Reyting", "Welcome", "Wagering", "To'lov"
-        pros_h, cons_h = "Afzalliklar", "Kamchiliklar"
-        cta = "Bonusni olish"
-        back = f'<a href="/#rating">← Reytingga</a>'
-        compare = f'<a href="/fairpari/">FairPari #1</a> bilan solishtiring — 20,2 mln UZS + 150 FS.'
-        body_intro = f"<strong>{b['name']}</strong> reytingimizda <strong>#{rank}</strong>. Welcome: <strong>{welcome}</strong>, wagering <strong>{b['wagering']}</strong>."
-        switch_href, switch = f"/ru/{slug}/", "RU"
+        crumb_home = "Bosh sahifa"
 
-    pros_ul = "".join(f"<li>{escape(p)}</li>" for p in pros)
-    cons_ul = "".join(f"<li>{escape(c)}</li>" for c in cons)
-    logo = f"{prefix}{logo_path(slug)}"
+    home = "/ru/" if lang == "ru" else "/"
+    logo = f"{assets_href(lang, depth)}/logos/brands/{slug}.svg"
     article_body = render_body(b, rank, lang, logo)
 
     schema = json.dumps({
@@ -530,57 +560,16 @@ def build_review(b: dict, rank: int, lang: str):
     }, ensure_ascii=False)
 
     faq_ld = faq_schema(b, rank, lang)
-
-    hreflang_uz = f"{DOMAIN}/{slug}/"
-    hreflang_ru = f"{DOMAIN}/ru/{slug}/"
-    html_lang = "ru-UZ" if lang == "ru" else "uz-UZ"
-    css_base = "../css" if lang == "ru" else "css"
-    home = "/ru/" if lang == "ru" else "/"
-    nav_ru = lang == "ru"
-
-    html = f'''<!DOCTYPE html>
-<html lang="{html_lang}">
-<head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<meta name="robots" content="index, follow, max-image-preview:large"/>
-<title>{escape(title)}</title>
-<meta name="description" content="{escape(desc)}"/>
-<link rel="stylesheet" href="{css_base}/style.css?v={CSS_V}"/>
-<link rel="stylesheet" href="{css_base}/fairpari-light-theme.css?v={CSS_V}"/>
-<link rel="canonical" href="{canonical}"/>
-<link rel="alternate" hreflang="uz-UZ" href="{hreflang_uz}"/>
-<link rel="alternate" hreflang="ru-UZ" href="{hreflang_ru}"/>
-<link rel="alternate" hreflang="x-default" href="{hreflang_uz}"/>
-<meta property="og:type" content="article"/>
-<meta property="og:site_name" content="Casino Bonuses UZ"/>
-<meta property="og:title" content="{escape(title)}"/>
-<meta property="og:description" content="{escape(desc)}"/>
-<meta property="og:url" content="{canonical}"/>
-<meta property="og:image" content="{DOMAIN}/assets/hero-bonus-light.webp"/>
-<meta property="og:locale" content="{'ru_UZ' if lang == 'ru' else 'uz_UZ'}"/>
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="{escape(title)}"/>
-<meta name="twitter:description" content="{escape(desc)}"/>
+    extra_head = f'''<meta property="og:type" content="article" />
 <script type="application/ld+json">{schema}</script>
-<script type="application/ld+json">{faq_ld}</script>
-</head>
-<body class="site-fairpari-light">
-<header class="site-header"><div class="site-header__inner">
-<a class="brand" href="{home}"><img src="{prefix}assets/logo-fairpari.svg" alt="Casino Bonuses UZ" width="132" height="20"/></a>
-<nav class="nav-desktop">
-<a href="{home}#rating">{"Рейтинг" if nav_ru else "Reyting"}</a>
-<a href="{home}{"kazino-bonuslari/" if not nav_ru else "kazino-bonuslari/"}">{"Типы бонусов" if nav_ru else "Bonus turlari"}</a>
-<a href="{home}fairpari/">FairPari</a>
-<a class="lang-switch" href="{switch_href}" hreflang="{'uz-UZ' if lang == 'ru' else 'ru-UZ'}" style="margin-left:12px;font-weight:600">{switch}</a>
-</nav>
-<button type="button" class="btn btn--gold js-go-partner">{"Получить бонус" if nav_ru else "Bonus olish"}</button>
-</div></header>
+<script type="application/ld+json">{faq_ld}</script>'''
+
+    html = f'''{head_block(lang, title, desc, canonical, href_uz=hreflang_uz, href_ru=hreflang_ru, depth=depth, extra_head=extra_head)}
 <main id="main" class="container" style="padding:2rem 1rem">
-<nav class="breadcrumbs" aria-label="Breadcrumb"><a href="{home}">{crumb_home}</a> / <span>{crumb}</span></nav>
+<nav class="breadcrumbs" aria-label="Breadcrumb"><a href="{home}">{crumb_home}</a> / <span>{escape(b["name"])}</span></nav>
 {article_body}
 </main>
-{footer_block(lang)}'''
+{footer_block(lang, depth)}'''
     path.write_text(html, encoding="utf-8")
 
 
@@ -660,49 +649,17 @@ HUB_META = {
 
 def build_hub(slug: str, lang: str):
     meta = HUB_META[slug][lang]
-    prefix = "../" if lang == "ru" else ""
+    depth = 1
     base = ROOT / ("ru" if lang == "ru" else "") / slug
     base.mkdir(parents=True, exist_ok=True)
     path = base / "index.html"
     canonical = f"{DOMAIN}/{'ru/' if lang == 'ru' else ''}{slug}/"
     hreflang_uz = f"{DOMAIN}/{slug}/"
     hreflang_ru = f"{DOMAIN}/ru/{slug}/"
-    switch_href = f"/{slug}/" if lang == "ru" else f"/ru/{slug}/"
     html_lang = "ru-UZ" if lang == "ru" else "uz-UZ"
-    css_base = "../css" if lang == "ru" else "css"
     home = "/ru/" if lang == "ru" else "/"
-    nav_ru = lang == "ru"
-    crumb_home = "Главная" if nav_ru else "Bosh sahifa"
+    crumb_home = "Главная" if lang == "ru" else "Bosh sahifa"
     body_content = hub_body(slug, lang)
-
-    if nav_ru:
-        nav = (
-            '<a href="/ru/#rating">Рейтинг</a>'
-            '<a href="/ru/kazino-bonuslari/">Типы бонусов</a>'
-            '<a href="/ru/welcome-bonus/">Welcome</a>'
-            '<a href="/ru/depozitsiz-bonus/">Без депозита</a>'
-            '<a href="/ru/tolov-uz/">Платежи</a>'
-            '<a href="/ru/fairpari/">FairPari</a>'
-            '<a href="/ru/faq/">FAQ</a>'
-        )
-        cta = "Получить бонус"
-        switch = "UZ"
-        skip = ""
-        nav_aria = "Разделы"
-    else:
-        nav = (
-            '<a href="../#rating">Reyting</a>'
-            '<a href="../kazino-bonuslari/">Bonus turlari</a>'
-            '<a href="../welcome-bonus/">Welcome</a>'
-            '<a href="../depozitsiz-bonus/">Depozitsiz</a>'
-            '<a href="../tolov-uz/">To\'lovlar</a>'
-            '<a href="../fairpari/">FairPari</a>'
-            '<a href="../faq/">FAQ</a>'
-        )
-        cta = "Bonus olish"
-        switch = "RU"
-        skip = '<a class="skip-link" href="#main">Asosiy kontentga o\'tish</a>'
-        nav_aria = "Asosiy menyu"
 
     schema = json.dumps({
         "@context": "https://schema.org",
@@ -718,47 +675,12 @@ def build_hub(slug: str, lang: str):
         ],
     }, ensure_ascii=False)
 
-    html = f'''<!DOCTYPE html>
-<html lang="{html_lang}">
-<head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<meta name="theme-color" content="#ffffff"/>
-<meta name="robots" content="index, follow, max-image-preview:large"/>
-<title>{escape(meta["title"])}</title>
-<meta name="description" content="{escape(meta["desc"])}"/>
-<link rel="icon" href="{prefix}assets/favicon.svg" type="image/svg+xml"/>
-<link rel="stylesheet" href="{css_base}/style.css?v={CSS_V}"/>
-<link rel="stylesheet" href="{css_base}/fairpari-light-theme.css?v={CSS_V}"/>
-<link rel="canonical" href="{canonical}"/>
-<link rel="alternate" hreflang="uz-UZ" href="{hreflang_uz}"/>
-<link rel="alternate" hreflang="ru-UZ" href="{hreflang_ru}"/>
-<link rel="alternate" hreflang="x-default" href="{hreflang_uz}"/>
-<meta property="og:type" content="website"/>
-<meta property="og:site_name" content="Casino Bonuses UZ"/>
-<meta property="og:title" content="{escape(meta["title"])}"/>
-<meta property="og:description" content="{escape(meta["desc"])}"/>
-<meta property="og:url" content="{canonical}"/>
-<meta property="og:image" content="{DOMAIN}/assets/hero-bonus-light.webp"/>
-<meta property="og:locale" content="{'ru_UZ' if nav_ru else 'uz_UZ'}"/>
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="{escape(meta["title"])}"/>
-<meta name="twitter:description" content="{escape(meta["desc"])}"/>
-<script type="application/ld+json">{schema}</script>
-</head>
-<body class="site-fairpari-light">
-{skip}
-<header class="site-header"><div class="site-header__inner">
-<a class="brand" href="{home}"><img class="brand__logo-img" src="{prefix}assets/logo-fairpari.svg" alt="Casino Bonuses UZ" width="132" height="20" loading="eager"/></a>
-<nav class="nav-desktop" aria-label="{nav_aria}">{nav}
-<a class="lang-switch" href="{switch_href}" hreflang="{'uz-UZ' if nav_ru else 'ru-UZ'}" style="margin-left:12px;font-weight:600">{switch}</a>
-</nav>
-<button type="button" class="btn btn--gold js-go-partner">{cta}</button>
-</div></header>
+    extra_head = f'<script type="application/ld+json">{schema}</script>'
+    html = f'''{head_block(lang, meta["title"], meta["desc"], canonical, href_uz=hreflang_uz, href_ru=hreflang_ru, depth=depth, extra_head=extra_head)}
 <main id="main" class="container" style="padding:2rem 1rem">
 {body_content}
 </main>
-{footer_block(lang)}'''
+{footer_block(lang, depth)}'''
     path.write_text(html, encoding="utf-8")
     print(f"hub: {path.relative_to(ROOT)}")
 

@@ -1,0 +1,218 @@
+/* casino-bonuses-uz.com — header, footer, sticky (fairpari-betting reference) */
+
+.site-fairpari-light {
+  --max-width: 1240px;
+  padding-bottom: 100px;
+}
+
+.site-fairpari-light .site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.98);
+  border-bottom: 1px solid var(--border);
+  padding: 0;
+}
+
+.site-fairpari-light .site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: nowrap;
+  width: 100%;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0.65rem 1.25rem;
+  min-height: var(--header-h);
+}
+
+.site-fairpari-light .brand {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.site-fairpari-light .brand img,
+.site-fairpari-light .brand__logo-img {
+  height: 32px;
+  width: auto;
+  max-width: 180px;
+  object-fit: contain;
+  display: block;
+}
+
+.site-fairpari-light .nav-desktop {
+  display: none;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.site-fairpari-light .nav-desktop a {
+  padding: 0.4rem 0.65rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--ink);
+  text-decoration: none;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+.site-fairpari-light .nav-desktop a:hover {
+  color: var(--accent);
+  background: var(--accent-dim);
+}
+
+.site-fairpari-light .site-header .btn--gold {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+@media (min-width: 960px) {
+  .site-fairpari-light .nav-desktop {
+    display: flex;
+  }
+}
+
+@media (max-width: 959px) {
+  .site-fairpari-light .site-header__inner {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .site-fairpari-light .site-header .btn--gold {
+    margin-left: auto;
+  }
+}
+
+/* Footer */
+.site-fairpari-light .site-footer {
+  background: var(--bg-card);
+  border-top: 1px solid var(--border);
+  padding: 2rem 0 1.5rem;
+  margin-top: 2.5rem;
+}
+
+.site-fairpari-light .footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 1.25rem;
+  margin-bottom: 1.25rem;
+  font-size: 0.9rem;
+}
+
+.site-fairpari-light .footer-nav a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.site-fairpari-light .footer-nav a:hover {
+  color: var(--accent);
+}
+
+.site-fairpari-light .footer-badges {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.site-fairpari-light .footer-badge-img {
+  height: 32px;
+  width: auto;
+  opacity: 0.85;
+}
+
+.site-fairpari-light .footer-legal-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.8rem;
+}
+
+.site-fairpari-light .footer-legal-nav a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.site-fairpari-light .footer-legal-nav a:hover {
+  color: var(--accent);
+}
+
+.site-fairpari-light .footer-disclaimer {
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.site-fairpari-light .footer-disclaimer .age {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+/* Sticky banner — betting reference */
+.site-fairpari-light .sticky-banner {
+  position: fixed;
+  bottom: 16px;
+  left: 20px;
+  right: 20px;
+  z-index: 999;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  flex-wrap: wrap;
+}
+
+.site-fairpari-light .sticky-banner-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0;
+  line-height: 1.35;
+}
+
+.site-fairpari-light .sticky-banner-title .bonus {
+  color: var(--accent);
+}
+
+.site-fairpari-light .sticky-banner .btn--gold {
+  flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+  .site-fairpari-light .sticky-banner {
+    flex-direction: column;
+    text-align: center;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+  }
+
+  .site-fairpari-light .sticky-banner .btn--gold {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Brand logos in rating cards */
+.casino-card__logo {
+  object-fit: contain;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 4px;
+}
