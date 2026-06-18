@@ -7,6 +7,8 @@ from pathlib import Path
 from html import escape
 
 from brand_qttk_content import render_body, faq_schema
+from hub_expand_2000 import hub_body, SLUGS as HUB_SLUGS
+from index_expand_2000 import index_extra_sections
 
 ROOT = Path(__file__).resolve().parent.parent
 DOMAIN = "https://casino-bonuses-uz.com"
@@ -459,6 +461,7 @@ def build_index(lang: str):
   <figure class="hero__art"><img src="{img}" alt="{img_alt}" loading="eager" /></figure>
 </div></section>
 {rating_section(lang)}
+{index_extra_sections(lang)}
 <section class="section section--alt" id="criteria"><div class="container">
   <h2 class="section__title">{crit_title}</h2>
   <p>{crit_text}</p>
@@ -581,6 +584,191 @@ def build_review(b: dict, rank: int, lang: str):
     path.write_text(html, encoding="utf-8")
 
 
+HUB_META = {
+    "kazino-bonuslari": {
+        "uz": {
+            "title": "Kazino bonuslari turlari — welcome, FS, keshbek | UZ 2026",
+            "desc": "Onlayn kazino bonus turlari O'zbekistonda: welcome paket, depozitsiz so'rovlar, free spins, cashback va reload. Wagering jadvali, Humo/Payme, 18+.",
+            "crumb": "Kazino bonuslari turlari",
+            "headline": "Kazino bonuslari turlari — welcome, FS, keshbek",
+        },
+        "ru": {
+            "title": "Типы бонусов казино — welcome, FS, кешбэк | UZ 2026",
+            "desc": "Типы бонусов онлайн-казино в Узбекистане: welcome, фриспины, cashback, reload. Таблица вейджера, Humo/Payme, рейтинг TOP-20, 18+.",
+            "crumb": "Типы казино-бонусов",
+            "headline": "Типы казино-бонусов — welcome, FS, кешбэк",
+        },
+    },
+    "welcome-bonus": {
+        "uz": {
+            "title": "Welcome bonus taqqoslash 2026 — TOP-5 O'zbekiston",
+            "desc": "Welcome bonus O'zbekiston 2026: FairPari 20.2M UZS + 150 FS, 1win, Mostbet taqqoslash. Wagering, Humo/Payme, 4 depozit paket. Mustaqil reyting, 18+.",
+            "crumb": "Welcome bonus",
+            "headline": "Welcome bonus taqqoslash 2026",
+        },
+        "ru": {
+            "title": "Сравнение welcome-бонусов 2026 — Узбекистан",
+            "desc": "Welcome-бонус Узбекистан: 20,2 млн UZS + 150 FS, 4 депозита, wagering ×35. Сравнение FairPari и TOP-20 операторов, 18+.",
+            "crumb": "Welcome-бонусы",
+            "headline": "Сравнение welcome-бонусов 2026",
+        },
+    },
+    "depozitsiz-bonus": {
+        "uz": {
+            "title": "Depozitsiz bonus O'zbekiston — haqiqat va miflar 2026",
+            "desc": "Depozitsiz bonus va no deposit O'zbekistonda: nima haqiqiy, nima marketing. FairPari welcome alternativasi, minimal depozit, wagering ×35. 18+.",
+            "crumb": "Depozitsiz bonus",
+            "headline": "Depozitsiz bonus — haqiqat va miflar",
+        },
+        "ru": {
+            "title": "Бонус без депозита — рынок Узбекистана 2026",
+            "desc": "Запросы «бонус без депозита» и no deposit: что реально, а что маркетинг. Альтернатива — welcome FairPari, минимальный депозит, 18+.",
+            "crumb": "Бонус без депозита",
+            "headline": "Бонус без депозита — рынок Узбекистан",
+        },
+    },
+    "tolov-uz": {
+        "uz": {
+            "title": "Humo, Uzcard, Payme — kazino to'lovlari O'zbekiston",
+            "desc": "O'zbekistonda kazino to'lovlari: Humo, Uzcard, Click, Payme, kripto. Depozit va yechish vaqti, KYC, bonus faollashtirish. casino-bonuses-uz.com, 18+.",
+            "crumb": "To'lovlar",
+            "headline": "Kazino to'lovlari O'zbekiston",
+        },
+        "ru": {
+            "title": "Humo, Uzcard, Payme — платежи казино Узбекистан",
+            "desc": "Платежи казино в Узбекистане: Humo, Uzcard, Click, Payme, крипто. Депозит, вывод, KYC, активация бонуса. casino-bonuses-uz.com, 18+.",
+            "crumb": "Платежи",
+            "headline": "Платежи казино в Узбекистане",
+        },
+    },
+    "faq": {
+        "uz": {
+            "title": "Kazino bonuslari FAQ — welcome, wagering, Humo | O'zbekiston",
+            "desc": "Kazino bonuslari FAQ: welcome, depozitsiz bonus, wagering ×35, promo fa_1635, Humo/Payme, yechish. Javoblar casino-bonuses-uz.com portali, 18+.",
+            "crumb": "FAQ",
+            "headline": "Kazino bonuslari FAQ",
+        },
+        "ru": {
+            "title": "FAQ по бонусам казино — Узбекистан 2026",
+            "desc": "Ответы: welcome, бонус без депозита, wagering ×35, Humo/Payme, промокод fa_1635. Портал casino-bonuses-uz.com, 18+.",
+            "crumb": "FAQ",
+            "headline": "FAQ по бонусам казино",
+        },
+    },
+}
+
+
+def build_hub(slug: str, lang: str):
+    meta = HUB_META[slug][lang]
+    prefix = "../" if lang == "ru" else ""
+    base = ROOT / ("ru" if lang == "ru" else "") / slug
+    base.mkdir(parents=True, exist_ok=True)
+    path = base / "index.html"
+    canonical = f"{DOMAIN}/{'ru/' if lang == 'ru' else ''}{slug}/"
+    hreflang_uz = f"{DOMAIN}/{slug}/"
+    hreflang_ru = f"{DOMAIN}/ru/{slug}/"
+    switch_href = f"/{slug}/" if lang == "ru" else f"/ru/{slug}/"
+    html_lang = "ru-UZ" if lang == "ru" else "uz-UZ"
+    css_base = "../css" if lang == "ru" else "css"
+    home = "/ru/" if lang == "ru" else "/"
+    nav_ru = lang == "ru"
+    crumb_home = "Главная" if nav_ru else "Bosh sahifa"
+    body_content = hub_body(slug, lang)
+
+    if nav_ru:
+        nav = (
+            '<a href="/ru/#rating">Рейтинг</a>'
+            '<a href="/ru/kazino-bonuslari/">Типы бонусов</a>'
+            '<a href="/ru/welcome-bonus/">Welcome</a>'
+            '<a href="/ru/depozitsiz-bonus/">Без депозита</a>'
+            '<a href="/ru/tolov-uz/">Платежи</a>'
+            '<a href="/ru/fairpari/">FairPari</a>'
+            '<a href="/ru/faq/">FAQ</a>'
+        )
+        cta = "Получить бонус"
+        switch = "UZ"
+        skip = ""
+        nav_aria = "Разделы"
+    else:
+        nav = (
+            '<a href="../#rating">Reyting</a>'
+            '<a href="../kazino-bonuslari/">Bonus turlari</a>'
+            '<a href="../welcome-bonus/">Welcome</a>'
+            '<a href="../depozitsiz-bonus/">Depozitsiz</a>'
+            '<a href="../tolov-uz/">To\'lovlar</a>'
+            '<a href="../fairpari/">FairPari</a>'
+            '<a href="../faq/">FAQ</a>'
+        )
+        cta = "Bonus olish"
+        switch = "RU"
+        skip = '<a class="skip-link" href="#main">Asosiy kontentga o\'tish</a>'
+        nav_aria = "Asosiy menyu"
+
+    schema = json.dumps({
+        "@context": "https://schema.org",
+        "@graph": [
+            {"@type": "WebSite", "@id": f"{DOMAIN}/#website", "url": f"{DOMAIN}/",
+             "name": "Casino Bonuses UZ", "inLanguage": html_lang},
+            {"@type": "BreadcrumbList", "itemListElement": [
+                {"@type": "ListItem", "position": 1, "name": crumb_home, "item": home.rstrip("/") or DOMAIN},
+                {"@type": "ListItem", "position": 2, "name": meta["crumb"], "item": canonical},
+            ]},
+            {"@type": "Article", "headline": meta["headline"], "description": meta["desc"],
+             "inLanguage": html_lang, "url": canonical},
+        ],
+    }, ensure_ascii=False)
+
+    html = f'''<!DOCTYPE html>
+<html lang="{html_lang}">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="theme-color" content="#ffffff"/>
+<meta name="robots" content="index, follow, max-image-preview:large"/>
+<title>{escape(meta["title"])}</title>
+<meta name="description" content="{escape(meta["desc"])}"/>
+<link rel="icon" href="{prefix}assets/favicon.svg" type="image/svg+xml"/>
+<link rel="stylesheet" href="{css_base}/style.css?v={CSS_V}"/>
+<link rel="stylesheet" href="{css_base}/fairpari-light-theme.css?v={CSS_V}"/>
+<link rel="canonical" href="{canonical}"/>
+<link rel="alternate" hreflang="uz-UZ" href="{hreflang_uz}"/>
+<link rel="alternate" hreflang="ru-UZ" href="{hreflang_ru}"/>
+<link rel="alternate" hreflang="x-default" href="{hreflang_uz}"/>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="Casino Bonuses UZ"/>
+<meta property="og:title" content="{escape(meta["title"])}"/>
+<meta property="og:description" content="{escape(meta["desc"])}"/>
+<meta property="og:url" content="{canonical}"/>
+<meta property="og:image" content="{DOMAIN}/assets/hero-bonus-light.webp"/>
+<meta property="og:locale" content="{'ru_UZ' if nav_ru else 'uz_UZ'}"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="{escape(meta["title"])}"/>
+<meta name="twitter:description" content="{escape(meta["desc"])}"/>
+<script type="application/ld+json">{schema}</script>
+</head>
+<body class="site-fairpari-light">
+{skip}
+<header class="site-header"><div class="site-header__inner">
+<a class="brand" href="{home}"><img class="brand__logo-img" src="{prefix}assets/logo-fairpari.svg" alt="Casino Bonuses UZ" width="132" height="20" loading="eager"/></a>
+<nav class="nav-desktop" aria-label="{nav_aria}">{nav}
+<a class="lang-switch" href="{switch_href}" hreflang="{'uz-UZ' if nav_ru else 'ru-UZ'}" style="margin-left:12px;font-weight:600">{switch}</a>
+</nav>
+<button type="button" class="btn btn--gold js-go-partner">{cta}</button>
+</div></header>
+<main id="main" class="container" style="padding:2rem 1rem">
+{body_content}
+</main>
+{footer_block(lang)}'''
+    path.write_text(html, encoding="utf-8")
+    print(f"hub: {path.relative_to(ROOT)}")
+
+
+def build_all_hubs():
+    for slug in HUB_SLUGS:
+        build_hub(slug, "uz")
+        build_hub(slug, "ru")
+
+
 def build_sitemap():
     from datetime import datetime
 
@@ -660,6 +848,7 @@ def main():
     for i, b in enumerate(BRANDS):
         build_review(b, i + 1, "uz")
         build_review(b, i + 1, "ru")
+    build_all_hubs()
     build_sitemap()
     issues = audit_i18n()
     if issues:

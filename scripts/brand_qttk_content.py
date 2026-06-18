@@ -276,7 +276,8 @@ def render_body(b: dict, rank: int, lang: str, logo: str) -> str:
   <tbody><tr><td>{L["spbon_row"]}</td><td>{escape(sport_w)}</td><td>Wagering ×5 ekspress (taxminiy)</td></tr></tbody></table>
 </section>'''
 
-    faq_items = _faq_items(b, rank, lang)
+    from brand_expand_2000 import all_faq_items
+    faq_items = all_faq_items(b, rank, lang)
     faq_html = "".join(
         f'<article class="faq-item{" is-open" if i == 0 else ""}">'
         f'<button type="button" class="faq-item__question" aria-expanded="{"true" if i == 0 else "false"}">'
@@ -305,6 +306,9 @@ def render_body(b: dict, rank: int, lang: str, logo: str) -> str:
         ("Humo / Uzcard" if "Humo" in b["pay"] or "Uzcard" in b["pay"] else b["pay"], pay_dep2, pay_time2),
     ]:
         pay_rows += f"<tr><td>{escape(method)}</td><td>{escape(dep)}</td><td>{escape(time)}</td></tr>"
+
+    from brand_expand_2000 import extra_sections
+    extra_html = extra_sections(b, rank, lang)
 
     return f'''
 <article class="brand-review">
@@ -417,6 +421,7 @@ def render_body(b: dict, rank: int, lang: str, logo: str) -> str:
     <h2 class="section__title">{L["faq_h2"]}</h2></header>
     <div class="faq-list">{faq_html}</div>
   </section>
+  {extra_html}
 
   <p>{L["compare"]}</p>
   <p>{L["back"]}</p>
@@ -426,7 +431,8 @@ def render_body(b: dict, rank: int, lang: str, logo: str) -> str:
 
 def faq_schema(b, rank, lang):
     import json
-    items = _faq_items(b, rank, lang)
+    from brand_expand_2000 import all_faq_items
+    items = all_faq_items(b, rank, lang)
     return json.dumps({
         "@context": "https://schema.org",
         "@type": "FAQPage",
