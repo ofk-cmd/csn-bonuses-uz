@@ -6,6 +6,8 @@ import re
 from pathlib import Path
 from html import escape
 
+from brand_qttk_content import render_body, faq_schema
+
 ROOT = Path(__file__).resolve().parent.parent
 DOMAIN = "https://casino-bonuses-uz.com"
 CSS_V = "20260618b"
@@ -512,6 +514,7 @@ def build_review(b: dict, rank: int, lang: str):
     pros_ul = "".join(f"<li>{escape(p)}</li>" for p in pros)
     cons_ul = "".join(f"<li>{escape(c)}</li>" for c in cons)
     logo = f"{prefix}{logo_path(slug)}"
+    article_body = render_body(b, rank, lang, logo)
 
     schema = json.dumps({
         "@context": "https://schema.org",
@@ -522,6 +525,8 @@ def build_review(b: dict, rank: int, lang: str):
         "inLanguage": "ru-UZ" if lang == "ru" else "uz-UZ",
         "url": canonical,
     }, ensure_ascii=False)
+
+    faq_ld = faq_schema(b, rank, lang)
 
     hreflang_uz = f"{DOMAIN}/{slug}/"
     hreflang_ru = f"{DOMAIN}/ru/{slug}/"
@@ -555,6 +560,7 @@ def build_review(b: dict, rank: int, lang: str):
 <meta name="twitter:title" content="{escape(title)}"/>
 <meta name="twitter:description" content="{escape(desc)}"/>
 <script type="application/ld+json">{schema}</script>
+<script type="application/ld+json">{faq_ld}</script>
 </head>
 <body class="site-fairpari-light">
 <header class="site-header"><div class="site-header__inner">
@@ -569,32 +575,7 @@ def build_review(b: dict, rank: int, lang: str):
 </div></header>
 <main id="main" class="container" style="padding:2rem 1rem">
 <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="{home}">{crumb_home}</a> / <span>{crumb}</span></nav>
-<article>
-  <div class="casino-card" style="margin-bottom:1.5rem">
-    <div class="casino-card__rank-col">
-      <span class="casino-card__rank">#{rank}</span>
-      <img class="casino-card__logo" src="{logo}" alt="{escape(b['name'])}" width="64" height="64"/>
-    </div>
-    <div class="casino-card__body">
-      <h1 class="casino-card__title" style="font-size:1.5rem">{h1}</h1>
-      <div class="casino-card__score">{STAR}<span>{b['rating']:.1f}</span></div>
-      <p>{body_intro}</p>
-    </div>
-  </div>
-  <h2>{"Параметры бонуса" if lang == "ru" else "Bonus parametrlari"}</h2>
-  <table class="data-table data-table--compact"><tbody>
-    <tr><td>{rank_lbl}</td><td>#{rank}</td></tr>
-    <tr><td>{welcome_lbl}</td><td>{escape(welcome)}</td></tr>
-    <tr><td>{wag_lbl}</td><td>{b['wagering']}</td></tr>
-    <tr><td>{pay_lbl}</td><td>{escape(b['pay'])}</td></tr>
-  </tbody></table>
-  <h2>{pros_h}</h2><ul>{pros_ul}</ul>
-  <h2>{cons_h}</h2><ul>{cons_ul}</ul>
-  <h2>{"Сравнение" if lang == "ru" else "Taqqoslash"}</h2>
-  <p>{compare}</p>
-  <p>{back}</p>
-  <button type="button" class="btn btn--gold js-go-partner">{cta}</button>
-</article>
+{article_body}
 </main>
 {footer_block(lang)}'''
     path.write_text(html, encoding="utf-8")
