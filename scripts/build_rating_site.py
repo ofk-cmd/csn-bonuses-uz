@@ -582,27 +582,50 @@ def build_review(b: dict, rank: int, lang: str):
 
 
 def build_sitemap():
-    urls = [f"{DOMAIN}/", f"{DOMAIN}/ru/"]
-    hubs = ["kazino-bonuslari", "welcome-bonus", "depozitsiz-bonus", "tolov-uz", "faq", "fairpari"]
+    from datetime import datetime
+
+    def lastmod_for_path(rel_path: str) -> str:
+        p = ROOT / rel_path
+        if p.exists():
+            return datetime.fromtimestamp(p.stat().st_mtime).strftime("%Y-%m-%d")
+        return "2026-06-18"
+
+    entries: list[tuple[str, str, str]] = []  # loc, priority, lastmod
+
+    def add(loc: str, pri: str, rel: str):
+        entries.append((loc, pri, lastmod_for_path(rel)))
+
+    add(f"{DOMAIN}/", "1.0", "index.html")
+    add(f"{DOMAIN}/ru/", "1.0", "ru/index.html")
+
+    hubs = ["kazino-bonuslari", "welcome-bonus", "depozitsiz-bonus", "tolov-uz", "faq"]
     for h in hubs:
-        urls.append(f"{DOMAIN}/{h}/")
-        urls.append(f"{DOMAIN}/ru/{h}/")
+        add(f"{DOMAIN}/{h}/", "0.8", f"{h}/index.html")
+        add(f"{DOMAIN}/ru/{h}/", "0.8", f"ru/{h}/index.html")
+
     for b in BRANDS:
-        urls.append(f"{DOMAIN}/{b['slug']}/")
-        urls.append(f"{DOMAIN}/ru/{b['slug']}/")
+        slug = b["slug"]
+        add(f"{DOMAIN}/{slug}/", "0.8", f"{slug}/index.html")
+        add(f"{DOMAIN}/ru/{slug}/", "0.8", f"ru/{slug}/index.html")
+
     for leg in ["cookie-siyosati", "foydalanish-shartlari", "masuliyatli-oyin", "maxfiylik-siyosati"]:
-        urls.append(f"{DOMAIN}/{leg}")
+        add(f"{DOMAIN}/{leg}", "0.3", f"{leg}.html")
     for leg in ["politika-konfidentsialnosti", "usloviya-ispolzovaniya", "politika-cookie", "otvetstvennaya-igra"]:
-        urls.append(f"{DOMAIN}/ru/{leg}")
-    lines = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
-    for u in urls:
-        pri = "1.0" if u.endswith(".com/") or u.endswith("/ru/") else "0.8"
-        if any(x in u for x in ["cookie", "siyosati", "shartlari", "masuliyat", "maxfiylik", "politika", "usloviya", "otvetstven"]):
-            pri = "0.3"
-        lines.append(f"  <url><loc>{u}</loc><priority>{pri}</priority></url>")
+        add(f"{DOMAIN}/ru/{leg}", "0.3", f"ru/{leg}.html")
+
+    lines = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+    ]
+    seen: set[str] = set()
+    for loc, pri, lm in entries:
+        if loc in seen:
+            continue
+        seen.add(loc)
+        lines.append(f"  <url><loc>{loc}</loc><lastmod>{lm}</lastmod><priority>{pri}</priority></url>")
     lines.append("</urlset>")
     (ROOT / "sitemap.xml").write_text("\n".join(lines) + "\n", encoding="utf-8")
-    print("sitemap.xml updated")
+    print(f"sitemap.xml updated ({len(seen)} urls)")
 
 
 def audit_i18n():
