@@ -10,12 +10,28 @@
   }
 
   function openPartnerLink() {
-    if (!PARTNER_URL) return;
+    if (!PARTNER_URL || PARTNER_URL === "#") return;
     var now = Date.now();
     if (now - lastOpenAt < 400) return;
     lastOpenAt = now;
-    var opened = window.open(PARTNER_URL, "_blank", "noopener,noreferrer");
-    if (!opened) window.location.href = PARTNER_URL;
+
+    var tab = window.open(PARTNER_URL, "_blank", "noopener,noreferrer");
+    if (tab) {
+      try {
+        tab.opener = null;
+        tab.focus();
+      } catch (e) {}
+      return;
+    }
+
+    var link = document.createElement("a");
+    link.href = PARTNER_URL;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.style.display = "none";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   }
 
   function onPartnerClick(event) {
