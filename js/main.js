@@ -24,6 +24,50 @@
     });
   }
 
+  document.querySelectorAll("[data-nav-disclosure]").forEach(function (wrap) {
+    var btn = wrap.querySelector(".nav-mobile__disclosure-btn");
+    var panel = wrap.querySelector(".nav-mobile__disclosure-panel");
+    if (!btn || !panel) return;
+    btn.addEventListener("click", function () {
+      var open = btn.getAttribute("aria-expanded") === "true";
+      btn.setAttribute("aria-expanded", String(!open));
+      wrap.classList.toggle("is-open", !open);
+      if (open) {
+        panel.setAttribute("hidden", "");
+      } else {
+        panel.removeAttribute("hidden");
+      }
+    });
+  });
+
+  document.querySelectorAll(".nav-dropdown").forEach(function (dropdown) {
+    var btn = dropdown.querySelector(".nav-dropdown__toggle");
+    if (!btn) return;
+    btn.addEventListener("click", function (event) {
+      event.stopPropagation();
+      var open = dropdown.classList.contains("is-open");
+      document.querySelectorAll(".nav-dropdown.is-open").forEach(function (other) {
+        if (other !== dropdown) {
+          other.classList.remove("is-open");
+          var otherBtn = other.querySelector(".nav-dropdown__toggle");
+          if (otherBtn) otherBtn.setAttribute("aria-expanded", "false");
+        }
+      });
+      dropdown.classList.toggle("is-open", !open);
+      btn.setAttribute("aria-expanded", String(!open));
+    });
+  });
+
+  document.addEventListener("click", function (event) {
+    if (!event.target.closest(".nav-dropdown")) {
+      document.querySelectorAll(".nav-dropdown.is-open").forEach(function (dropdown) {
+        dropdown.classList.remove("is-open");
+        var btn = dropdown.querySelector(".nav-dropdown__toggle");
+        if (btn) btn.setAttribute("aria-expanded", "false");
+      });
+    }
+  });
+
   var faqItems = document.querySelectorAll(".faq-item");
   faqItems.forEach(function (item, index) {
     var btn = item.querySelector(".faq-item__question");

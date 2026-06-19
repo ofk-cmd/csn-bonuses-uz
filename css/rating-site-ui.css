@@ -122,6 +122,40 @@
   color: var(--accent);
 }
 
+.site-fairpari-light .nav-mobile__disclosure-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.55rem 0.65rem;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--ink);
+  font-size: 0.92rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+.site-fairpari-light .nav-mobile__disclosure-btn:hover {
+  background: var(--accent-dim);
+  color: var(--accent);
+}
+
+.site-fairpari-light .nav-mobile__disclosure.is-open .nav-mobile__chevron {
+  transform: rotate(-135deg) translateY(1px);
+}
+
+.site-fairpari-light .nav-mobile__disclosure-panel {
+  padding: 0.15rem 0 0.25rem;
+}
+
+.site-fairpari-light .nav-mobile__disclosure-panel[hidden] {
+  display: none;
+}
+
 .site-fairpari-light body.nav-open {
   overflow: hidden;
 }
@@ -166,6 +200,81 @@
   background: var(--accent-dim);
 }
 
+.site-fairpari-light .nav-dropdown {
+  position: relative;
+}
+
+.site-fairpari-light .nav-dropdown__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.4rem 0.65rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--ink);
+  text-decoration: none;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+
+.site-fairpari-light .nav-dropdown__chevron,
+.site-fairpari-light .nav-mobile__chevron {
+  display: inline-block;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg) translateY(-1px);
+  transition: transform 0.2s ease;
+}
+
+.site-fairpari-light .nav-dropdown:hover .nav-dropdown__toggle,
+.site-fairpari-light .nav-dropdown:focus-within .nav-dropdown__toggle,
+.site-fairpari-light .nav-dropdown.is-open .nav-dropdown__toggle {
+  color: var(--accent);
+  background: var(--accent-dim);
+}
+
+.site-fairpari-light .nav-dropdown__menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 0.35rem);
+  left: 0;
+  min-width: 13.5rem;
+  padding: 0.35rem;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  z-index: 120;
+}
+
+.site-fairpari-light .nav-dropdown:hover .nav-dropdown__menu,
+.site-fairpari-light .nav-dropdown:focus-within .nav-dropdown__menu,
+.site-fairpari-light .nav-dropdown.is-open .nav-dropdown__menu {
+  display: block;
+}
+
+.site-fairpari-light .nav-dropdown__link {
+  display: block;
+  padding: 0.5rem 0.65rem;
+  border-radius: 8px;
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 0.88rem;
+  line-height: 1.35;
+}
+
+.site-fairpari-light .nav-dropdown__link:hover {
+  background: var(--accent-dim);
+  color: var(--accent);
+}
+
 .site-fairpari-light .site-header .btn--gold {
   flex-shrink: 0;
   white-space: nowrap;
@@ -177,6 +286,10 @@
   gap: 0.5rem;
   flex-shrink: 0;
   margin-left: auto;
+}
+
+.site-fairpari-light .header-actions .nav-toggle {
+  margin-left: 0.15rem;
 }
 
 .site-fairpari-light .lang-switcher {
@@ -224,8 +337,14 @@
     gap: 0.5rem;
   }
 
+  .site-fairpari-light .brand {
+    flex: 1;
+    min-width: 0;
+  }
+
   .site-fairpari-light .header-actions {
     margin-left: auto;
+    flex-shrink: 0;
   }
 
   .site-fairpari-light .site-header .btn--gold {

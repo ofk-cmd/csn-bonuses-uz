@@ -2,34 +2,482 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://casino-bonuses-uz.com/</loc>
-    <lastmod>2026-06-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
+    <lastmod>2026-06-19</lastmod>
+    <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/" />
   </url>
   <url>
+    <loc>https://casino-bonuses-uz.com/ru/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/kazino-bonuslari/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/kazino-bonuslari/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/kazino-bonuslari/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/kazino-bonuslari/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/ru/kazino-bonuslari/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/kazino-bonuslari/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/kazino-bonuslari/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/kazino-bonuslari/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/welcome-bonus/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/welcome-bonus/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/welcome-bonus/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/welcome-bonus/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/ru/welcome-bonus/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/welcome-bonus/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/welcome-bonus/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/welcome-bonus/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/depozitsiz-bonus/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/depozitsiz-bonus/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/depozitsiz-bonus/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/depozitsiz-bonus/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/ru/depozitsiz-bonus/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/depozitsiz-bonus/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/depozitsiz-bonus/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/depozitsiz-bonus/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/tolov-uz/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/tolov-uz/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/tolov-uz/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/tolov-uz/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/ru/tolov-uz/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/tolov-uz/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/tolov-uz/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/tolov-uz/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/faq/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/faq/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/faq/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/faq/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/ru/faq/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/faq/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/faq/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/faq/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/fairpari/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/fairpari/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/fairpari/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/fairpari/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/ru/fairpari/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/fairpari/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/fairpari/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/fairpari/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/1win/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/1win/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/1win/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/1win/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/ru/1win/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/1win/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/1win/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/1win/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/1xbet/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/1xbet/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/1xbet/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/1xbet/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/ru/1xbet/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/1xbet/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/1xbet/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/1xbet/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/mostbet/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/mostbet/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/mostbet/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/mostbet/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/ru/mostbet/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/mostbet/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/mostbet/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/mostbet/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/melbet/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/melbet/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/melbet/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/melbet/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/ru/melbet/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/melbet/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/melbet/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/melbet/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/pin-up/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/pin-up/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/pin-up/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/pin-up/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/ru/pin-up/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/pin-up/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/pin-up/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/pin-up/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/linebet/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/linebet/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/linebet/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/linebet/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/ru/linebet/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/linebet/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/linebet/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/linebet/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/betwinner/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/betwinner/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/betwinner/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/betwinner/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/ru/betwinner/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/betwinner/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/betwinner/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/betwinner/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/megapari/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/megapari/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/megapari/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/megapari/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/ru/megapari/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/megapari/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/megapari/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/megapari/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/22bet/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/22bet/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/22bet/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/22bet/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/ru/22bet/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/22bet/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/22bet/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/22bet/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/parimatch/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/parimatch/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/parimatch/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/parimatch/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/ru/parimatch/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/parimatch/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/parimatch/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/parimatch/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/leon/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/leon/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/leon/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/leon/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/ru/leon/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/leon/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/leon/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/leon/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/fonbet/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/fonbet/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/fonbet/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/fonbet/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/ru/fonbet/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/fonbet/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/fonbet/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/fonbet/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/marathonbet/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/marathonbet/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/marathonbet/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/marathonbet/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/ru/marathonbet/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/marathonbet/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/marathonbet/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/marathonbet/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/betway/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/betway/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/betway/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/betway/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/ru/betway/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/betway/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/betway/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/betway/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/spinbetter/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/spinbetter/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/spinbetter/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/spinbetter/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/ru/spinbetter/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/spinbetter/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/spinbetter/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/spinbetter/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/vulkan-vegas/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/vulkan-vegas/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/vulkan-vegas/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/vulkan-vegas/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/ru/vulkan-vegas/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/vulkan-vegas/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/vulkan-vegas/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/vulkan-vegas/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/joycasino/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/joycasino/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/joycasino/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/joycasino/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/ru/joycasino/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/joycasino/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/joycasino/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/joycasino/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/fresh-casino/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/fresh-casino/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/fresh-casino/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/fresh-casino/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/ru/fresh-casino/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/fresh-casino/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/fresh-casino/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/fresh-casino/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/bc-game/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/bc-game/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/bc-game/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/bc-game/" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/ru/bc-game/</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/bc-game/" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/bc-game/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/bc-game/" />
+  </url>
+  <url>
     <loc>https://casino-bonuses-uz.com/maxfiylik-siyosati</loc>
-    <lastmod>2026-06-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/maxfiylik-siyosati" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/politika-konfidentsialnosti" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/maxfiylik-siyosati" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/ru/politika-konfidentsialnosti</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/maxfiylik-siyosati" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/politika-konfidentsialnosti" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/maxfiylik-siyosati" />
   </url>
   <url>
     <loc>https://casino-bonuses-uz.com/foydalanish-shartlari</loc>
-    <lastmod>2026-06-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/foydalanish-shartlari" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/usloviya-ispolzovaniya" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/foydalanish-shartlari" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/ru/usloviya-ispolzovaniya</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/foydalanish-shartlari" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/usloviya-ispolzovaniya" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/foydalanish-shartlari" />
   </url>
   <url>
     <loc>https://casino-bonuses-uz.com/cookie-siyosati</loc>
-    <lastmod>2026-06-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/cookie-siyosati" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/politika-cookie" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/cookie-siyosati" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/ru/politika-cookie</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/cookie-siyosati" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/politika-cookie" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/cookie-siyosati" />
   </url>
   <url>
     <loc>https://casino-bonuses-uz.com/masuliyatli-oyin</loc>
-    <lastmod>2026-06-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/masuliyatli-oyin" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/otvetstvennaya-igra" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/masuliyatli-oyin" />
+  </url>
+  <url>
+    <loc>https://casino-bonuses-uz.com/ru/otvetstvennaya-igra</loc>
+    <lastmod>2026-06-19</lastmod>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://casino-bonuses-uz.com/masuliyatli-oyin" />
+    <xhtml:link rel="alternate" hreflang="ru-UZ" href="https://casino-bonuses-uz.com/ru/otvetstvennaya-igra" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casino-bonuses-uz.com/masuliyatli-oyin" />
   </url>
 </urlset>

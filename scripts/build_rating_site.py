@@ -12,7 +12,7 @@ from index_expand_2000 import index_extra_sections, index_footer_faq
 
 ROOT = Path(__file__).resolve().parent.parent
 DOMAIN = "https://casino-bonuses-uz.com"
-CSS_V = "20260618o"
+CSS_V = "20260619b"
 PARTNER = "https://bobaffs.org/click?o=1603&a=189"
 
 # 20 brands popular in Google UZ (casino + BK)
@@ -20,9 +20,9 @@ BRANDS = [
     {"slug": "fairpari", "name": "FairPari", "rating": 5.0, "type": "both",
      "welcome_uz": "20 200 000 UZS + 150 FS", "welcome_ru": "20 200 000 UZS + 150 FS",
      "wagering": "×35", "pay": "Humo, Payme, Click",
-     "pros_uz": ["Eng katta kazino welcome UZ", "Mahalliy to'lovlar", "APK va PWA"],
+     "pros_uz": ["Eng katta kazino welcome UZ", "UZ interfeysi (fairpari.com/uz)", "APK va PWA"],
      "cons_uz": ["Sport va kazino welcome bir vaqtda emas"],
-     "pros_ru": ["Крупнейший welcome в UZ", "Локальные платежи", "APK и PWA"],
+     "pros_ru": ["Крупнейший welcome в UZ", "UZ-интерфейс (fairpari.com/uz)", "APK и PWA"],
      "cons_ru": ["Спорт и казино welcome не вместе"],
      "tags_uz": ["Slotlar", "Live", "Sport", "Kazino"], "tags_ru": ["Слоты", "Live", "Спорт", "Казино"],
      "hit": True},
@@ -66,14 +66,14 @@ BRANDS = [
      "pros_ru": ["Известный бренд", "250 FS"],
      "cons_ru": ["Лимит welcome ниже"],
      "tags_uz": ["Slotlar", "Sport"], "tags_ru": ["Слоты", "Спорт"]},
-    {"slug": "linebet", "name": "Linebet", "rating": 4.4, "type": "bk",
+    {"slug": "linebet", "name": "Linebet", "rating": 4.4, "type": "both",
      "welcome_uz": "4 800 000 UZS sport", "welcome_ru": "4 800 000 UZS спорт",
      "wagering": "×5", "pay": "Humo, Click",
-     "pros_uz": ["Sport welcome ×5", "Ekspress aksiyalar"],
-     "cons_uz": ["Kazino tanlovi cheklangan"],
-     "pros_ru": ["Спорт welcome ×5", "Экспресс-акции"],
-     "cons_ru": ["Ограниченный казино-раздел"],
-     "tags_uz": ["Sport", "Live stavka"], "tags_ru": ["Спорт", "Live-ставки"]},
+     "pros_uz": ["Sport welcome ×5", "Kazino GAMES va slotlar", "iOS/Android ilova"],
+     "cons_uz": ["Bannerda ba'zan RUB ko'rsatiladi"],
+     "pros_ru": ["Спорт welcome ×5", "Казино GAMES и слоты", "Приложение iOS/Android"],
+     "cons_ru": ["В баннере иногда RUB вместо UZS"],
+     "tags_uz": ["Sport", "Slotlar", "Kazino"], "tags_ru": ["Спорт", "Слоты", "Казино"]},
     {"slug": "betwinner", "name": "Betwinner", "rating": 4.4, "type": "both",
      "welcome_uz": "5 000 000 UZS + 150 FS", "welcome_ru": "5 000 000 UZS + 150 FS",
      "wagering": "×35", "pay": "Humo, Uzcard",
@@ -98,22 +98,22 @@ BRANDS = [
      "pros_ru": ["Низкий мин. депозит", "Крипто"],
      "cons_ru": ["Мало FS"],
      "tags_uz": ["Sport", "Kazino"], "tags_ru": ["Спорт", "Казино"]},
-    {"slug": "parimatch", "name": "Parimatch", "rating": 4.2, "type": "bk",
+    {"slug": "parimatch", "name": "Parimatch", "rating": 4.2, "type": "both",
      "welcome_uz": "3 800 000 UZS sport", "welcome_ru": "3 800 000 UZS спорт",
      "wagering": "×5", "pay": "Humo, Payme",
-     "pros_uz": ["Sport brend", "Live koeffitsientlar"],
-     "cons_uz": ["Kazino bonus cheklangan"],
-     "pros_ru": ["Спортивный бренд", "Live-коэффициенты"],
-     "cons_ru": ["Ограниченный казино-бонус"],
-     "tags_uz": ["Sport", "Live"], "tags_ru": ["Спорт", "Live"]},
-    {"slug": "leon", "name": "Leon", "rating": 4.2, "type": "bk",
+     "pros_uz": ["Sport brend", "Kazino va live bo'limlari"],
+     "cons_uz": ["Welcome sportga yo'naltirilgan"],
+     "pros_ru": ["Спортивный бренд", "Разделы казино и live"],
+     "cons_ru": ["Welcome ориентирован на спорт"],
+     "tags_uz": ["Sport", "Live", "Kazino"], "tags_ru": ["Спорт", "Live", "Казино"]},
+    {"slug": "leon", "name": "Leon", "rating": 4.2, "type": "both",
      "welcome_uz": "3 500 000 UZS", "welcome_ru": "3 500 000 UZS",
      "wagering": "×5", "pay": "Humo, Click",
-     "pros_uz": ["Oddiy interfeys", "Sport fokus"],
-     "cons_uz": ["Kichik welcome"],
-     "pros_ru": ["Простой интерфейс", "Фокус на спорт"],
+     "pros_uz": ["Oddiy interfeys", "Sport va kazino (ru-uz)"],
+     "cons_uz": ["Welcome kichikroq"],
+     "pros_ru": ["Простой интерфейс", "Спорт и казино (ru-uz)"],
      "cons_ru": ["Небольшой welcome"],
-     "tags_uz": ["Sport"], "tags_ru": ["Спорт"]},
+     "tags_uz": ["Sport", "Slotlar", "Kazino"], "tags_ru": ["Спорт", "Слоты", "Казино"]},
     {"slug": "fonbet", "name": "Fonbet", "rating": 4.1, "type": "bk",
      "welcome_uz": "3 200 000 UZS sport", "welcome_ru": "3 200 000 UZS спорт",
      "wagering": "×5", "pay": "Humo, Uzcard",
@@ -122,14 +122,14 @@ BRANDS = [
      "pros_ru": ["Опытный БК", "Live-трансляции"],
      "cons_ru": ["Казино в UZ ограничено"],
      "tags_uz": ["Sport", "Live"], "tags_ru": ["Спорт", "Live"]},
-    {"slug": "marathonbet", "name": "Marathonbet", "rating": 4.1, "type": "bk",
+    {"slug": "marathonbet", "name": "Marathonbet", "rating": 4.1, "type": "both",
      "welcome_uz": "3 000 000 UZS", "welcome_ru": "3 000 000 UZS",
      "wagering": "×5", "pay": "Humo, Payme",
-     "pros_uz": ["Yuqori koeffitsientlar", "Sport ekspertiza"],
-     "cons_uz": ["Kazino bo'limi kichik"],
-     "pros_ru": ["Высокие коэффициенты", "Спортивная экспертиза"],
-     "cons_ru": ["Малый раздел казино"],
-     "tags_uz": ["Sport"], "tags_ru": ["Спорт"]},
+     "pros_uz": ["Yuqori koeffitsientlar", "Sport va live kazino"],
+     "cons_uz": ["Interfeys eskiroq"],
+     "pros_ru": ["Высокие коэффициенты", "Спорт и live-казино"],
+     "cons_ru": ["Интерфейс устаревает"],
+     "tags_uz": ["Sport", "Kazino", "Live"], "tags_ru": ["Спорт", "Казино", "Live"]},
     {"slug": "betway", "name": "Betway", "rating": 4.0, "type": "bk",
      "welcome_uz": "2 800 000 UZS sport", "welcome_ru": "2 800 000 UZS спорт",
      "wagering": "×6", "pay": "Humo, kripto",
@@ -140,44 +140,44 @@ BRANDS = [
      "tags_uz": ["Sport"], "tags_ru": ["Спорт"]},
     {"slug": "spinbetter", "name": "Spinbetter", "rating": 4.0, "type": "both",
      "welcome_uz": "3 600 000 UZS + 100 FS", "welcome_ru": "3 600 000 UZS + 100 FS",
-     "wagering": "×35", "pay": "Humo, Click",
-     "pros_uz": ["Yangi platforma", "Slot turnirlari"],
+     "wagering": "×35", "pay": "Humo, Uzcard, Click",
+     "pros_uz": ["Humo va Uzcard", "Sport va kazino bo'limlari"],
      "cons_uz": ["Kam sharhlar UZ"],
-     "pros_ru": ["Новая платформа", "Турниры на слотах"],
+     "pros_ru": ["Humo и Uzcard", "Спорт и казино на одной платформе"],
      "cons_ru": ["Мало отзывов в UZ"],
-     "tags_uz": ["Slotlar", "Sport"], "tags_ru": ["Слоты", "Спорт"]},
-    {"slug": "vulkan-vegas", "name": "Vulkan Vegas", "rating": 4.0, "type": "casino",
+     "tags_uz": ["Slotlar", "Sport", "Kazino"], "tags_ru": ["Слоты", "Спорт", "Казино"]},
+    {"slug": "vulkan-vegas", "name": "Vulkan Vegas", "rating": 4.0, "type": "both",
      "welcome_uz": "3 400 000 UZS + 150 FS", "welcome_ru": "3 400 000 UZS + 150 FS",
      "wagering": "×40", "pay": "Humo, Payme",
-     "pros_uz": ["Kazino fokus", "Ko'p slot provayderlar"],
-     "cons_uz": ["Sport yo'q", "×40 wagering"],
-     "pros_ru": ["Фокус на казино", "Много провайдеров"],
-     "cons_ru": ["Нет спорта", "Вейджер ×40"],
-     "tags_uz": ["Slotlar", "Live kazino"], "tags_ru": ["Слоты", "Live-казино"]},
-    {"slug": "joycasino", "name": "Joycasino", "rating": 3.9, "type": "casino",
+     "pros_uz": ["Katta slot katalogi", "Sport va kazino"],
+     "cons_uz": ["Bannerda EUR", "×40 wagering"],
+     "pros_ru": ["Большой каталог слотов", "Спорт и казино"],
+     "cons_ru": ["Баннер в EUR", "Вейджер ×40"],
+     "tags_uz": ["Slotlar", "Live kazino", "Sport"], "tags_ru": ["Слоты", "Live-казино", "Спорт"]},
+    {"slug": "joycasino", "name": "Joycasino", "rating": 3.9, "type": "both",
      "welcome_uz": "3 000 000 UZS + 200 FS", "welcome_ru": "3 000 000 UZS + 200 FS",
      "wagering": "×40", "pay": "Humo, Uzcard",
-     "pros_uz": ["200 FS", "Slot aksiyalar"],
-     "cons_uz": ["Faqat kazino", "Yuqori wagering"],
-     "pros_ru": ["200 FS", "Акции на слоты"],
-     "cons_ru": ["Только казино", "Высокий вейджер"],
-     "tags_uz": ["Slotlar"], "tags_ru": ["Слоты"]},
-    {"slug": "fresh-casino", "name": "Fresh Casino", "rating": 3.9, "type": "casino",
+     "pros_uz": ["200 FS", "Sport va kazino"],
+     "cons_uz": ["Yuqori wagering"],
+     "pros_ru": ["200 FS", "Спорт и казино"],
+     "cons_ru": ["Высокий вейджер"],
+     "tags_uz": ["Slotlar", "Sport", "Live"], "tags_ru": ["Слоты", "Спорт", "Live"]},
+    {"slug": "fresh-casino", "name": "Fresh Casino", "rating": 3.9, "type": "both",
      "welcome_uz": "2 900 000 UZS + 100 FS", "welcome_ru": "2 900 000 UZS + 100 FS",
      "wagering": "×35", "pay": "Payme, Click",
-     "pros_uz": ["Zamonaviy dizayn", "Tez ro'yxat"],
-     "cons_uz": ["Kichik welcome"],
-     "pros_ru": ["Современный дизайн", "Быстрая регистрация"],
+     "pros_uz": ["Zamonaviy dizayn", "Sport va slotlar"],
+     "cons_uz": ["Welcome kichikroq"],
+     "pros_ru": ["Современный дизайн", "Спорт и слоты"],
      "cons_ru": ["Небольшой welcome"],
-     "tags_uz": ["Slotlar", "Crash"], "tags_ru": ["Слоты", "Crash"]},
-    {"slug": "bc-game", "name": "BC.Game", "rating": 3.8, "type": "casino",
+     "tags_uz": ["Slotlar", "Crash", "Sport"], "tags_ru": ["Слоты", "Crash", "Спорт"]},
+    {"slug": "bc-game", "name": "BC.Game", "rating": 3.8, "type": "both",
      "welcome_uz": "Kripto paket USDT", "welcome_ru": "Крипто-пакет USDT",
      "wagering": "×45", "pay": "USDT, BTC",
-     "pros_uz": ["Kripto kazino", "Provably fair o'yinlar"],
+     "pros_uz": ["Kripto kazino", "Sport BTi va crash"],
      "cons_uz": ["Humo yo'q", "Yuqori wagering"],
-     "pros_ru": ["Крипто-казино", "Provably fair"],
+     "pros_ru": ["Крипто-казино", "Спорт BTi и crash"],
      "cons_ru": ["Нет Humo", "Высокий вейджер"],
-     "tags_uz": ["Kripto", "Crash", "Slotlar"], "tags_ru": ["Крипто", "Crash", "Слоты"]},
+     "tags_uz": ["Kripto", "Crash", "Sport"], "tags_ru": ["Крипто", "Crash", "Спорт"]},
 ]
 
 STAR = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>'
@@ -306,6 +306,34 @@ def css_links(lang: str, depth: int = 0, extra: str = "") -> str:
   {extra}'''
 
 
+def top10_brand_links(lang: str, prefix: str, link_class: str = "nav-mobile__link") -> str:
+    links: list[str] = []
+    for rank, b in enumerate(BRANDS[:10], 1):
+        label = f"#{rank} {b['name']}"
+        if b["slug"] == "fairpari":
+            label += " ★"
+        links.append(
+            f'<a class="{link_class}" href="{prefix}{b["slug"]}/">{escape(label)}</a>'
+        )
+    return "".join(links)
+
+
+def desktop_brands_dropdown(lang: str, prefix: str) -> str:
+    label = "Казино и БК" if lang == "ru" else "Kazino va BK"
+    menu_label = "ТОП-10 рейтинга" if lang == "ru" else "TOP-10 reyting"
+    return (
+        f'<div class="nav-dropdown">'
+        f'<button type="button" class="nav-dropdown__toggle" aria-expanded="false" '
+        f'aria-haspopup="true" aria-controls="nav-brands-menu">'
+        f'{escape(label)}<span class="nav-dropdown__chevron" aria-hidden="true"></span>'
+        f"</button>"
+        f'<div class="nav-dropdown__menu" id="nav-brands-menu" role="menu" '
+        f'aria-label="{escape(menu_label)}">'
+        f'{top10_brand_links(lang, prefix, "nav-dropdown__link")}'
+        f"</div></div>"
+    )
+
+
 def mobile_nav_html(lang: str) -> tuple[str, str]:
     prefix = "/ru/" if lang == "ru" else "/"
     legal_prefix = "/ru/" if lang == "ru" else "/"
@@ -314,7 +342,7 @@ def mobile_nav_html(lang: str) -> tuple[str, str]:
     home_label = "Рейтинг TOP-20" if lang == "ru" else "TOP-20 reyting"
     home_title = "Главная" if lang == "ru" else "Bosh sahifa"
     guides_title = "Гайды и справочники" if lang == "ru" else "Qo'llanmalar"
-    rating_title = "Обзоры операторов" if lang == "ru" else "Operator sharhlari"
+    brands_title = "Казино и БК" if lang == "ru" else "Kazino va BK"
     legal_title = "Правовая информация" if lang == "ru" else "Huquqiy ma'lumot"
     menu_label = "Меню сайта" if lang == "ru" else "Sayt menyusi"
     open_label = "Открыть меню" if lang == "ru" else "Menyuni ochish"
@@ -336,6 +364,16 @@ def mobile_nav_html(lang: str) -> tuple[str, str]:
         f'<div class="nav-mobile__section">'
         f'<p class="nav-mobile__heading">{escape(guides_title)}</p>'
         f"{hub_links}</div>"
+    )
+
+    sections.append(
+        f'<div class="nav-mobile__section nav-mobile__disclosure" data-nav-disclosure>'
+        f'<button type="button" class="nav-mobile__disclosure-btn" aria-expanded="false">'
+        f'{escape(brands_title)}<span class="nav-mobile__chevron" aria-hidden="true"></span>'
+        f"</button>"
+        f'<div class="nav-mobile__disclosure-panel" hidden>'
+        f'{top10_brand_links(lang, prefix)}'
+        f"</div></div>"
     )
 
     for brand_type in ("both", "bk", "casino"):
@@ -396,10 +434,12 @@ def lang_switcher_html(lang: str, href_uz: str, href_ru: str) -> str:
 def header_block(lang: str, depth: int = 0, href_uz: str = "", href_ru: str = "") -> str:
     assets = assets_href(lang, depth)
     home = "/ru/" if lang == "ru" else "/"
+    prefix = "/ru/" if lang == "ru" else "/"
     if lang == "ru":
         nav = (
             '<a href="/ru/#rating">Рейтинг</a>'
             '<a href="/ru/kazino-bonuslari/">Типы бонусов</a>'
+            f'{desktop_brands_dropdown(lang, prefix)}'
             '<a href="/ru/fairpari/">FairPari</a>'
             '<a href="/ru/faq/">FAQ</a>'
         )
@@ -408,6 +448,7 @@ def header_block(lang: str, depth: int = 0, href_uz: str = "", href_ru: str = ""
         nav = (
             '<a href="/#rating">Reyting</a>'
             '<a href="/kazino-bonuslari/">Bonus turlari</a>'
+            f'{desktop_brands_dropdown(lang, prefix)}'
             '<a href="/fairpari/">FairPari</a>'
             '<a href="/faq/">FAQ</a>'
         )
@@ -416,12 +457,12 @@ def header_block(lang: str, depth: int = 0, href_uz: str = "", href_ru: str = ""
     lang_nav = lang_switcher_html(lang, href_uz, href_ru)
     nav_toggle, nav_panel = mobile_nav_html(lang)
     return f'''<header class="site-header"><div class="site-header__inner">
-  {nav_toggle}
   <a class="brand" href="{home}"><img class="brand__logo-img" src="{assets}/logo-casino-bonuses-uz.svg" alt="Casino Bonuses UZ" width="180" height="32" loading="eager" /></a>
   <nav class="nav-desktop" aria-label="{nav_aria}">{nav}</nav>
   <div class="header-actions">
     {lang_nav}
     <button type="button" class="btn btn--gold js-go-partner">{cta}</button>
+    {nav_toggle}
   </div>
 </div>{nav_panel}</header>'''
 
@@ -863,44 +904,111 @@ def build_sitemap():
         p = ROOT / rel_path
         if p.exists():
             return datetime.fromtimestamp(p.stat().st_mtime).strftime("%Y-%m-%d")
-        return "2026-06-18"
+        return datetime.now().strftime("%Y-%m-%d")
 
-    entries: list[tuple[str, str, str]] = []  # loc, priority, lastmod
+    def hreflang_links(uz_loc: str, ru_loc: str) -> str:
+        return (
+            f'    <xhtml:link rel="alternate" hreflang="uz-UZ" href="{uz_loc}" />\n'
+            f'    <xhtml:link rel="alternate" hreflang="ru-UZ" href="{ru_loc}" />\n'
+            f'    <xhtml:link rel="alternate" hreflang="x-default" href="{uz_loc}" />'
+        )
 
-    def add(loc: str, pri: str, rel: str):
-        entries.append((loc, pri, lastmod_for_path(rel)))
+    page_groups: list[tuple[str, str, str, str, str]] = []  # uz_loc, ru_loc, pri, uz_rel, ru_rel
 
-    add(f"{DOMAIN}/", "1.0", "index.html")
-    add(f"{DOMAIN}/ru/", "1.0", "ru/index.html")
+    def add_pair(uz_path: str, ru_path: str, pri: str, uz_rel: str, ru_rel: str):
+        page_groups.append((f"{DOMAIN}{uz_path}", f"{DOMAIN}{ru_path}", pri, uz_rel, ru_rel))
 
-    hubs = ["kazino-bonuslari", "welcome-bonus", "depozitsiz-bonus", "tolov-uz", "faq"]
-    for h in hubs:
-        add(f"{DOMAIN}/{h}/", "0.8", f"{h}/index.html")
-        add(f"{DOMAIN}/ru/{h}/", "0.8", f"ru/{h}/index.html")
+    add_pair("/", "/ru/", "1.0", "index.html", "ru/index.html")
+
+    for h in ["kazino-bonuslari", "welcome-bonus", "depozitsiz-bonus", "tolov-uz", "faq"]:
+        add_pair(f"/{h}/", f"/ru/{h}/", "0.8", f"{h}/index.html", f"ru/{h}/index.html")
 
     for b in BRANDS:
         slug = b["slug"]
-        add(f"{DOMAIN}/{slug}/", "0.8", f"{slug}/index.html")
-        add(f"{DOMAIN}/ru/{slug}/", "0.8", f"ru/{slug}/index.html")
+        add_pair(f"/{slug}/", f"/ru/{slug}/", "0.8", f"{slug}/index.html", f"ru/{slug}/index.html")
 
-    for leg in ["cookie-siyosati", "foydalanish-shartlari", "masuliyatli-oyin", "maxfiylik-siyosati"]:
-        add(f"{DOMAIN}/{leg}", "0.3", f"{leg}.html")
-    for leg in ["politika-konfidentsialnosti", "usloviya-ispolzovaniya", "politika-cookie", "otvetstvennaya-igra"]:
-        add(f"{DOMAIN}/ru/{leg}", "0.3", f"ru/{leg}.html")
+    legal_pairs = [
+        ("maxfiylik-siyosati", "politika-konfidentsialnosti"),
+        ("foydalanish-shartlari", "usloviya-ispolzovaniya"),
+        ("cookie-siyosati", "politika-cookie"),
+        ("masuliyatli-oyin", "otvetstvennaya-igra"),
+    ]
+    for uz_leg, ru_leg in legal_pairs:
+        add_pair(f"/{uz_leg}", f"/ru/{ru_leg}", "0.3", f"{uz_leg}.html", f"ru/{ru_leg}.html")
 
+    flat_entries: list[tuple[str, str, str]] = []
+    for uz_loc, ru_loc, pri, uz_rel, ru_rel in page_groups:
+        lm_uz = lastmod_for_path(uz_rel)
+        lm_ru = lastmod_for_path(ru_rel)
+        lm = max(lm_uz, lm_ru)
+        flat_entries.append((uz_loc, pri, lm))
+        flat_entries.append((ru_loc, pri, lm))
+
+    # Root sitemap.xml (flat list for tools that read it directly)
     lines = [
         '<?xml version="1.0" encoding="UTF-8"?>',
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
     ]
     seen: set[str] = set()
-    for loc, pri, lm in entries:
+    for loc, pri, lm in flat_entries:
         if loc in seen:
             continue
         seen.add(loc)
         lines.append(f"  <url><loc>{loc}</loc><lastmod>{lm}</lastmod><priority>{pri}</priority></url>")
     lines.append("</urlset>")
     (ROOT / "sitemap.xml").write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+    # sitemaps/pages.xml with hreflang (referenced from robots.txt via sitemap_index.xml)
+    page_lines = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">',
+    ]
+    for uz_loc, ru_loc, pri, uz_rel, ru_rel in page_groups:
+        lm = max(lastmod_for_path(uz_rel), lastmod_for_path(ru_rel))
+        links = hreflang_links(uz_loc, ru_loc)
+        for loc in (uz_loc, ru_loc):
+            page_lines.append("  <url>")
+            page_lines.append(f"    <loc>{loc}</loc>")
+            page_lines.append(f"    <lastmod>{lm}</lastmod>")
+            page_lines.append(f"    <priority>{pri}</priority>")
+            page_lines.append(links)
+            page_lines.append("  </url>")
+    page_lines.append("</urlset>")
+    pages_path = ROOT / "sitemaps" / "pages.xml"
+    pages_path.parent.mkdir(parents=True, exist_ok=True)
+    pages_path.write_text("\n".join(page_lines) + "\n", encoding="utf-8")
+
+    # Refresh lastmod in images sitemap
+    images_path = ROOT / "sitemaps" / "images.xml"
+    if images_path.exists():
+        img_lm = lastmod_for_path("index.html")
+        images_path.write_text(
+            images_path.read_text(encoding="utf-8").replace("2026-06-10", img_lm),
+            encoding="utf-8",
+        )
+
+    # sitemap_index.xml
+    index_lm = max(lastmod_for_path("index.html"), lastmod_for_path("sitemaps/pages.xml"))
+    (ROOT / "sitemap_index.xml").write_text(
+        "\n".join([
+            '<?xml version="1.0" encoding="UTF-8"?>',
+            '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+            "  <sitemap>",
+            f"    <loc>{DOMAIN}/sitemaps/pages.xml</loc>",
+            f"    <lastmod>{index_lm}</lastmod>",
+            "  </sitemap>",
+            "  <sitemap>",
+            f"    <loc>{DOMAIN}/sitemaps/images.xml</loc>",
+            f"    <lastmod>{lastmod_for_path('sitemaps/images.xml')}</lastmod>",
+            "  </sitemap>",
+            "</sitemapindex>",
+            "",
+        ]),
+        encoding="utf-8",
+    )
+
     print(f"sitemap.xml updated ({len(seen)} urls)")
+    print(f"sitemaps/pages.xml updated ({len(page_groups) * 2} urls with hreflang)")
 
 
 def audit_i18n():
