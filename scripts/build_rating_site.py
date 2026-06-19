@@ -6,7 +6,7 @@ import re
 from pathlib import Path
 from html import escape
 
-from brand_qttk_content import render_body, faq_schema
+from brand_qttk_content import render_body, faq_schema, brand_footer_faq
 from hub_expand_2000 import hub_body, SLUGS as HUB_SLUGS
 from index_expand_2000 import index_extra_sections, index_footer_faq
 
@@ -734,7 +734,7 @@ def build_review(b: dict, rank: int, lang: str):
 <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="{home}">{crumb_home}</a> / <span>{escape(b["name"])}</span></nav>
 {article_body}
 </main>
-{footer_block(lang, depth)}'''
+{footer_block(lang, depth, index_faq=brand_footer_faq(b, rank, lang))}'''
     path.write_text(html, encoding="utf-8")
 
 

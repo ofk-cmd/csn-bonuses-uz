@@ -43,7 +43,7 @@ def _faq_extended(b, rank, lang):
             (f"Нужна ли верификация для вывода?", "Да, KYC при первом выводе: паспорт/ID, иногда селфи. Срок — от нескольких часов до 3 дней."),
             (f"Совместим ли спорт-бонус с казино welcome?", "Обычно нет — выбирают один тип при регистрации. У FairPari спорт и казино — разные пакеты."),
             (f"Как отменить бонус в {name}?", "В кабинете или через поддержку до начала отыгрыша. После ставок с бонусным балансом отмена невозможна."),
-            (f"Сравнение {name} с {c1} и {c2}", f"См. раздел «Сравнение» на этой странице и обзоры /{c1.lower().replace(' ', '-')}/ и других брендов в рейтинге."),
+            (f"Сравнение {name} с {c1} и {c2}", f"См. раздел «Сравнение» на этой странице и обзоры /ru/{c1.lower().replace(' ', '-').replace('.', '')}/ и других брендов в рейтинге."),
             (f"Актуален ли обзор {name} в 2026?", f"Дата обновления рейтинга — 2026. Суммы welcome сверяйте на официальном сайте перед депозитом."),
         ]
     return [
@@ -57,7 +57,7 @@ def _faq_extended(b, rank, lang):
         (f"Yechish uchun verifikatsiya kerakmi?", "Ha, birinchi yechishda KYC: pasport/ID. Muddat — bir necha soatdan 3 kungacha."),
         (f"Sport va kazino welcome bir vaqtda bo'ladimi?", "Odatda yo'q — bittasini tanlaysiz. FairPari da sport va kazino alohida paketlar."),
         (f"{name} bonusini qanday bekor qilish mumkin?", "Kabinet yoki qo'llab-quvvatlash orqali wagering boshlanmaguncha. Keyin bekor qilib bo'lmaydi."),
-        (f"{name} vs {c1} va {c2}", f"«Taqqoslash» bo'limi va /{c1.lower().replace(' ', '-')}/ kabi boshqa sharhlarni o'qing."),
+        (f"{name} vs {c1} va {c2}", f"«Taqqoslash» bo'limi va /{c1.lower().replace(' ', '-').replace('.', '')}/ kabi boshqa sharhlarni o'qing."),
         (f"{name} sharhi 2026 da dolzarbmi?", "Reyting 2026 yangilangan. Depozitdan oldin rasmiy saytda summalarni tekshiring."),
     ]
 
@@ -211,60 +211,61 @@ def extra_sections(b: dict, rank: int, lang: str) -> str:
 <section class="section" id="wagering-guide">
   <header class="section__header section__header--compact"><span class="section__eyebrow">Wagering</span>
   <h2 class="section__title">{name} welcome wagering — bosqichma-bosqich</h2></header>
-  <p><strong>{b['wagering']}</strong> wagering degani: bonus (va ba'zan depozit) summasini ruxsat etilgan o'yinlarda shuncha marta aylantirish kerak. Misol: 1 000 000 UZS bonus, ×35 — 35 000 000 UZS aylanma slotlarda (100% hisob). Muddat odatda 7–14 kun.</p>
-  <p>PROMO ni o'qing: max bet (ko'pincha 130 000 UZS gacha), to'liq hisoblanadigan slotlar, live/crash istisnolari. Live kazino 10–20% — wagering sekinlashadi.</p>
+  <p><strong>{b['wagering']}</strong> wagering degani: bonus (va ba'zan depozit) summasini ruxsat etilgan o'yinlarda ko'rsatilgan marta aylantirish kerak. Misol: 1 000 000 UZS bonus, ×35 — slotlarda 35 000 000 UZS aylanma (100% hisob). Muddat odatda 7–14 kun; muddat o'tsa bonus bekor bo'ladi.</p>
+  <p>Birinchi stavkadan oldin PROMO ni oching: max bet (ko'pincha spin uchun 130 000 UZS gacha), to'liq hisoblanadigan slotlar ro'yxati va istisnolar (live, stol o'yinlari). Live kazino ko'pincha wagering ga 10–20% beradi — aylanma sekinlashadi.</p>
   <h3>Wageringdagi xatolar</h3>
   <ul class="section-list">
     <li>Max betdan yuqori stavka</li>
     <li>0% hisoblanadigan bo'limlarda o'ynash</li>
     <li>Wagering tugamay yechish so'rash — bonus yo'qoladi</li>
-    <li>Sport va kazino bonusini aralashtirish</li>
-    <li>Muddatni o'tkazib yuborish</li>
+    <li>Sport va kazino bonusini aralashtirish (qoidalarsiz)</li>
+    <li>Muddatni o'tkazib yuborish — qoldiq avtomatik bekor</li>
   </ul>
-  <p><a href="{fp_link}">FairPari</a>: ×35, 20,2 mln UZS + 150 FS. {name} welcome kichikroq bo'lsa ham, past wagering (masalan ×30) umumiy aylanmani kamaytirishi mumkin.</p>
+  <p><a href="{fp_link}">FairPari</a>: ×35, 20,2 mln UZS + 150 FS, to'rt depozit. {name} welcome kichikroq bo'lsa ham, past wagering (masalan ×30) umumiy aylanmani kamaytirishi mumkin — aylanmani hisoblang, faqat banner raqamiga qaramang.</p>
 </section>"""
 
         reg_block = f"""
 <section class="section section--alt" id="registration-detail">
   <header class="section__header section__header--compact"><span class="section__eyebrow">Ro'yxatdan o'tish</span>
   <h2 class="section__title">{name} da batafsil ro'yxatdan o'tish UZ</h2></header>
-  <p>Rasmiy operator saytida 2–5 daqiqa. casino-bonuses-uz.com mustaqil reyting — depozit qabul qilmaydi.</p>
+  <p>Rasmiy operator saytida ro'yxatdan o'tish 2–5 daqiqa. casino-bonuses-uz.com — mustaqil reyting: depozit qabul qilmaymiz va bonus bermaymiz. Barcha amallar faqat {name} saytida.</p>
   <ol class="section-list">
-    <li>Rasmiy domenni oching (SSL va manzilni tekshiring).</li>
-    <li>«Ro'yxatdan o'tish» — telefon, email yoki ijtimoiy tarmoq.</li>
-    <li>Valyuta: <strong>UZS</strong>.</li>
-    <li>Promokod maydoni (FairPari klasterida fa_1635).</li>
-    <li>Welcome turi: kazino yoki sport — keyin o'zgartirish qiyin.</li>
-    <li>SMS/email tasdiqlash, kassaga o'tish.</li>
-    <li>Birinchi depozit — bonus PROMO qoidalariga ko'ra.</li>
+    <li>Rasmiy domenni oching (fishingdan saqlaning — SSL va manzilni tekshiring).</li>
+    <li>«Ro'yxatdan o'tish» / «Sign up» — telefon, email yoki ijtimoiy tarmoq, agar mavjud bo'lsa.</li>
+    <li>Valyuta: <strong>UZS</strong> — Humo, Uzcard, Payme konvertatsiyasiz ishlash uchun.</li>
+    <li>Promokod maydoni bo'lsa — birinchi depozitdan oldin kiriting (FairPari UZ klasterida ko'pincha fa_1635).</li>
+    <li>Welcome turi: kazino yoki sport — faollashtirgandan keyin o'zgartirish odatda mumkin emas.</li>
+    <li>SMS/email tasdiqlash, kabinetga kirish, «Kassa» / «Deposit» bo'limi.</li>
+    <li>Birinchi depozit minimumdan ({b['pay']}) — bonus PROMO qoidalariga ko'ra.</li>
   </ol>
-  <p>Bir kishi — bitta akkaunt. 18+.</p>
+  <p>Bir kishi — bitta akkaunt. Multiakkaunt bloklash va bonus bekor qilishga olib keladi. 18+.</p>
 </section>"""
 
         pay_block = f"""
 <section class="section" id="payments-detail">
   <header class="section__header section__header--compact"><span class="section__eyebrow">To'lovlar</span>
   <h2 class="section__title">{name} depozit va yechish O'zbekiston</h2></header>
-  <p>UZ standarti: <strong>Humo</strong>, <strong>Uzcard</strong>, <strong>Payme</strong>, <strong>Click</strong>. {name}: {escape(b['pay'])}.</p>
+  <p>Mahalliy usullar — UZ bozori asosi: <strong>Humo</strong>, <strong>Uzcard</strong>, <strong>Payme</strong>, <strong>Click</strong>. {name} qabul qiladi: {escape(b['pay'])}. Kripto (USDT, BTC) hamma joyda yo'q — BC.Game va ayrim BK larda asosiy kanal.</p>
   <table class="data-table data-table--striped"><thead><tr><th>Usul</th><th>Depozit</th><th>Yechish</th><th>Izoh</th></tr></thead><tbody>
-  <tr><td>Humo</td><td>Daqiqalar</td><td>1–24 soat</td><td>UZ da mashhur</td></tr>
-  <tr><td>Uzcard</td><td>Daqiqalar</td><td>1–24 soat</td><td>Humo ga o'xshash</td></tr>
+  <tr><td>Humo</td><td>Daqiqalar</td><td>1–24 soat</td><td>UZ da mashhur, ko'pincha komissiyasiz</td></tr>
+  <tr><td>Uzcard</td><td>Daqiqalar</td><td>1–24 soat</td><td>Humo ga o'xshash tezlik</td></tr>
   <tr><td>Payme / Click</td><td>Tez</td><td>Operatorga qarab</td><td>Telefondan qulay</td></tr>
-  <tr><td>Kripto</td><td>15–60 min</td><td>24 soatgacha</td><td>USDT, BTC</td></tr>
+  <tr><td>Kripto</td><td>15–60 min</td><td>24 soatgacha</td><td>Yuqori min va kurs</td></tr>
   </tbody></table>
-  <p>Birinchi yechishda <strong>KYC</strong>: hujjat surati. Limitlar kabinetda.</p>
+  <p>Birinchi yechish deyarli har doim <strong>KYC</strong> talab qiladi: hujjat surati, ba'zan selfie. Pasportni oldindan tayyorlang — welcome yutug'ini tezroq chiqarishga yordam beradi. Kunlik/haftalik limitlar kabinetda.</p>
 </section>"""
 
         cmp_block = f"""
 <section class="section section--alt" id="comparison">
   <header class="section__header section__header--compact"><span class="section__eyebrow">Taqqoslash</span>
-  <h2 class="section__title">{name} vs FairPari, {c1}</h2></header>
-  <p>Reyting pozitsiyasi: <strong>#{rank}</strong>. <a href="{fp_link}">FairPari #1</a> — 20 200 000 UZS + 150 FS, ×35.</p>
+  <h2 class="section__title">{name} vs FairPari, {c1} va {c2}</h2></header>
+  <p>casino-bonuses-uz.com reytingidagi pozitsiya: <strong>#{rank}</strong>. UZ bozori lideri — <a href="{fp_link}">FairPari</a> (20 200 000 UZS + 150 FS, wagering ×35). Quyida {name} va yaqin raqobatchilar uchun yo'riqnoma.</p>
   <table class="data-table data-table--compact"><thead><tr><th>Operator</th><th>Welcome</th><th>Wagering</th><th>To'lov</th></tr></thead><tbody>
-  <tr><td>FairPari</td><td>20,2 mln + 150 FS</td><td>×35</td><td>Humo, Payme</td></tr>
+  <tr><td>FairPari #1</td><td>20,2 mln + 150 FS</td><td>×35</td><td>Humo, Payme, Click</td></tr>
   <tr><td>{name}</td><td>{escape(welcome)}</td><td>{b['wagering']}</td><td>{escape(b['pay'])}</td></tr>
   <tr><td>{c1}</td><td colspan="3"><a href="{prefix}{c1.lower().replace(' ', '-').replace('.', '')}/">Sharh</a></td></tr>
   </tbody></table>
+  <p>Maksimal UZS start paketi kerak bo'lsa — FairPari etalon. {name} wagering, mobil ilova yoki sport liniyasi bo'yicha ustun bo'lishi mumkin — sahifa boshidagi afzalliklarni ko'ring.</p>
 </section>"""
 
         casino_extra = ""
@@ -273,8 +274,9 @@ def extra_sections(b: dict, rank: int, lang: str) -> str:
 <section class="section" id="slots-detail">
   <header class="section__header section__header--compact"><span class="section__eyebrow">Slotlar</span>
   <h2 class="section__title">{name} slotlar va live — bonus bilan</h2></header>
-  <p>Slotlar, live, crash UZS da. Welcome odatda vide slotlarda 100% hisoblanadi. Live ruletka kamroq %. Mashhur: Gates of Olympus, Sweet Bonanza, Aviator, Crazy Time — operator provayderlariga bog'liq.</p>
-  <p>FS welcome ichida ma'lum slotlarga bog'langan — PROMO ro'yxati. FS yutug'i ham {b['wagering']} wagering.</p>
+  <p>{name} kazino bo'limida slotlar, live-stollar va crash-o'yinlar bo'lishi mumkin. Welcome odatda vide slotlarda 100% hisoblanadi: Pragmatic Play, Amatic, Endorphina va boshqalar. Live ruletka va blekdzhek — past foiz yoki wageringdan butunlay istisno qilinadi.</p>
+  <p>UZ o'yinchilari orasida mashhur o'yinlar (operatorga bog'liq): Gates of Olympus, Sweet Bonanza, Aviator, Crazy Time. Demo rejim bonusdan oldin volatillikni baholashga yordam beradi.</p>
+  <p>Welcome ichidagi FS ko'pincha ma'lum slotlarga bog'langan — PROMO ro'yxati. FS yutug'i ham {b['wagering']} wagering talab qiladi.</p>
 </section>"""
 
         sport_extra = ""
@@ -283,16 +285,18 @@ def extra_sections(b: dict, rank: int, lang: str) -> str:
 <section class="section section--alt" id="sport-detail">
   <header class="section__header section__header--compact"><span class="section__eyebrow">Sport</span>
   <h2 class="section__title">{name} sport stavkalari</h2></header>
-  <p>Pre-match, live, ekspress. Sport welcome ×5 ekspress (taxminiy). Kazino welcome bilan aralashtirilmaydi. UZ da futbol, basketbol, tennis mashhur.</p>
+  <p>Pre-match va live, ekspress va ordinari. Sport welcome odatda 3+ hodisali ekspresslarda minimal koeffitsient bilan ×5 wagering talab qiladi — aniq shartlarni PROMO da tekshiring. Kazino welcome va sport welcome, qoida bo'yicha, bir vaqtda kombinatsiya qilinmaydi.</p>
+  <p>UZ da futbol (LK, APL), basketbol (NBA), tennis va ba'zan kibersport mashhur. Mobil stavkalar — ilova yoki mobil sayt versiyasi orqali qilinadi.</p>
 </section>"""
 
         method_block = """
 <section class="section" id="methodology">
   <header class="section__header section__header--compact"><span class="section__eyebrow">Metodologiya</span>
   <h2 class="section__title">Reyting qanday tuziladi</h2></header>
-  <p>casino-bonuses-uz.com mustaqil agregator. {name} uchun #{rank} — welcome, wagering, Humo/Payme, mobil, UZ sharhlar asosida. 2026 yangilangan. 18+.</p>
-  <p>Biz faqat bannerdagi raqamni emas, bonusning to'liq «narxini» ham hisoblaymiz: summa × wagering, muddat, max bet va to'liq hisoblanadigan o'yinlar ro'yxati. Kichik welcome, lekin ×30 va uzoq muddat ba'zan katta paket + ×45 dan foydaliroq bo'lishi mumkin.</p>
-  <p>Toshkent, Samarqand, Buxoro va boshqa shaharlardan o'yinchilar uchun UZS konvertatsiyasiz Humo/Uzcard muhim. {name} da {pay} qabul qilinsa — bu plus, lekin ro'yxatdan keyin kassani tekshiring.</p>
+  <p>casino-bonuses-uz.com — mustaqil agregator. Operator emasmiz, stavka va depozit qabul qilmaymiz. {name} uchun #{rank} baho quyidagilarga asoslanadi: UZS welcome hajmi, wagering, mahalliy to'lovlar (Humo, Payme), mobil kirish, UZ o'yinchilar sharhlari va PROMO qoidalarining shaffofligi.</p>
+  <p>Ma'lumotlar 2026 yilda yangilanadi; depozitdan oldin rasmiy saytda summalarni tekshiring. 18+. Mas'uliyat bilan o'ynang — depozit va vaqt limitlari hamda o'z-o'zini chetlashtirish operator kabinetida mavjud.</p>
+  <p>Biz faqat bannerdagi raqamni emas, bonusning to'liq «narxini» ham hisoblaymiz: summa × wagering, wagering muddati, max bet va to'liq hisoblanadigan o'yinlar ro'yxati. Kichik welcome, lekin ×30 va uzoq muddat ba'zan katta paket + ×45 va bir haftalik muddatdan foydaliroq bo'lishi mumkin.</p>
+  <p>Toshkent, Samarqand, Buxoro va boshqa shaharlardan o'yinchilar uchun UZS konvertatsiyasiz Humo/Uzcard va yashirin komissiyasiz UZS yechish muhim. {name} da {pay} qabul qilinsa — bu reyting jadvalida plus, lekin ro'yxatdan keyin kassani tekshiring.</p>
 </section>""".replace("{name}", name).replace("{rank}", str(rank)).replace("{pay}", escape(b['pay']))
 
         tags_str = ", ".join(b.get("tags_uz", []))
@@ -300,43 +304,43 @@ def extra_sections(b: dict, rank: int, lang: str) -> str:
 <section class="section section--alt" id="mobile-app">
   <header class="section__header section__header--compact"><span class="section__eyebrow">Mobil</span>
   <h2 class="section__title">{name} ilovasi va mobil versiya</h2></header>
-  <p>UZ o'yinchilari ko'pincha telefondan o'ynaydi: Android APK, iOS PWA yoki mobil sayt. {name} rasmiy saytida «Ilova» bo'limini tekshiring. APK ni faqat operator domenidan yuklang — forumdagi soxta fayllar xavfli.</p>
-  <p>Desktop va mobil bir akkaunt: welcome va wagering sinxron. Push-bildirishnomalar qulay, lekin depozit limitini o'chirmang. Play Market da bo'lmasa — PWA (bosh ekranga yorliq) xavfsiz alternativa.</p>
-  <p><a href="{fp_link}">FairPari</a> UZ uchun APK/PWA ni faol targ'ib qiladi. {name} da live va slotlar mobil mijozda barqarorligini katta depozitdan oldin sinab ko'ring.</p>
+  <p>UZ o'yinchilari ko'pincha telefondan o'ynaydi: Android APK, iOS PWA yoki mobil sayt. {name} sharhimizda smartfondan stavka va kazino qo'llab-quvvatlanadi — rasmiy sayt «Ilova» bo'limini tekshiring. APK ni faqat operator domenidan yuklang — forumdagi soxta fayllar fishing va soxta mijozlar muammosi.</p>
+  <p>Desktop va mobil bir akkaunt: welcome va wagering sinxron. Push-bildirishnomalar yangi PROMO haqida qulay, lekin mas'uliyatli o'yin sozlamalarida depozit limitini o'chirmang. Play Market da bo'lmasa — PWA (bosh ekranga yorliq) noma'lum manbadan o'rnatmasdan xavfsiz alternativa.</p>
+  <p><a href="{fp_link}">FairPari</a> UZ uchun APK va PWA ni faol targ'ib qiladi — bu reytingdagi yetakchilik omillaridan biri. {name} da welcome bilan katta depozitdan oldin mobil mijozda live-stavkalar va slotlar barqarorligini sinab ko'ring.</p>
 </section>
 
 <section class="section" id="vip-reload">
   <header class="section__header section__header--compact"><span class="section__eyebrow">Aksiyalar</span>
   <h2 class="section__title">{name} reload, keshbek va VIP</h2></header>
-  <p>Welcome — faqat boshlanish. Keyin reload (2–5-depozit foizi), haftalik keshbek, slot turnirlari va VIP darajalar. {name} PROMO da shartlarni o'qing — birinchi wagering tugamaguncha ikkinchi bonusni faollashtirmang.</p>
-  <p>Keshbek odatda ×3–×10 wagering bilan, davr uchun sof minusdan. VIP tezroq yechish va yuqori limit — lekin aylanma talab qiladi. Oddiy UZ o'yinchisi uchun shaffof welcome va Humo ko'pincha VIP dan muhimroq.</p>
-  <p>Turnirlar: UZS yoki FS mukofot, stavka summasi bo'yicha reyting. Qoidalar va byudjetni o'qing.</p>
+  <p>Welcome — faqat boshlanish. Keyin operatorlar reload-bonuslar (2–5-depozit foizi), haftalik keshbek (sof minusdan), slot turnirlari va shaxsiy menejerli VIP darajalar bilan o'yinchilarni ushlab turadi. {name} PROMO da shartlarni o'qing — birinchi wagering tugamaguncha ikkinchi bonusni faollashtirmang.</p>
+  <p>Keshbek odatda ×3–×10 wagering bilan, davr uchun sof minusdan hisoblanadi. VIP tezroq yechish va yuqori limit beradi — lekin aylanma talab qiladi. Oddiy UZ o'yinchisi uchun shaffof welcome va Humo ko'pincha ko'p darajali VIP dan muhimroq.</p>
+  <p>Turnirlar: UZS yoki FS mukofot fondi, stavka summasi bo'yicha reyting jadvali. Ishtirok ixtiyoriy — qoidalarni o'qing, reyting uchun byudjetdan oshib ketmang.</p>
 </section>
 
 <section class="section section--alt" id="withdrawal-guide">
   <header class="section__header section__header--compact"><span class="section__eyebrow">Yechish</span>
   <h2 class="section__title">{name} da welcome dan keyin yechish</h2></header>
-  <p>{b['wagering']} wagering to'liq bajarilgach bonus real balansga o'tadi — PROMO buzilmagan bo'lsa. Yechish: kabinet → «Withdraw» → {escape(b['pay'])}. Birinchi marta KYC: pasport surati, ba'zan selfie. Tekshiruv 1 soatdan 3 ish kunigacha.</p>
-  <p>Wagering tugamay yechish so'rash — bonus yo'qoladi. Minimal summa va komissiya kassada. Humo/Uzcard odatda 1–24 soat; kripto tezroq, kursni hisobga oling.</p>
-  <p>Kechiksa — live-chat, ariza raqami bilan. casino-bonuses-uz.com to'lov qilmaydi.</p>
+  <p>{b['wagering']} wagering to'liq bajarilgach bonus balansi real mablag'larga o'tadi — PROMO qoidalari buzilmagan bo'lsa. Yechish so'rovi: kabinet → «Withdraw» → usul tanlash ({escape(b['pay'])}). Birinchi marta deyarli har doim KYC: pasportning aniq surati, ba'zan hujjat bilan selfie. Tekshiruv muddati — 1 soatdan 3 ish kunigacha.</p>
+  <p>Wagering tugamay yechishga urinmang — tizim bonusni bekor qiladi va suiiste'mol shubhasi bo'lsa akkauntni muzlatishi mumkin. Minimal yechish summasi va komissiya kassada ko'rsatiladi. Humo/Uzcard tasdiqlangandan keyin odatda 1–24 soat; kripto tezroq, lekin kursni hisobga oling.</p>
+  <p>Yechish kechiksa, ariza raqami bilan live-chat ga murojaat qiling. casino-bonuses-uz.com to'lovlarni qayta ishlamaydi — faqat UZ bozori 2026 uchun odatiy muddatlar haqida ma'lumot beramiz.</p>
 </section>
 
 <section class="section" id="providers-market">
   <header class="section__header section__header--compact"><span class="section__eyebrow">Bozor</span>
   <h2 class="section__title">{name} va UZ bozori konteksti</h2></header>
-  <p>{name} kazino bo'limida (mavjud bo'lsa) Pragmatic, Amatic, Endorphina, Evolution, Spribe kabi provayderlar bo'lishi mumkin — katalog o'zgaradi. Yuqori volatillik bankrollni tez kamaytiradi; wagering uchun o'rta volatillik tanlanadi.</p>
-  <p>2026 UZ: o'yinchilar USD emas, UZS welcome solishtiradi. Lider — FairPari (20,2 mln + 150 FS). {name} #{rank} — agar sizga {tags_str} yoki {b['wagering']} yaqin bo'lsa.</p>
-  <p>BK segmentida Linebet, Parimatch, Leon va {name} kabi gibridlar raqobatlashadi. Sport welcome ×5 ekspressda matematik jihatdan osonroq, summalar kichikroq.</p>
+  <p>{name} kazino bo'limi (mavjud bo'lsa) odatda Pragmatic Play, Amatic, Endorphina, Evolution (live), Spribe (Aviator) kabi studiyalarni o'z ichiga oladi. Aniq provayderlar litsenziya va shartnomalarga bog'liq — katalog o'zgaradi. Yuqori volatillikli slotlar wagering paytida bankrollni tez kamaytiradi — shuning uchun o'rta volatillik tanlanadi.</p>
+  <p>2026 yilda O'zbekiston bozori: o'yinchilar USD/EUR emas, UZS welcome solishtiradi. Summada lider — FairPari (20,2 mln + 150 FS). {name} #{rank} pozitsiyada — agar sizga {tags_str} yoki {b['wagering']} shartlari yaqin bo'lsa, alternativa.</p>
+  <p>Bukmeker segmenti («both» yoki BK turi bo'lsa): Linebet, Parimatch, Leon va {name} kabi gibridlar o'rtasida raqobat. Sport welcome ekspresslarda ×5 bilan matematik jihatdan kazino ×35 dan osonroq, lekin summalar odatda kichikroq.</p>
 </section>
 
 <section class="section section--alt" id="responsible-brand">
   <header class="section__header section__header--compact"><span class="section__eyebrow">18+</span>
   <h2 class="section__title">{name} bonusi bilan mas'uliyatli o'yin</h2></header>
-  <p>Bonus bankrollni oshiradi, foyda kafolatlamaydi. Birinchi stavkadan oldin depozit va vaqt limiti qo'ying. Oxirgi kunda wagering quvish — impulsiv stavkalar. Nazorat yo'qolsa — o'z-o'zini chetlashtirish.</p>
-  <p>casino-bonuses-uz.com — 18+ ma'lumot portali. Ortiqcha o'yinni rag'batlantirmaymiz.</p>
+  <p>Bonus bankrollni oshiradi, lekin foyda kafolatlamaydi. {name} kabinetida birinchi stavkadan oldin depozit va vaqt limiti belgilang. Muddatning oxirgi kunida wagering quvmang — bu impulsiv stavkalarga olib keladi. Nazorat yo'qolsa — o'z-o'zini chetlashtirish va pauza. Yordam: operator saytidagi mas'uliyatli o'yin bo'limi va mahalliy ishonch telefonlari.</p>
+  <p>casino-bonuses-uz.com — O'zbekistondagi voyaga yetganlar (18+) uchun ma'lumot portali. Ortiqcha o'yinni rag'batlantirmaymiz va welcome da «oson daromad» va'da qilmaymiz.</p>
 </section>"""
 
-    return wag_block + reg_block + pay_block + casino_extra + sport_extra + cmp_block + method_block + deep_block + _uz_parity_block(b, rank, lang) + brand_tz_boost(b, rank, lang)
+    return wag_block + reg_block + pay_block + casino_extra + sport_extra + cmp_block + method_block + deep_block + deep_guide_block(b, rank, lang) + brand_tz_boost(b, rank, lang)
 
 
 def brand_tz_boost(b: dict, rank: int, lang: str) -> str:
@@ -416,16 +420,45 @@ def brand_tz_boost(b: dict, rank: int, lang: str) -> str:
 </section>"""
 
 
-def _uz_parity_block(b: dict, rank: int, lang: str) -> str:
-    """Extra ~650 words for uz reviews to match ru length."""
-    if lang != "uz":
-        return ""
+def deep_guide_block(b: dict, rank: int, lang: str) -> str:
+    """Deep guide section — same structure for uz/ru."""
     name = b["name"]
-    welcome = b["welcome_uz"]
-    prefix = "/"
+    welcome = b["welcome_ru"] if lang == "ru" else b["welcome_uz"]
+    prefix = "/ru/" if lang == "ru" else "/"
     fp_link = f"{prefix}fairpari/"
+
+    if lang == "ru":
+        return f"""
+<section class="section" id="brand-deep-guide">
+  <header class="section__header section__header--compact"><span class="section__eyebrow">Гид</span>
+  <h2 class="section__title">Полный гид по бонусу {name} для UZ — 2026</h2></header>
+  <p>Для игроков Узбекистана {name} занимает <strong>#{rank}</strong> в нашем рейтинге. Welcome: <strong>{escape(welcome)}</strong>, вейджер <strong>{b['wagering']}</strong>, платежи: {escape(b['pay'])}. Ниже — как получить бонус, посчитать отыгрыш и спланировать вывод. Независимая информация, мы не оператор.</p>
+  <h3>Первый депозит и активация бонуса</h3>
+  <p>После регистрации выберите UZS в кассе. Внесите минимальный депозит через Humo или Uzcard — сумма не ниже минимума из PROMO. У части операторов бонус начисляется автоматически, у других нужна кнопка «Получить бонус». Условия {name} смотрите в официальном PROMO: процент на депозит, FS и срок в одном месте.</p>
+  <p>Если казино и спорт welcome разделены (часто у гибридов БК+казино), выберите направление до регистрации. Позже сменить сложно. У FairPari: казино 20,2 млн UZS + 150 FS или спорт 1,4 млн UZS — один пакет. У {name} может быть похожее правило.</p>
+  <h3>Расчёт вейджера — практические примеры</h3>
+  <p>Пример: бонус 500 000 UZS, вейджер ×35. Нужный оборот: 17 500 000 UZS в слотах (100% зачёт). Если играть в live с 10% зачёта, срок сильно вырастет. Для отыгрыша выбирают видеослоты: Gates of Olympus, Sweet Bonanza — если они в списке оператора.</p>
+  <p>Max bet: обычно 50 000–130 000 UZS за спин. Превышение может аннулировать бонус — даже случайная крупная ставка. При активном бонусе в кабинете {name} проверяйте лимит заранее.</p>
+  <h3>Платежи и KYC — реалии Узбекистана</h3>
+  <p>Игроки UZ используют Humo, Uzcard, Payme и Click. {name} принимает: {escape(b['pay'])}. Депозит — минуты; вывод после первого KYC — 1–24 часа. Подготовьте паспорт/ID заранее — это ускорит выплату welcome-выигрыша.</p>
+  <p>Крипто (USDT) есть у части операторов — выше минимум и курс. Если вы пользуетесь только национальной картой, крипто-раздел можно пропустить.</p>
+  <h3>{name} и лидер рейтинга FairPari</h3>
+  <p><a href="{fp_link}">FairPari №1</a> — 20 200 000 UZS + 150 FS, промокод fa_1635, Humo/Payme/Click. Если welcome {name} меньше, но вейджер ниже или важнее линия спорта — сравните в таблице в начале страницы и в <a href="{prefix}#rating">рейтинге TOP-20</a>.</p>
+  <p>Хабы: <a href="{prefix}welcome-bonus/">сравнение welcome</a>, <a href="{prefix}kazino-bonuslari/">типы бонусов</a>, <a href="{prefix}depozitsiz-bonus/">без депозита</a>, <a href="{prefix}tolov-uz/">платежи</a>, <a href="{prefix}faq/">FAQ</a>.</p>
+  <h3>Ответственная игра</h3>
+  <p>Бонус — стимул к развлечению, не гарантия дохода. Задайте бюджет, не гонитесь за проигрышем. 18+. casino-bonuses-uz.com не принимает депозиты — все платежи только на официальном сайте {name}.</p>
+  <h3>Краткие ответы</h3>
+  <p><strong>Нужен промокод?</strong> Иногда да — у FairPari в UZ часто fa_1635. Для {name} проверьте PROMO или форму регистрации.</p>
+  <p><strong>Можно второй аккаунт?</strong> Нет — мультиаккаунт отменяет бонус и ведёт к блокировке.</p>
+  <p><strong>Вейджер в приложении считается?</strong> Да, обычно один аккаунт — десктоп и телефон синхронизированы.</p>
+  <p><strong>Сколько ждать вывод?</strong> После KYC Humo/Uzcard обычно 1–24 часа; первый раз может дольше.</p>
+  <p><strong>Есть ли лицензия у {name}?</strong> Offshore Curacao или иная юрисдикция — смотрите футер официального сайта. Мы не верифицируем номер лицензии независимо.</p>
+  <p>В карточке рейтинга {name} указаны теги и краткие плюсы — сравните с другими операторами через фильтр TOP-20 на главной. Данные 2026 года; welcome может меняться — проверяйте дважды перед депозитом.</p>
+  <p><strong>Итог:</strong> {name} — welcome {escape(welcome)}, вейджер {b['wagering']}, платежи {escape(b['pay'])}. Если приоритет — максимальный старт, смотрите <a href="{fp_link}">FairPari</a>; если важнее линия спорта или низкий вейджер — {name} может быть логичным выбором. Читайте PROMO и играйте 18+.</p>
+</section>"""
+
     return f"""
-<section class="section" id="uz-deep-guide">
+<section class="section" id="brand-deep-guide">
   <header class="section__header section__header--compact"><span class="section__eyebrow">Qo'llanma</span>
   <h2 class="section__title">{name} bonusi bo'yicha to'liq UZ qo'llanmasi 2026</h2></header>
   <p>O'zbekiston o'yinchilari uchun {name} — reytingimizda <strong>#{rank}</strong> o'rin. Welcome paket: <strong>{escape(welcome)}</strong>, wagering <strong>{b['wagering']}</strong>, to'lovlar: {escape(b['pay'])}. Bu bo'limda bonusni qanday olish, wageringni hisoblash va yechishni rejalashtirish haqida batafsil yozilgan — mustaqil ma'lumot, operator emas.</p>

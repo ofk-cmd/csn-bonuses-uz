@@ -267,24 +267,15 @@ def render_body(b: dict, rank: int, lang: str, logo: str) -> str:
 </section>'''
 
     sp_bonus_sec = ""
+    sp_wager_note = "Wagering ×5 на экспресс (типично)" if lang == "ru" else "Wagering ×5 ekspress (taxminiy)"
     if t in ("both", "bk") and sport_w != "—":
         sp_bonus_sec = f'''
 <section class="section section--alt" id="betting-bonuses">
   <header class="section__header section__header--compact"><span class="section__eyebrow">{L["sport_eyebrow"]}</span>
   <h2 class="section__title">{L["spbon_h2"]}</h2></header>
   <table class="data-table data-table--compact"><thead><tr><th>{L["bon_th1"]}</th><th>{L["bon_th2"]}</th><th>{L["bon_th3"]}</th></tr></thead>
-  <tbody><tr><td>{L["spbon_row"]}</td><td>{escape(sport_w)}</td><td>Wagering ×5 ekspress (taxminiy)</td></tr></tbody></table>
+  <tbody><tr><td>{L["spbon_row"]}</td><td>{escape(sport_w)}</td><td>{sp_wager_note}</td></tr></tbody></table>
 </section>'''
-
-    from brand_expand_2000 import all_faq_items
-    faq_items = all_faq_items(b, rank, lang)
-    faq_html = "".join(
-        f'<article class="faq-item{" is-open" if i == 0 else ""}">'
-        f'<button type="button" class="faq-item__question" aria-expanded="{"true" if i == 0 else "false"}">'
-        f'<span>{escape(q)}</span><span class="faq-item__icon" aria-hidden="true">+</span></button>'
-        f'<div class="faq-item__answer">{escape(a)}</div></article>'
-        for i, (q, a) in enumerate(faq_items)
-    )
 
     pros_li = "".join(f"<li>{escape(p)}</li>" for p in pros)
     cons_li = "".join(f"<li>{escape(c)}</li>" for c in cons)
@@ -415,18 +406,38 @@ def render_body(b: dict, rank: int, lang: str, logo: str) -> str:
     <h2 class="section__title">{L["rev_h2"]}</h2><p class="section__subtitle">{L["rev_sub"]}</p></header>
     <p>{L["rev_p"]}</p>
   </section>
-
-  <section class="section section--alt" id="faq">
-    <header class="section__header section__header--compact"><span class="section__eyebrow">{L["faq_eyebrow"]}</span>
-    <h2 class="section__title">{L["faq_h2"]}</h2></header>
-    <div class="faq-list">{faq_html}</div>
-  </section>
   {extra_html}
 
   <p>{L["compare"]}</p>
   <p>{L["back"]}</p>
   <button type="button" class="btn btn--gold js-go-partner">{L["cta"]}</button>
 </article>'''
+
+
+def brand_footer_faq(b: dict, rank: int, lang: str) -> str:
+    """FAQ accordion for brand review pages — rendered in site footer."""
+    from brand_expand_2000 import all_faq_items
+
+    name = b["name"]
+    if lang == "ru":
+        title = f"FAQ {name}: бонус, регистрация, вывод"
+    else:
+        title = f"{name} FAQ: bonus, ro'yxatdan o'tish, yechish"
+
+    faq_html = "".join(
+        f'<article class="faq-item{" is-open" if i == 0 else ""}">'
+        f'<button type="button" class="faq-item__question" aria-expanded="{"true" if i == 0 else "false"}">'
+        f'<span>{escape(q)}</span><span class="faq-item__icon" aria-hidden="true">+</span></button>'
+        f'<div class="faq-item__answer">{escape(a)}</div></article>'
+        for i, (q, a) in enumerate(all_faq_items(b, rank, lang))
+    )
+    return f'''<section class="footer-faq" id="faq" aria-labelledby="brand-faq-title">
+  <header class="footer-faq__header">
+    <span class="section__eyebrow">FAQ</span>
+    <h2 class="footer-faq__title" id="brand-faq-title">{escape(title)}</h2>
+  </header>
+  <div class="faq-list">{faq_html}</div>
+</section>'''
 
 
 def faq_schema(b, rank, lang):
