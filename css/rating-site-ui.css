@@ -208,13 +208,10 @@
   }
 }
 
-/* Brand logos in rating cards */
+/* Brand logos in rating cards — wide wordmarks */
 .casino-card__logo {
   object-fit: contain;
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 4px;
+  object-position: center;
 }
 
 /* Hero — image + title + subtitle (mobile: stack; desktop: split) */

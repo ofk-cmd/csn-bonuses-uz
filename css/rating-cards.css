@@ -71,7 +71,7 @@
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
-  min-width: 72px;
+  min-width: 108px;
 }
 .casino-card__rank {
   font-size: 1.75rem;
@@ -81,12 +81,18 @@
 }
 .casino-card[data-rank="1"] .casino-card__rank { color: var(--gold, #9dcc00); }
 .casino-card__logo {
-  width: 64px;
-  height: 64px;
-  border-radius: 12px;
+  display: block;
+  width: auto;
+  min-width: 88px;
+  max-width: 112px;
+  height: 48px;
+  padding: 4px 8px;
+  border-radius: 10px;
   object-fit: contain;
-  background: #f4f6f8;
+  object-position: center;
+  background: #fff;
   border: 1px solid var(--border, #e8ecf0);
+  box-sizing: border-box;
 }
 .casino-card__body { min-width: 0; }
 .casino-card__head {
@@ -206,8 +212,27 @@
   }
   .casino-card__rank-col {
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.75rem 1rem;
     min-width: 0;
+    width: 100%;
+    padding-bottom: 0.65rem;
+    margin-bottom: 0.15rem;
+    border-bottom: 1px solid var(--border, #e8ecf0);
+  }
+  .casino-card__rank {
+    flex-shrink: 0;
+    min-width: 2.25rem;
+    text-align: left;
+  }
+  .casino-card__logo {
+    flex: 1 1 auto;
+    min-width: 120px;
+    max-width: min(220px, calc(100% - 3.5rem));
+    height: 44px;
+    margin-left: auto;
+    margin-right: auto;
   }
   .casino-card__head { justify-content: center; }
   .casino-card__actions { justify-content: center; }

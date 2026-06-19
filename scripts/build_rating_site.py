@@ -12,7 +12,7 @@ from index_expand_2000 import index_extra_sections
 
 ROOT = Path(__file__).resolve().parent.parent
 DOMAIN = "https://casino-bonuses-uz.com"
-CSS_V = "20260618d"
+CSS_V = "20260618e"
 PARTNER = "https://bobaffs.org/click?o=1603&a=189"
 
 # 20 brands popular in Google UZ (casino + BK)
@@ -290,7 +290,7 @@ def card_html(b: dict, rank: int, lang: str) -> str:
     return f'''<article class="casino-card" data-rank="{rank}" data-type="{t}" data-name="{escape(b["name"])}">
   <div class="casino-card__rank-col">
     <span class="casino-card__rank">#{rank}</span>
-    <img class="casino-card__logo" src="{logo}" alt="{escape(b["name"])}" width="64" height="64" loading="lazy" />
+    <img class="casino-card__logo" src="{logo}" alt="{escape(b["name"])}" width="120" height="48" loading="lazy" />
   </div>
   <div class="casino-card__body">
     <div class="casino-card__head">
