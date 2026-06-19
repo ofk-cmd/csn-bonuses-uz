@@ -411,6 +411,7 @@ def index_extra_sections(lang: str) -> str:
   <header class="section__header section__header--compact"><span class="section__eyebrow">Платежи</span>
   <h2 class="section__title">Humo, Payme, Click — депозит и вывод для бонусов в UZ</h2></header>
   <p>Без Humo или Payme welcome часто не активировать. TOP-20 принимает национальные карты; различия — в min депозите и скорости вывода после KYC.</p>
+  <div class="table-scroll">
   <table class="data-table data-table--striped"><thead><tr><th>Метод</th><th>Тип</th><th>Депозит</th><th>Вывод</th><th>Комментарий для бонусов</th></tr></thead><tbody>
   <tr><td><strong>Humo</strong></td><td>Карта UZ</td><td>Обычно от 15 000 UZS</td><td>Да, после KYC</td><td>Стандарт для FairPari, Mostbet, 1xBet; welcome засчитывается</td></tr>
   <tr><td><strong>Uzcard</strong></td><td>Карта UZ</td><td>От 15 000 UZS</td><td>Да</td><td>1win, Melbet, Betwinner; проверьте лимиты в кассе</td></tr>
@@ -418,6 +419,7 @@ def index_extra_sections(lang: str) -> str:
   <tr><td><strong>Click</strong></td><td>Кошелёк</td><td>Мгновенно</td><td>Частично</td><td>FairPari, Melbet, Linebet, Spinbetter; альтернатива Payme</td></tr>
   <tr><td><strong>Крипто (USDT)</strong></td><td>Блокчейн</td><td>Выше min</td><td>На кошелёк</td><td>1xBet, 22Bet, BC.Game; отдельные крипто-welcome</td></tr>
   </tbody></table>
+  </div>
   <p>Порядок: регистрация, промокод, бонус в PROMO, депозит по правилам. Вывод — на тот же канал после KYC. Подробнее — <a href="{prefix}tolov-uz/">платежи Узбекистан</a>. FairPari №1 частично за Humo + Payme + Click.</p>
 </div></section>
 
@@ -503,6 +505,7 @@ def index_extra_sections(lang: str) -> str:
   <header class="section__header section__header--compact"><span class="section__eyebrow">To'lovlar</span>
   <h2 class="section__title">Humo, Payme, Click — UZ da bonus uchun depozit va yechish</h2></header>
   <p>O'zbekiston o'yinchisi uchun to'lov usuli ko'pincha banner foizidan muhimroq: Humo yoki Payme bo'lmasa welcome faollashmaydi. TOP-20 dagi operatorlarning ko'pchiligi milliy kartalarni qabul qiladi; farq — minimal depozit, komissiya va KYC dan keyin yechish tezligida.</p>
+  <div class="table-scroll">
   <table class="data-table data-table--striped"><thead><tr><th>Usul</th><th>Turi</th><th>Depozit</th><th>Yechish</th><th>Bonus uchun izoh</th></tr></thead><tbody>
   <tr><td><strong>Humo</strong></td><td>UZ karta</td><td>Odatda 15 000 UZS dan</td><td>Ha, KYC dan keyin</td><td>FairPari, Mostbet, 1xBet uchun standart; welcome hisoblanadi</td></tr>
   <tr><td><strong>Uzcard</strong></td><td>UZ karta</td><td>15 000 UZS dan</td><td>Ha</td><td>1win, Melbet, Betwinner; kassada limitlarni tekshiring</td></tr>
@@ -510,6 +513,7 @@ def index_extra_sections(lang: str) -> str:
   <tr><td><strong>Click</strong></td><td>Hamyon</td><td>Darhol</td><td>Qisman</td><td>FairPari, Melbet, Linebet, Spinbetter; Payme alternativasi</td></tr>
   <tr><td><strong>Kripto (USDT)</strong></td><td>Blokcheyn</td><td>Yuqori min</td><td>Hamyonga</td><td>1xBet, 22Bet, BC.Game; alohida kripto welcome</td></tr>
   </tbody></table>
+  </div>
   <p>Welcome uchun tartib: ro'yxatdan o'tish, promokod, PROMO da bonus, qoidalarga muvofiq depozit. Yechish — KYC dan keyin o'sha kanalga. Batafsil — <a href="{prefix}tolov-uz/">to'lovlar O'zbekiston</a>. FairPari №1 qisman Humo + Payme + Click tufayli.</p>
 </div></section>
 

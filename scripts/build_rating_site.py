@@ -12,7 +12,53 @@ from index_expand_2000 import index_extra_sections, index_footer_faq
 
 ROOT = Path(__file__).resolve().parent.parent
 DOMAIN = "https://casino-bonuses-uz.com"
-CSS_V = "20260619b"
+CSS_V = "20260619e"
+
+
+def _table_end(html: str, start: int) -> int:
+    depth = 0
+    pos = start
+    while pos < len(html):
+        if html.startswith("<table", pos):
+            depth += 1
+            close = html.find(">", pos)
+            pos = close + 1 if close != -1 else pos + 1
+        elif html.startswith("</table>", pos):
+            depth -= 1
+            pos += len("</table>")
+            if depth == 0:
+                return pos
+        else:
+            pos += 1
+    return len(html)
+
+
+def wrap_data_tables(html: str) -> str:
+    marker = '<table class="data-table'
+    out: list[str] = []
+    pos = 0
+    while True:
+        start = html.find(marker, pos)
+        if start == -1:
+            out.append(html[pos:])
+            break
+        before = html[max(0, start - 120):start]
+        if re.search(r'<div class="(?:table-scroll|data-table-wrap)"[^>]*>\s*$', before):
+            end = _table_end(html, start)
+            out.append(html[pos:end])
+            pos = end
+            continue
+        end = _table_end(html, start)
+        out.append(html[pos:start])
+        out.append('<div class="table-scroll">')
+        out.append(html[start:end])
+        out.append("</div>")
+        pos = end
+    return "".join(out)
+
+
+def write_html(path: Path, html: str) -> None:
+    path.write_text(wrap_data_tables(html), encoding="utf-8")
 PARTNER = "https://bobaffs.org/click?o=1603&a=189"
 
 # 20 brands popular in Google UZ (casino + BK)
@@ -339,62 +385,80 @@ def mobile_nav_html(lang: str) -> tuple[str, str]:
     legal_prefix = "/ru/" if lang == "ru" else "/"
     idx = 0 if lang == "ru" else 1
 
-    home_label = "Рейтинг TOP-20" if lang == "ru" else "TOP-20 reyting"
-    home_title = "Главная" if lang == "ru" else "Bosh sahifa"
-    guides_title = "Гайды и справочники" if lang == "ru" else "Qo'llanmalar"
-    brands_title = "Казино и БК" if lang == "ru" else "Kazino va BK"
-    legal_title = "Правовая информация" if lang == "ru" else "Huquqiy ma'lumot"
-    menu_label = "Меню сайта" if lang == "ru" else "Sayt menyusi"
-    open_label = "Открыть меню" if lang == "ru" else "Menyuni ochish"
+    if lang == "ru":
+        rating_l = "Рейтинг"
+        bonus_l = "Типы бонусов"
+        brands_l = "Казино и БК"
+        fairpari_l = "FairPari"
+        faq_l = "FAQ"
+        primary_title = "Разделы"
+        guides_title = "Гайды и справочники"
+        all_brands_l = "Все операторы TOP-20"
+        legal_title = "Правовая информация"
+        menu_label = "Меню сайта"
+        open_label = "Открыть меню"
+        close_label = "Закрыть меню"
+        cta_l = "Получить бонус"
+    else:
+        rating_l = "Reyting"
+        bonus_l = "Bonus turlari"
+        brands_l = "Kazino va BK"
+        fairpari_l = "FairPari"
+        faq_l = "FAQ"
+        primary_title = "Bo'limlar"
+        guides_title = "Qo'shimcha qo'llanmalar"
+        all_brands_l = "Barcha TOP-20 operatorlar"
+        legal_title = "Huquqiy ma'lumot"
+        menu_label = "Sayt menyusi"
+        open_label = "Menyuni ochish"
+        close_label = "Menyuni yopish"
+        cta_l = "Bonus olish"
 
     sections: list[str] = []
 
     sections.append(
-        f'<div class="nav-mobile__section">'
-        f'<p class="nav-mobile__heading">{escape(home_title)}</p>'
-        f'<a class="nav-mobile__link" href="{prefix}#rating">{escape(home_label)}</a>'
-        f"</div>"
-    )
-
-    hub_links = "".join(
-        f'<a class="nav-mobile__link" href="{prefix}{slug}/">{escape(labels[idx])}</a>'
-        for slug, *labels in HUB_LINKS
-    )
-    sections.append(
-        f'<div class="nav-mobile__section">'
-        f'<p class="nav-mobile__heading">{escape(guides_title)}</p>'
-        f"{hub_links}</div>"
-    )
-
-    sections.append(
-        f'<div class="nav-mobile__section nav-mobile__disclosure" data-nav-disclosure>'
-        f'<button type="button" class="nav-mobile__disclosure-btn" aria-expanded="false">'
-        f'{escape(brands_title)}<span class="nav-mobile__chevron" aria-hidden="true"></span>'
+        f'<div class="nav-mobile__section nav-mobile__section--primary">'
+        f'<p class="nav-mobile__heading">{escape(primary_title)}</p>'
+        f'<a class="nav-mobile__link nav-mobile__link--primary" href="{prefix}#rating">{escape(rating_l)}</a>'
+        f'<a class="nav-mobile__link nav-mobile__link--primary" href="{prefix}kazino-bonuslari/">{escape(bonus_l)}</a>'
+        f'<div class="nav-mobile__disclosure nav-mobile__disclosure--inline" data-nav-disclosure>'
+        f'<button type="button" class="nav-mobile__disclosure-btn nav-mobile__link--primary" aria-expanded="false">'
+        f'{escape(brands_l)}<span class="nav-mobile__chevron" aria-hidden="true"></span>'
         f"</button>"
         f'<div class="nav-mobile__disclosure-panel" hidden>'
         f'{top10_brand_links(lang, prefix)}'
         f"</div></div>"
+        f'<a class="nav-mobile__link nav-mobile__link--primary" href="{prefix}fairpari/">{escape(fairpari_l)}</a>'
+        f'<a class="nav-mobile__link nav-mobile__link--primary" href="{prefix}faq/">{escape(faq_l)}</a>'
+        f"</div>"
     )
 
-    for brand_type in ("both", "bk", "casino"):
-        links = []
-        for rank, b in enumerate(BRANDS, 1):
-            if b["type"] != brand_type:
-                continue
-            label = f"#{rank} {b['name']}"
-            if b["slug"] == "fairpari":
-                label += " ★"
-            links.append(
-                f'<a class="nav-mobile__link" href="{prefix}{b["slug"]}/">{escape(label)}</a>'
-            )
-        if not links:
-            continue
-        title = BRAND_TYPE_LABELS[brand_type][idx]
+    extra_guides = "".join(
+        f'<a class="nav-mobile__link" href="{prefix}{slug}/">{escape(labels[idx])}</a>'
+        for slug, *labels in HUB_LINKS
+        if slug not in ("kazino-bonuslari", "faq")
+    )
+    if extra_guides:
         sections.append(
             f'<div class="nav-mobile__section">'
-            f'<p class="nav-mobile__heading">{escape(title)}</p>'
-            f'{"".join(links)}</div>'
+            f'<p class="nav-mobile__heading">{escape(guides_title)}</p>'
+            f"{extra_guides}</div>"
         )
+
+    all_brand_links = "".join(
+        f'<a class="nav-mobile__link" href="{prefix}{b["slug"]}/">'
+        f"#{rank} {escape(b['name'])}{' ★' if b['slug'] == 'fairpari' else ''}</a>"
+        for rank, b in enumerate(BRANDS, 1)
+    )
+    sections.append(
+        f'<div class="nav-mobile__section nav-mobile__disclosure" data-nav-disclosure>'
+        f'<button type="button" class="nav-mobile__disclosure-btn" aria-expanded="false">'
+        f'{escape(all_brands_l)}<span class="nav-mobile__chevron" aria-hidden="true"></span>'
+        f"</button>"
+        f'<div class="nav-mobile__disclosure-panel" hidden>'
+        f"{all_brand_links}"
+        f"</div></div>"
+    )
 
     legal_links = "".join(
         f'<a class="nav-mobile__link" href="{legal_prefix}{path}">{escape(label)}</a>'
@@ -407,12 +471,27 @@ def mobile_nav_html(lang: str) -> tuple[str, str]:
     )
 
     body = "\n".join(sections)
-    toggle = f'''<button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav-mobile" aria-label="{escape(open_label)}">
-  <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
-</button>'''
-    panel = f'''<nav class="nav-mobile" id="site-nav-mobile" aria-label="{escape(menu_label)}">
-{body}
-</nav>'''
+    toggle = (
+        f'<button type="button" class="nav-toggle" aria-expanded="false" '
+        f'aria-controls="site-nav-mobile" aria-label="{escape(open_label)}" '
+        f'data-label-open="{escape(open_label)}" data-label-close="{escape(close_label)}">'
+        f'<span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>'
+        f"</button>"
+    )
+    panel = (
+        f'<div class="nav-mobile-backdrop" id="nav-mobile-backdrop" hidden aria-hidden="true"></div>'
+        f'<nav class="nav-mobile" id="site-nav-mobile" aria-label="{escape(menu_label)}" hidden>'
+        f'<div class="nav-mobile__top">'
+        f'<p class="nav-mobile__title">{escape(menu_label)}</p>'
+        f'<button type="button" class="nav-mobile__close" aria-label="{escape(close_label)}">'
+        f'<span aria-hidden="true">×</span></button>'
+        f"</div>"
+        f'<div class="nav-mobile__body">{body}</div>'
+        f'<div class="nav-mobile__footer">'
+        f'<button type="button" class="btn btn--gold btn--block js-go-partner">{escape(cta_l)}</button>'
+        f"</div>"
+        f"</nav>"
+    )
     return toggle, panel
 
 
@@ -464,7 +543,8 @@ def header_block(lang: str, depth: int = 0, href_uz: str = "", href_ru: str = ""
     <button type="button" class="btn btn--gold js-go-partner">{cta}</button>
     {nav_toggle}
   </div>
-</div>{nav_panel}</header>'''
+</div></header>
+{nav_panel}'''
 
 
 def card_html(b: dict, rank: int, lang: str) -> str:
@@ -727,7 +807,7 @@ def build_index(lang: str):
 </div></section>
 </main>
 {footer_block(lang, index_faq=index_footer_faq(lang))}'''
-    path.write_text(body, encoding="utf-8")
+    write_html(path, body)
     print(f"index: {path.relative_to(ROOT)}")
 
 
@@ -776,7 +856,7 @@ def build_review(b: dict, rank: int, lang: str):
 {article_body}
 </main>
 {footer_block(lang, depth, index_faq=brand_footer_faq(b, rank, lang))}'''
-    path.write_text(html, encoding="utf-8")
+    write_html(path, html)
 
 
 HUB_META = {
@@ -887,7 +967,7 @@ def build_hub(slug: str, lang: str):
 {body_content}
 </main>
 {footer_block(lang, depth)}'''
-    path.write_text(html, encoding="utf-8")
+    write_html(path, html)
     print(f"hub: {path.relative_to(ROOT)}")
 
 

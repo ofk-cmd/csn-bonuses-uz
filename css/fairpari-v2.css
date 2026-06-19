@@ -148,7 +148,8 @@ html[data-template="v2"] .site-fairpari-light .data-table-wrap {
   background: #fff;
   border: 1px solid var(--border);
   border-radius: 16px;
-  overflow: hidden;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   box-shadow: var(--shadow);
 }
 

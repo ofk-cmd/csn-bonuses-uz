@@ -71,30 +71,126 @@
   transform: translateY(-7px) rotate(-45deg);
 }
 
-.site-fairpari-light .nav-mobile {
+.site-fairpari-light .nav-mobile-backdrop {
   display: none;
   position: fixed;
-  top: var(--header-h);
-  left: 0;
+  inset: 0;
+  z-index: 104;
+  background: rgba(21, 32, 51, 0.45);
+}
+
+.site-fairpari-light .nav-mobile-backdrop.is-open {
+  display: block;
+}
+
+.site-fairpari-light .nav-mobile {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
   right: 0;
   bottom: 0;
-  z-index: 99;
-  overflow-y: auto;
-  padding: 0.75rem 1rem 2rem;
-  background: rgba(255, 255, 255, 0.98);
-  border-top: 1px solid var(--border);
-  box-shadow: var(--shadow);
-  -webkit-overflow-scrolling: touch;
+  width: min(100vw, 22rem);
+  z-index: 110;
+  overflow: hidden;
+  background: #fff;
+  border-left: 1px solid var(--border);
+  box-shadow: -8px 0 32px rgba(21, 32, 51, 0.12);
+  transform: translateX(100%);
+  transition: transform 0.28s ease;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .site-fairpari-light .nav-mobile.is-open {
-  display: block;
+  transform: translateX(0);
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.site-fairpari-light .nav-mobile__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-shrink: 0;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-card);
+}
+
+.site-fairpari-light .nav-mobile__title {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.site-fairpari-light .nav-mobile__close {
+  flex-shrink: 0;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-elevated);
+  color: var(--ink);
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+}
+
+.site-fairpari-light .nav-mobile__close:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.site-fairpari-light .nav-mobile__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.75rem 0.85rem 1rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.site-fairpari-light .nav-mobile__footer {
+  flex-shrink: 0;
+  padding: 0.85rem 1rem calc(0.85rem + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid var(--border);
+  background: var(--bg-card);
+}
+
+.site-fairpari-light .nav-mobile__footer .btn--block {
+  width: 100%;
+  justify-content: center;
 }
 
 .site-fairpari-light .nav-mobile__section + .nav-mobile__section {
   margin-top: 1rem;
   padding-top: 1rem;
   border-top: 1px solid var(--border);
+}
+
+.site-fairpari-light .nav-mobile__section--primary {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+.site-fairpari-light .nav-mobile__link--primary {
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.65rem 0.75rem;
+}
+
+.site-fairpari-light .nav-mobile__disclosure--inline {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+.site-fairpari-light .nav-mobile__disclosure--inline .nav-mobile__disclosure-btn {
+  font-size: 1rem;
+  font-weight: 600;
 }
 
 .site-fairpari-light .nav-mobile__heading {
@@ -156,13 +252,15 @@
   display: none;
 }
 
-.site-fairpari-light body.nav-open {
+.site-fairpari-light body.nav-open,
+body.site-fairpari-light.nav-open {
   overflow: hidden;
 }
 
 @media (min-width: 960px) {
   .site-fairpari-light .nav-toggle,
-  .site-fairpari-light .nav-mobile {
+  .site-fairpari-light .nav-mobile,
+  .site-fairpari-light .nav-mobile-backdrop {
     display: none !important;
   }
 }
@@ -456,17 +554,20 @@
 /* Sticky banner — betting reference */
 .site-fairpari-light .sticky-banner {
   position: fixed;
-  bottom: 16px;
-  left: 20px;
-  right: 20px;
+  bottom: max(12px, env(safe-area-inset-bottom, 0px));
+  left: 50%;
+  right: auto;
   z-index: 999;
-  max-width: var(--max-width);
-  margin: 0 auto;
+  width: min(calc(100vw - 24px), var(--max-width));
+  max-width: calc(100vw - 24px);
+  margin: 0;
+  transform: translateX(-50%);
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  padding: 14px 20px;
+  gap: 12px;
+  padding: 12px 16px;
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
@@ -480,23 +581,34 @@
   color: var(--ink);
   margin: 0;
   line-height: 1.35;
+  flex: 1 1 12rem;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .site-fairpari-light .sticky-banner-title .bonus {
   color: var(--accent);
+  white-space: nowrap;
 }
 
 .site-fairpari-light .sticky-banner .btn--gold {
-  flex-shrink: 0;
+  flex: 0 0 auto;
+  max-width: 100%;
 }
 
 @media (max-width: 640px) {
   .site-fairpari-light .sticky-banner {
     flex-direction: column;
+    align-items: stretch;
     text-align: center;
-    left: 12px;
-    right: 12px;
-    bottom: 12px;
+    width: calc(100vw - 16px);
+    max-width: calc(100vw - 16px);
+    padding: 12px 14px;
+    bottom: max(8px, env(safe-area-inset-bottom, 0px));
+  }
+
+  .site-fairpari-light .sticky-banner-title {
+    flex-basis: auto;
   }
 
   .site-fairpari-light .sticky-banner .btn--gold {
@@ -697,4 +809,59 @@
   font-weight: 600;
   font-size: 0.78rem;
   color: var(--accent);
+}
+
+/* ─── Table horizontal scroll ─── */
+html[data-template="v2"] {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+.site-fairpari-light main,
+.site-fairpari-light .site-header,
+.site-fairpari-light .site-footer {
+  max-width: 100%;
+  min-width: 0;
+}
+
+.site-fairpari-light .container,
+.site-fairpari-light .section,
+.site-fairpari-light .section--alt {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.table-scroll,
+.data-table-wrap {
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  max-width: 100%;
+  width: 100%;
+  margin: 0.75rem 0 1rem;
+}
+
+.table-card {
+  max-width: 100%;
+  margin-bottom: 1rem;
+  min-width: 0;
+}
+
+.table-scroll .data-table,
+.data-table-wrap .data-table {
+  width: max-content;
+  min-width: 100%;
+  margin: 0;
+}
+
+.table-scroll .data-table th,
+.data-table-wrap .data-table th {
+  white-space: nowrap;
+}
+
+.table-scroll .data-table td,
+.data-table-wrap .data-table td {
+  white-space: normal;
+  min-width: 5.5rem;
 }

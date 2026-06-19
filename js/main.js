@@ -3,20 +3,55 @@
 
   var toggle = document.querySelector(".nav-toggle");
   var mobileNav = document.querySelector(".nav-mobile");
+  var mobileBackdrop = document.getElementById("nav-mobile-backdrop");
+  var mobileClose = document.querySelector(".nav-mobile__close");
+
   if (toggle && mobileNav) {
     function setNavOpen(open) {
       toggle.setAttribute("aria-expanded", String(open));
       mobileNav.classList.toggle("is-open", open);
       document.body.classList.toggle("nav-open", open);
+      if (mobileBackdrop) {
+        mobileBackdrop.classList.toggle("is-open", open);
+        mobileBackdrop.hidden = !open;
+        mobileBackdrop.setAttribute("aria-hidden", String(!open));
+      }
+      mobileNav.hidden = !open;
+      var openLabel = toggle.getAttribute("data-label-open");
+      var closeLabel = toggle.getAttribute("data-label-close");
+      if (openLabel && closeLabel) {
+        toggle.setAttribute("aria-label", open ? closeLabel : openLabel);
+      }
     }
+
     toggle.addEventListener("click", function () {
       setNavOpen(toggle.getAttribute("aria-expanded") !== "true");
     });
+
+    if (mobileClose) {
+      mobileClose.addEventListener("click", function () {
+        setNavOpen(false);
+      });
+    }
+
+    if (mobileBackdrop) {
+      mobileBackdrop.addEventListener("click", function () {
+        setNavOpen(false);
+      });
+    }
+
     mobileNav.querySelectorAll("a").forEach(function (link) {
       link.addEventListener("click", function () {
         setNavOpen(false);
       });
     });
+
+    mobileNav.querySelectorAll(".js-go-partner").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        setNavOpen(false);
+      });
+    });
+
     document.addEventListener("keydown", function (event) {
       if (event.key === "Escape" && mobileNav.classList.contains("is-open")) {
         setNavOpen(false);
@@ -115,6 +150,21 @@
       });
     }
   }
+
+  document.querySelectorAll("table.data-table").forEach(function (table) {
+    var parent = table.parentElement;
+    if (!parent) return;
+    if (
+      parent.classList.contains("table-scroll") ||
+      parent.classList.contains("data-table-wrap")
+    ) {
+      return;
+    }
+    var wrap = document.createElement("div");
+    wrap.className = "table-scroll";
+    parent.insertBefore(wrap, table);
+    wrap.appendChild(table);
+  });
 
   var copyPromoBtns = document.querySelectorAll(".js-copy-promo");
   copyPromoBtns.forEach(function (btn) {
