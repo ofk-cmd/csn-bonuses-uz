@@ -216,3 +216,113 @@
   border-radius: 10px;
   padding: 4px;
 }
+
+/* Hero — image + title + subtitle (mobile: stack; desktop: split) */
+.site-fairpari-light .hero {
+  padding: 1rem 0 0.5rem;
+}
+
+.site-fairpari-light .hero .hero__slide-inner--split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  align-items: center;
+  padding: 1.25rem 1rem 1.5rem;
+  background: linear-gradient(135deg, #f0fdf9 0%, #f6f8fb 48%, #fefce8 100%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+}
+
+.site-fairpari-light .hero__art {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  line-height: 0;
+}
+
+.site-fairpari-light .hero__art img {
+  width: 100%;
+  height: auto;
+  max-height: 280px;
+  object-fit: contain;
+  filter: none;
+  display: block;
+}
+
+.site-fairpari-light .hero__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.site-fairpari-light .hero__title {
+  margin: 0;
+  font-size: clamp(1.45rem, 4.5vw, 2.35rem);
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  text-align: left;
+  max-width: 18ch;
+}
+
+.site-fairpari-light .hero__title em {
+  font-style: normal;
+  color: var(--accent);
+  display: block;
+  margin-top: 0.2rem;
+}
+
+.site-fairpari-light .hero__subtitle {
+  margin: 0;
+  max-width: 36rem;
+  font-size: clamp(0.95rem, 2.5vw, 1.08rem);
+  line-height: 1.55;
+  color: var(--muted);
+  text-align: left;
+}
+
+.site-fairpari-light .hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.site-fairpari-light .hero__actions .btn--lg {
+  width: auto;
+  min-width: min(100%, 280px);
+}
+
+@media (min-width: 768px) {
+  .site-fairpari-light .hero {
+    padding: 1.5rem 0 0.75rem;
+  }
+
+  .site-fairpari-light .hero .hero__slide-inner--split {
+    grid-template-columns: minmax(260px, 0.95fr) minmax(300px, 1.05fr);
+    gap: 2rem;
+    padding: 2rem 2rem 2.25rem;
+  }
+
+  .site-fairpari-light .hero__art {
+    max-width: none;
+    margin: 0;
+    order: 2;
+  }
+
+  .site-fairpari-light .hero__copy {
+    order: 1;
+  }
+
+  .site-fairpari-light .hero__art img {
+    max-height: 360px;
+  }
+
+  .site-fairpari-light .hero__title {
+    max-width: none;
+  }
+}

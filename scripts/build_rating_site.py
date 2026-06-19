@@ -12,7 +12,7 @@ from index_expand_2000 import index_extra_sections
 
 ROOT = Path(__file__).resolve().parent.parent
 DOMAIN = "https://casino-bonuses-uz.com"
-CSS_V = "20260618c"
+CSS_V = "20260618d"
 PARTNER = "https://bobaffs.org/click?o=1603&a=189"
 
 # 20 brands popular in Google UZ (casino + BK)
@@ -502,12 +502,12 @@ def build_index(lang: str):
     body = f'''{head_block(lang, title, desc, url, extra, href_uz=url if lang != "ru" else f"{DOMAIN}/", href_ru=f"{DOMAIN}/ru/")}
 <main id="main">
 <section class="hero"><div class="container hero__slide-inner hero__slide-inner--split">
+  <figure class="hero__art"><img src="{img}" alt="{img_alt}" width="520" height="400" loading="eager" decoding="async" /></figure>
   <div class="hero__copy">
     <h1 class="hero__title">{hero_h1}</h1>
     <p class="hero__subtitle">{hero_sub}</p>
-    <button type="button" class="btn btn--gold btn--lg js-go-partner">{hero_btn}</button>
+    <div class="hero__actions"><button type="button" class="btn btn--gold btn--lg js-go-partner">{hero_btn}</button></div>
   </div>
-  <figure class="hero__art"><img src="{img}" alt="{img_alt}" loading="eager" /></figure>
 </div></section>
 {rating_section(lang)}
 {index_extra_sections(lang)}
