@@ -192,11 +192,32 @@
   color: var(--muted, #64748b);
 }
 .casino-card__pay {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem 0.6rem;
   font-size: 0.82rem;
   color: var(--muted, #5c6b7a);
   margin-bottom: 0.85rem;
 }
-.casino-card__pay strong { color: var(--ink, #334155); }
+.casino-card__pay strong {
+  color: var(--ink, #334155);
+  flex-shrink: 0;
+}
+.casino-card__pay-logos {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+}
+.casino-card__pay-logo {
+  display: block;
+  height: 24px;
+  width: auto;
+  max-width: 76px;
+  object-fit: contain;
+  border-radius: 4px;
+}
 .casino-card__actions {
   display: flex;
   flex-wrap: wrap;
@@ -235,6 +256,7 @@
     margin-right: auto;
   }
   .casino-card__head { justify-content: center; }
+  .casino-card__pay { justify-content: center; }
   .casino-card__actions { justify-content: center; }
   .casino-card__proscons { text-align: left; }
 }

@@ -12,7 +12,7 @@ from index_expand_2000 import index_extra_sections
 
 ROOT = Path(__file__).resolve().parent.parent
 DOMAIN = "https://casino-bonuses-uz.com"
-CSS_V = "20260618e"
+CSS_V = "20260618f"
 PARTNER = "https://bobaffs.org/click?o=1603&a=189"
 
 # 20 brands popular in Google UZ (casino + BK)
@@ -182,6 +182,43 @@ BRANDS = [
 
 STAR = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>'
 
+PAY_TOKEN_MAP = {
+    "humo": ("humo", "Humo"),
+    "payme": ("payme", "Payme"),
+    "click": ("click", "Click"),
+    "uzcard": ("uzcard", "Uzcard"),
+    "kripto": ("usdt", "USDT"),
+    "крипто": ("usdt", "USDT"),
+    "usdt": ("usdt", "USDT"),
+    "btc": ("bitcoin", "BTC"),
+    "bitcoin": ("bitcoin", "Bitcoin"),
+}
+
+
+def pay_logos_html(pay: str, lang: str) -> str:
+    assets = assets_href(lang, 0)
+    imgs: list[str] = []
+    for part in pay.split(","):
+        key = part.strip().lower()
+        if not key:
+            continue
+        mapped = PAY_TOKEN_MAP.get(key)
+        if not mapped:
+            for token, value in PAY_TOKEN_MAP.items():
+                if token in key:
+                    mapped = value
+                    break
+        if not mapped:
+            continue
+        slug, alt = mapped
+        imgs.append(
+            f'<img class="casino-card__pay-logo" src="{assets}/logos/payments/{slug}.svg" '
+            f'alt="{escape(alt)}" width="72" height="24" loading="lazy" />'
+        )
+    if not imgs:
+        return escape(pay)
+    return f'<span class="casino-card__pay-logos" role="list">{"".join(imgs)}</span>'
+
 
 def logo_path(slug: str) -> str:
     return f"assets/logos/brands/{slug}.svg"
@@ -304,7 +341,7 @@ def card_html(b: dict, rank: int, lang: str) -> str:
       <ul class="casino-card__cons">{cons_li}</ul>
     </div>
     <div class="casino-card__tags">{tags_html}</div>
-    <p class="casino-card__pay"><strong>{pay_label}:</strong> {escape(b["pay"])}</p>
+    <div class="casino-card__pay"><strong>{pay_label}:</strong> {pay_logos_html(b["pay"], lang)}</div>
     <div class="casino-card__actions">
       <button type="button" class="btn btn--gold btn--sm js-go-partner">{btn_get}</button>
       <a class="btn btn--ghost btn--sm" href="{prefix}{b["slug"]}/">{btn_review}</a>
