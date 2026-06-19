@@ -19,7 +19,7 @@ CONTENT = {
 """),
     "tolov-uz/index.html": block("""
 <h2>To'lov xulosasi 2026</h2>
-<p>Humo va Uzcard — O'zbekiston o'yinchilari uchun asosiy usullar; depozit daqiqalar ichida, yechish KYC dan keyin. Payme va Click qulay mobil to'lovlar. Kripto alohida ekotizim — BC.Game va ba'zi BK larda USDT. Bonus faollashtirish tartibi: ro'yxatdan o'tish, promokod (FairPari kazino: fa_1635), keyin tanlangan usulda depozit. Noto'g'ri usul bonusni bekor qilishi mumkin. <a href="../welcome-bonus/">Welcome</a> · <a href="../depozitsiz-bonus/">Depozitsiz</a> · <a href="../fairpari/">FairPari</a> · <a href="../#rating">Reyting</a>. 18+.</p>
+<p>O'zbekistonda to'lov usuli welcome summasidan kam muhim emas. Humo va Uzcard asosiy kanallar; Payme va Click mobil to'ldirish uchun qulay. Bonus PROMO shartlari bajarilgach faollashadi. Yechish KYC dan keyin. Tartib: ro'yxatdan o'tish, fa_1635, paket, depozit. <a href="../welcome-bonus/">Welcome</a> · <a href="../fairpari/">FairPari</a> · <a href="../#rating">TOP-20</a>. 18+.</p>
 """),
     "ru/kazino-bonuslari/index.html": block("""
 <p>Итог: типы бонусов в UZ — welcome, FS, cashback, reload, VIP. FairPari #1 по сумме welcome и локальным платежам. Сравните бренды в <a href="/ru/#rating">рейтинге TOP-20</a>.</p>
@@ -33,8 +33,12 @@ CONTENT = {
 <p>Постоянный no deposit редок; ценность чаще в welcome с первым депозитом. FairPari #1: 20,2 млн + 150 FS. Временные акции без депозита проверяйте только в официальном PROMO. Вейджер ×40–×60 на «бесплатных» FS — норма. Мы не оператор, а рейтинг casino-bonuses-uz.com. Ссылки: <a href="/ru/welcome-bonus/">Welcome</a>, <a href="/ru/fairpari/">FairPari</a>, <a href="/ru/kazino-bonuslari/">Типы бонусов</a>, <a href="https://fairpari-casino-bonuses.com/ru/depozitsiz-bonus/" rel="noopener">хаб FairPari</a>. Играйте ответственно, 18+.</p>
 """),
     "ru/tolov-uz/index.html": block("""
-<h2>Платежи: итоговая памятка</h2>
-<p>Humo, Uzcard, Payme, Click — стандарт для UZ. Депозит быстрый, вывод после KYC. Активируйте welcome после промокода fa_1635 (FairPari казино). Не доверяйте «менеджерам» вне официального сайта. Сравните операторов: <a href="/ru/tolov-uz/">эта страница</a>, <a href="/ru/welcome-bonus/">Welcome</a>, <a href="/ru/#rating">рейтинг</a>. 18+.</p>
+<h2>Что запомнить о платежах в Узбекистане</h2>
+<p>Для игрока из UZ способ оплаты не менее важен, чем цифра welcome на баннере. Humo и Uzcard закрывают большинство депозитов в TOP-20; Payme и Click удобны с телефона. Зачисление обычно занимает минуты, но бонус активируется только после выполнения условий PROMO. Вывод — после верификации; заявку могут задержать, если welcome ещё не отыгран. Порядок: регистрация → промокод fa_1635 (FairPari казино) → пакет в PROMO → депозит. Не доверяйте ссылкам из мессенджеров. <a href="/ru/welcome-bonus/">Welcome</a> · <a href="/ru/#rating">рейтинг</a> · <a href="/ru/fairpari/">FairPari</a>. 18+.</p>
+"""),
+    "tolov-uz/index.html": block("""
+<h2>O'zbekistonda to'lovlar haqida nimalarni eslab qolish kerak</h2>
+<p>UZ o'yinchisi uchun to'lov usuli bannerdagi raqamdan kam muhim emas. Humo va Uzcard TOP-20 depozitlarining ko'pchiligini qoplaydi; Payme va Click telefondan qulay. Bonus PROMO shartlari bajarilgach faollashadi. Yechish verifikatsiyadan keyin. Tartib: ro'yxatdan o'tish → fa_1635 → paket → depozit. Messenjer havolalariga ishonmang. <a href="../welcome-bonus/">Welcome</a> · <a href="../#rating">TOP-20</a> · <a href="../fairpari/">FairPari</a>. 18+.</p>
 """),
     "ru/faq/index.html": block("""
 <h2>О портале casino-bonuses-uz.com</h2>

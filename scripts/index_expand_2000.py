@@ -2,10 +2,51 @@
 """Extra index sections for casino-bonuses-uz.com — ~1400–1600 words (uz/ru)."""
 from __future__ import annotations
 
+import re
 from html import escape
 
 _TYPE_UZ = {"both": "Kazino + BK", "bk": "Bukmeker", "casino": "Kazino"}
 _TYPE_RU = {"both": "Казино + БК", "bk": "БК", "casino": "Казино"}
+
+
+def _format_welcome_cell(welcome: str) -> str:
+    w = welcome.strip()
+    if "USDT" in w.upper() or "Kripto" in w or "Крипто" in w:
+        return (
+            f'<span class="welcome-cell welcome-cell--crypto">'
+            f'<span class="bonus-crypto">{escape(w)}</span></span>'
+        )
+
+    m = re.match(
+        r"^(?:(до)\s+)?([\d ]+)\s+UZS(?:\s*\+\s*(\d+)\s*FS)?(?:\s+(спорт|sport))?$",
+        w,
+        re.I,
+    )
+    if m:
+        prefix_ru, amount, fs, sport = m.groups()
+        parts = ['<span class="welcome-cell">']
+        if prefix_ru:
+            parts.append('<span class="welcome-prefix">до </span>')
+        parts.append(f'<span class="bonus-amt">{escape(amount.strip())}</span>')
+        parts.append(' <span class="bonus-currency">UZS</span>')
+        if fs:
+            parts.append(f' <span class="bonus-fs">+ {escape(fs)} FS</span>')
+        if sport:
+            tag = "спорт" if sport.lower() == "спорт" else "sport"
+            parts.append(f' <span class="bonus-tag">{escape(tag)}</span>')
+        parts.append("</span>")
+        return "".join(parts)
+
+    m2 = re.match(r"^([\d ]+)\s+UZS\s+gacha$", w, re.I)
+    if m2:
+        return (
+            f'<span class="welcome-cell">'
+            f'<span class="bonus-amt">{escape(m2.group(1).strip())}</span>'
+            f' <span class="bonus-currency">UZS</span>'
+            f' <span class="welcome-prefix">gacha</span></span>'
+        )
+
+    return f'<span class="welcome-cell">{escape(w)}</span>'
 
 
 def _faq_html(items: list[tuple[str, str]], open_first: bool = False) -> str:
@@ -37,7 +78,7 @@ def _comparison_rows(lang: str, prefix: str) -> str:
             f"<tr{highlight}>"
             f"<td>#{i}</td>"
             f'<td><a href="{prefix}{b["slug"]}/">{escape(b["name"])}</a></td>'
-            f"<td>{escape(welcome)}</td>"
+            f"<td class=\"welcome-col\">{_format_welcome_cell(welcome)}</td>"
             f"<td>{escape(b['wagering'])}</td>"
             f"<td>{escape(b['pay'])}</td>"
             f"<td>{escape(t)}</td>"
@@ -154,9 +195,9 @@ def index_brand_snapshots(lang: str, prefix: str) -> str:
             type_l = {"both": "kazino + BK", "bk": "BK", "casino": "kazino"}.get(t, t)
             parts.append(
                 f"<p><strong>#{i} {escape(b['name'])}</strong> ({type_l}): welcome <strong>{escape(welcome)}</strong>, "
-                f"wagering {escape(b['wagering'])}, to'lov {escape(b['pay'])}. "
-                f"Reyting {b['rating']:.1f}/5.0 — UZ o'yinchisi uchun summa va aylanma muvozanati. "
-                f"<a href=\"{prefix}{b['slug']}/\">#{i} sharh</a> — FAQ, to'lovlar va FairPari bilan taqqoslash.</p>"
+                f"wagering {escape(b['wagering'])}, to'lovlar {escape(b['pay'])}. "
+                f"Reytingda {b['rating']:.1f}/5.0 — UZ o'yinchisi uchun summa va aylanma muvozanati. "
+                f"<a href=\"{prefix}{b['slug']}/\">#{i} sharhni o'qing</a> — FAQ, to'lovlar va FairPari bilan taqqoslash.</p>"
             )
     h2 = "TOP-20 operatorlar — qisqa profil har biri uchun" if lang != "ru" else "TOP-20 операторов — краткий профиль каждого"
     intro = (
@@ -242,56 +283,79 @@ def index_tz_boost_sections(lang: str, prefix: str) -> str:
   <h3>A daraja — katta kazino welcome li gibridlar</h3>
   <p>FairPari, 1win, Mostbet, Pin-Up, 1xBet, Melbet, Betwinner, Megapari, Spinbetter, 22Bet. Slot va sport bor. Kazino welcome odatda 5–20 mln UZS + FS, wagering ×30–×45. Sport welcome alohida — ×5–×6. Ro'yxatdan oldin yo'nalishni tanlang; aralashtirish PROMO buzilishiga olib keladi.</p>
   <p>Slotlarda maksimal start kapitali kerak bo'lsa, FairPari etalon: 20,2 mln UZS + 150 FS, to'rt depozit, fa_1635, Humo/Payme/Click. 1win ×30 va ilova bilan raqobatlashadi; Mostbet va Pin-Up FS soni bilan (250 gacha). 1xBet va Betwinner kriptoda kuchli, lekin kazino welcome og'irroq bo'lishi mumkin.</p>
-  <h3>B daraja — sport BK</h3>
-  <p>Linebet, Parimatch, Leon, Fonbet, Marathonbet, Betway. Welcome ekspressga bog'langan: ×5–×6, 3–4 hodisa, kf. 1.40+. UZS summalari kichikroq, lekin sport o'yinchisi uchun aylanma tezroq. Faqat slot rejalashtirsangiz sport welcome olmang.</p>
-  <h3>C daraja — sport yo'q yoki kripto</h3>
-  <p>Vulkan Vegas, Joycasino, Fresh Casino, BC.Game. Slot va turnirlar. BC.Game — kripto, Humo yo'q. Milliy karta bilan C segment zaxira variant.</p>
-  <p>Har bir brend sharhi — yuqoridagi kartochkalar va /fairpari/, /1win/ URL larda. FairPari welcome to'liq qo'llanma: <a href="https://fairpari-casino-bonus.com/" rel="noopener">FairPari to'liq bonus</a>. Bonus turlari katalogi: <a href="https://fairpari-casino-bonuses.com/kazino-bonuslari/" rel="noopener">FairPari promo va FS</a>.</p>
+  <h3>B daraja — sportga ixtisoslashgan BK</h3>
+  <p>Linebet, Parimatch, Leon, Fonbet, Marathonbet, Betway. Welcome ko'pincha ekspresslarga bog'langan: ×5–×6, kamida 3–4 hodisa, koeffitsientlar 1.40 dan. UZS summalari kazino gigantlaridan kamroq, lekin sport o'yinchisi uchun aylanma tezroq — APL, UCL va mahalliy ligalar bo'yicha stavkalar uchun.</p>
+  <p>Faqat slot rejalashtirsangiz sport welcome olmang — va aksincha.</p>
+  <h3>C daraja — to'liq BK liniyasiz kazino</h3>
+  <p>Vulkan Vegas, Joycasino, Fresh Casino, BC.Game. Slotlar, turnirlar va FS ustuvor. BC.Game — kripto; Humo mavjud emas. Milliy kartali UZ o'yinchisi uchun C segment zaxira variant: sport emas, balki nish provayderlar va crash-o'yinlar ustuvor bo'lsa.</p>
+  <p>Batafsil sharhlar — yuqoridagi reyting kartochkalarida va <a href="{prefix}fairpari/">/fairpari/</a>, <a href="{prefix}1win/">/1win/</a> kabi alohida URL larda. FairPari welcome to'liq qo'llanma — <a href="https://fairpari-casino-bonus.com/" rel="noopener">FairPari to'liq bonus qo'llanmasi</a> (EMD-landing). FairPari bonus turlari katalogi — <a href="https://fairpari-casino-bonuses.com/kazino-bonuslari/" rel="noopener">FairPari promo va FS</a>.</p>
 </div></section>
 
 <section class="section" id="wagering-deep"><div class="container">
   <header class="section__header section__header--compact"><span class="section__eyebrow">Wagering</span>
   <h2 class="section__title">Wagering amaliy misollar — UZ konteksti</h2></header>
-  <p>O'yinchilar ko'pincha faqat welcome raqamiga qarab, «to'liq narxni» e'tiborsiz qoldiradi: <strong>bonus × wagering = kerakli aylanma</strong>. ×35 va 1 000 000 UZS bonusda 35 000 000 UZS slot aylanmasi kerak (100% hisob bo'lsa).</p>
+  <p>O'yinchilar ko'pincha faqat welcome raqamiga qarab, «to'liq narxni» e'tiborsiz qoldiradi. Formula oddiy: <strong>bonus × wagering = kerakli aylanma</strong> ruxsat etilgan o'yinlarda. ×35 va 1 000 000 UZS bonusda 35 000 000 UZS slot aylanmasi kerak (slotlar 100% hisob bo'lsa).</p>
   <table class="data-table data-table--compact"><thead><tr><th>Operator</th><th>Welcome</th><th>Wagering</th><th>1M bonus oborot</th></tr></thead><tbody>
   <tr><td>FairPari</td><td>20,2M + 150 FS</td><td>×35</td><td>Qisman bonusga bog'liq</td></tr>
   <tr><td>1win</td><td>500% paket</td><td>×30–×50</td><td>Bosqichma-bosqich</td></tr>
   <tr><td>Linebet</td><td>Sport</td><td>×5</td><td>5M</td></tr>
   <tr><td>BC.Game</td><td>Kripto</td><td>×40+</td><td>Yuqori risk</td></tr>
   </tbody></table>
-  <p>Muddat odatda 7–14 kun. Max bet cheklangan (~130 000 UZS/spin). PROMO dan wagering, muddat va max bet ni yozib oling.</p>
-  <p><a href="{prefix}welcome-bonus/">Welcome taqqoslash</a>, <a href="{prefix}kazino-bonuslari/">bonus turlari</a>, <a href="{prefix}faq/">FAQ</a>.</p>
+  <p>Muddat odatda 7–14 kun. Max bet cheklangan (taxminan 130 000 UZS/spin). Oshirish yoki istisno bo'limlarda o'ynash bonusni bekor qiladi. Depozitdan oldin PROMO dan uch raqamni yozib oling: wagering, muddat, max bet.</p>
+  <p>Qo'shimcha materiallar: <a href="{prefix}welcome-bonus/">welcome taqqoslash</a>, <a href="{prefix}kazino-bonuslari/">bonus turlari</a>, <a href="{prefix}faq/">verifikatsiya va yechish FAQ</a>.</p>
 </div></section>
 
 <section class="section section--alt" id="network-links"><div class="container">
   <header class="section__header section__header--compact"><span class="section__eyebrow">Tarmoq</span>
   <h2 class="section__title">FairPari bonus bo'yicha bog'liq qo'llanmalar</h2></header>
-  <p>casino-bonuses-uz.com — bozor reytingi. Bitta brend chuqurroq:</p>
+  <p>casino-bonuses-uz.com — bozor reytingi. Bitta brend bo'yicha chuqurroq ma'lumot uchun tarmoq saytlaridan foydalaning (operator emas):</p>
   <ul class="section-list">
-    <li><a href="https://fairpari-casino-bonus.com/" rel="noopener">FairPari to'liq bonus</a> — EMD qisqa javob</li>
-    <li><a href="https://fairpari-casino-bonuses.com/kazino-bonuslari/" rel="noopener">FairPari promo va FS</a> — katalog</li>
-    <li><a href="{prefix}fairpari/">Reytingda #1 sharh</a> — 19 raqobatchi bilan</li>
+    <li><a href="https://fairpari-casino-bonus.com/" rel="noopener">FairPari to'liq bonus</a> — «fairpari bonus» so'roviga qisqa EMD-javob</li>
+    <li><a href="https://fairpari-casino-bonuses.com/kazino-bonuslari/" rel="noopener">FairPari promo va FS</a> — mavzu bo'yicha katalog (sport, promo, FS)</li>
+    <li><a href="{prefix}fairpari/">Reytingda FairPari #1</a> — 19 raqobatchi bilan taqqoslash</li>
   </ul>
+  <p>Biz EMD-saytlardagi welcome matnlarni dublikat qilmaymiz: bu yerda — TOP-20 dagi pozitsiya va UZ bozori konteksti.</p>
 </div></section>
 
 <section class="section" id="selection-guide"><div class="container">
   <header class="section__header section__header--compact"><span class="section__eyebrow">Tanlash</span>
-  <h2 class="section__title">Welcome bonusni tanlash — kengaytirilgan cheklist</h2></header>
-  <p>Bonus tanlovi — bannerdagi maksimal raqam poygasi emas. TOP-20 ni yangilashda qo'llaydigan yetti mezon:</p>
+  <h2 class="section__title">O'zbekistonda welcome tanlash — kengaytirilgan cheklist</h2></header>
+  <p>Bonus tanlovi — bannerdagi maksimal raqam poygasi emas. TOP-20 ni yangilashda qo'llaydigan yetti mezon. Birinchi depozitdan oldin ulardan foydalaning.</p>
   <ol class="section-list">
-    <li><strong>Maqsad:</strong> slot, live yoki sport? Welcome aralashtirilmaydi.</li>
+    <li><strong>Maqsad:</strong> slotlar, live yoki sport? Mos kelmaydigan welcome paketlarini aralashtirish mumkin emas.</li>
     <li><strong>To'liq narx:</strong> bonus × wagering. 20 mln ×45 ba'zan 10 mln ×30 dan yomonroq.</li>
     <li><strong>Muddat:</strong> 7 kun vs 30 kun — bankrollingizga mosligi.</li>
-    <li><strong>Max bet:</strong> ~130 000 UZS; tasodifiy katta stavka bonusni yo'q qiladi.</li>
-    <li><strong>To'lov:</strong> Humo/Payme/Click kassada bo'lishi kerak.</li>
-    <li><strong>Mobil:</strong> APK/PWA va wagering sinxronizatsiyasi.</li>
-    <li><strong>KYC:</strong> birinchi yechish — pasport; kechikish ko'pincha verifikatsiya sababli.</li>
+    <li><strong>Max bet:</strong> odatda 130 000 UZS gacha; tasodifiy oshirish bonusni bekor qiladi.</li>
+    <li><strong>To'lov:</strong> Humo/Payme/Click kassada bo'lishi kerak; faqat kripto operatorlar UZ o'yinchisini chetlab o'tadi.</li>
+    <li><strong>Mobil:</strong> APK/PWA va telefon va desktop o'rtasida wagering sinxronizatsiyasi.</li>
+    <li><strong>Qo'llab-quvvatlash va KYC:</strong> birinchi yechish — pasport; kechikish ko'pincha to'liq verifikatsiya sababli.</li>
   </ol>
-  <p>FairPari kazino ssenariyida yetti mezonni qoplaydi. Sport uchun Linebet va Parimatch ni solishtiring.</p>
-  <p><a href="{prefix}welcome-bonus/">TOP-5 welcome</a>, <a href="{prefix}depozitsiz-bonus/">depozitsiz miflar</a>, <a href="{prefix}tolov-uz/">to'lovlar</a>.</p>
-  <p>Reyting metodologiyasi mustaqil: biz operatorlardan to'lov olmaymiz. Har oyda TOP-5 operator shartlarini qayta tekshiramiz; qolgan 15 ta brend — choraklik audit. FairPari odatda birinchi o'rinda qoladi, chunki welcome hajmi va Humo/Payme/Click uchtaligini bir vaqtda qoplaydi — bu UZ o'yinchisi uchun amaliy ustunlik.</p>
-  <p>Yuqoridagi TOP-20 jadvali filtrlash va teg orqali toraytiriladi — masalan, faqat kazino yoki faqat BK. Mobil qurilmada gorizontal scroll bilan barcha ustunlarni ko'ring; sticky CTA orqali #1 FairPari bonusiga o'tish mumkin.</p>
+  <p>FairPari gibrid kazino ssenariysida yetti mezonni qoplaydi: katta paket, ×35, mahalliy to'lovlar, fa_1635. Toza sport uchun reyting jadvalida Linebet va Parimatch ni solishtiring.</p>
+  <p>Qo'shimcha: <a href="{prefix}welcome-bonus/">TOP-5 welcome taqqoslash</a>, <a href="{prefix}depozitsiz-bonus/">depozitsiz miflar</a>, <a href="{prefix}tolov-uz/">Humo/Payme to'lovlari</a>. FairPari EMD-qo'llanma — <a href="https://fairpari-casino-bonus.com/" rel="noopener">qisqa yo'riqnoma</a>.</p>
 </div></section>"""
+
+
+def index_footer_faq(lang: str) -> str:
+    """FAQ block for index page footer."""
+    prefix = "/ru/" if lang == "ru" else "/"
+    faq_block = _faq_html(_faq_items(lang), open_first=True)
+    if lang == "ru":
+        return f'''<section class="footer-faq" id="faq-index" aria-labelledby="faq-index-title">
+  <header class="footer-faq__header">
+    <span class="section__eyebrow">FAQ</span>
+    <h2 class="footer-faq__title" id="faq-index-title">Частые вопросы о рейтинге и бонусах UZ</h2>
+  </header>
+  <div class="faq-list">{faq_block}</div>
+  <p class="footer-faq__more">Больше ответов — в <a href="{prefix}faq/">разделе FAQ</a> и в обзорах каждого оператора из таблицы сравнения.</p>
+</section>'''
+    return f'''<section class="footer-faq" id="faq-index" aria-labelledby="faq-index-title">
+  <header class="footer-faq__header">
+    <span class="section__eyebrow">FAQ</span>
+    <h2 class="footer-faq__title" id="faq-index-title">Reyting va UZ bonuslari bo'yicha tez-tez savollar</h2>
+  </header>
+  <div class="faq-list">{faq_block}</div>
+  <p class="footer-faq__more">Ko'proq javoblar — <a href="{prefix}faq/">FAQ bo'limida</a> va taqqoslash jadvalidagi har bir operator sharhida.</p>
+</section>'''
 
 
 def index_extra_sections(lang: str) -> str:
@@ -301,7 +365,6 @@ def index_extra_sections(lang: str) -> str:
 
     prefix = "/ru/" if lang == "ru" else "/"
     cmp_rows = _comparison_rows(lang, prefix)
-    faq_block = _faq_html(_faq_items(lang), open_first=True)
 
     if lang == "ru":
         return f"""
@@ -326,8 +389,21 @@ def index_extra_sections(lang: str) -> str:
   <header class="section__header section__header--compact"><span class="section__eyebrow">Рынок UZ</span>
   <h2 class="section__title">Обзор welcome-бонусов Узбекистана — 2026</h2></header>
   <p>Рынок UZ 2026 сфокусирован на UZS, Humo, Uzcard, Payme и Click. Бренды конкурируют FS, пакетами на 2–4 депозита и спорт welcome с ×5–×6 на экспрессы.</p>
-  <p>TOP-10 казино welcome — 5–20 млн UZS + 100–250 FS, ×30–×40. FairPari — четыре депозита и fa_1635; 1win — мобилка и ×30; Mostbet и Pin-Up — 250 FS. 1xBet и Melbet сильны в спорте и крипто.</p>
-  <p>Букмекеры (Linebet, Parimatch, Leon, Fonbet) — ставки с ×5–×6. Казино-only (Vulkan Vegas, Joycasino, Fresh Casino) — FS без полной линии.</p>
+  <p><strong>TOP-10 казино welcome:</strong> <em>5–20 млн UZS</em> + <strong>100–250 FS</strong>, вейджер <em>×30–×40</em>.</p>
+  <ul class="section-list">
+    <li><strong><a href="{prefix}fairpari/">FairPari</a></strong> — четыре депозита, промокод <code>fa_1635</code>, лидер рейтинга</li>
+    <li><strong><a href="{prefix}1win/">1win</a></strong> — сильное <em>мобильное приложение</em>, вейджер <em>×30</em></li>
+    <li><strong><a href="{prefix}mostbet/">Mostbet</a></strong> и <strong><a href="{prefix}pin-up/">Pin-Up</a></strong> — до <strong>250 FS</strong> в welcome</li>
+    <li><strong><a href="{prefix}1xbet/">1xBet</a></strong> и <strong><a href="{prefix}melbet/">Melbet</a></strong> — сильны в <em>спорте</em> и <em>крипто</em></li>
+  </ul>
+  <p><strong>Букмекеры</strong> — ставки с вейджером <em>×5–×6</em>:</p>
+  <ul class="section-list">
+    <li><strong><a href="{prefix}linebet/">Linebet</a></strong>, <strong><a href="{prefix}parimatch/">Parimatch</a></strong>, <strong><a href="{prefix}leon/">Leon</a></strong>, <strong><a href="{prefix}fonbet/">Fonbet</a></strong> — <em>спорт welcome</em>, быстрый отыгрыш</li>
+  </ul>
+  <p><strong>Казино-only</strong> — <strong>FS</strong> без полной линии спорта:</p>
+  <ul class="section-list">
+    <li><strong><a href="{prefix}vulkan-vegas/">Vulkan Vegas</a></strong>, <strong><a href="{prefix}joycasino/">Joycasino</a></strong>, <strong><a href="{prefix}fresh-casino/">Fresh Casino</a></strong> — фокус на <em>слотах</em> и <em>фриспинах</em></li>
+  </ul>
   <p>Тренд 2026: игроки чаще сравнивают «полную стоимость» бонуса — произведение суммы на вейджер — а не только заголовок на баннере. Кешбэк, reload и VIP-программы идут вторым эшелоном после welcome. Подробные гайды — на хабах <a href="{prefix}welcome-bonus/">welcome-бонусы</a>, <a href="{prefix}kazino-bonuslari/">типы бонусов</a> и <a href="{prefix}depozitsiz-bonus/">депозитные акции</a>.</p>
 </div></section>
 
@@ -359,13 +435,6 @@ def index_extra_sections(lang: str) -> str:
   <p>FairPari опережает 1win по сумме казино welcome, но 1win может быть интереснее при приоритете ×30 и приложении. 1xBet и Betwinner — сеть с крипто; Mostbet и Pin-Up — баланс FS и UZS. Для чистого спорта смотрите Linebet и Parimatch; для крипто-слотов — BC.Game с оговоркой на отсутствие Humo.</p>
 </div></section>
 
-<section class="section" id="faq-index"><div class="container">
-  <header class="section__header section__header--compact"><span class="section__eyebrow">FAQ</span>
-  <h2 class="section__title">Частые вопросы о рейтинге и бонусах UZ</h2></header>
-  <div class="faq-list">{faq_block}</div>
-  <p style="margin-top:1.25rem">Больше ответов — в <a href="{prefix}faq/">разделе FAQ</a> и в обзорах каждого оператора из таблицы выше.</p>
-</div></section>
-
 <section class="section section--alt" id="hubs"><div class="container">
   <header class="section__header section__header--compact"><span class="section__eyebrow">Гайды</span>
   <h2 class="section__title">Полезные разделы сайта</h2></header>
@@ -394,8 +463,8 @@ def index_extra_sections(lang: str) -> str:
 <section class="section" id="methodology-detail"><div class="container">
   <header class="section__header section__header--compact"><span class="section__eyebrow">Metodologiya</span>
   <h2 class="section__title">TOP-20 kazino va BK reytingi qanday tuziladi</h2></header>
-  <p>casino-bonuses-uz.com dagi reyting — casino.ru uslubidagi mustaqil agregator: welcome paketlar, wagering shartlari va O'zbekiston o'yinchisi uchun qulaylikni solishtiramiz, joy sotmaymiz. 20 ta operator vaznli model bo'yicha baholanadi; yakuniy ball (5,0 gacha) 2026 yil UZ bozori uchun taklif sifatini aks ettiradi.</p>
-  <p>PROMO qoidalari, kassa, mobil ilovalar va o'zbek hamda rus tilidagi fikr-mulohazalar tahlil qilinadi. Ma'lumotlar qo'lda tekshiriladi: UZS dagi welcome, frispinlar soni, paketdagi depozitlar, bonus va depozit wagering, muddat, max bet, 100% hisoblanadigan o'yinlar va istisnolar. Alohida Humo, Uzcard, Payme, Click mavjudligi va KYC dan keyin yechish tezligi baholanadi.</p>
+  <p>casino-bonuses-uz.com dagi reyting — mustaqil agregator: welcome, wagering va UZ o'yinchisi uchun qulaylikni solishtiramiz, joy sotmaymiz. Yakuniy ball (5,0 gacha) 2026 yil taklif sifatini aks ettiradi, brend reklama byudjetini emas.</p>
+  <p>Ma'lumotlar qo'lda tekshiriladi: UZS dagi welcome, FS, paketdagi depozitlar soni, wagering, muddat, max bet, o'yinlarning hisoblanishi. Alohida — Humo, Uzcard, Payme, Click va KYC dan keyin yechish.</p>
   <h3>Baholash mezonlari va ularning vazni</h3>
   <table class="data-table data-table--compact"><thead><tr><th>Mezon</th><th>Vazn</th><th>Nima tekshiramiz</th></tr></thead><tbody>
   <tr><td>Welcome bonus (kazino)</td><td>~30%</td><td>UZS summasi, FS, paket (1–4 depozit)</td></tr>
@@ -404,16 +473,29 @@ def index_extra_sections(lang: str) -> str:
   <tr><td>Mahsulot</td><td>~15%</td><td>Slotlar, live, sport liniyasi, APK/PWA</td></tr>
   <tr><td>Shaffoflik va litsenziya</td><td>~10%</td><td>Bonus qoidalari, qo'llab-quvvatlash, xalqaro litsenziya</td></tr>
   </tbody></table>
-  <p>FairPari #1 — rekord kazino welcome (20,2 mln UZS + 150 FS), ×35 wagering va to'liq mahalliy to'lovlar tufayli. Yuqori banner, lekin ×45 wagering yoki Humo yo'qligi pastroq o'rin. Bukmekerlar (Linebet, Parimatch, Fonbet) o'z toifasida: sport welcome ×5–×6 kazino paketlari bilan aralashtirilmaydi.</p>
-  <p>Operator saytining doimiy mavjudligini kafolatlamaymiz: domenlar o'zgarishi mumkin. Ro'yxatdan oldin rasmiy manzil va qoidalarni tekshiring. Yuqoridagi kartochkalar qisqacha; bu bo'lim — reyting mantiqini tushuntiradi.</p>
+  <p>FairPari №1 — rekord welcome, ×35 va mahalliy to'lovlar. ×45 yoki Humo yo'qligi pastroq o'rin. Bukmekerlar o'z toifasida (sport ×5–×6).</p>
+  <p>Ro'yxatdan oldin rasmiy manzil va qoidalarni tekshiring. Yuqoridagi kartochkalar — qisqacha; bu bo'lim — reyting mantiqini tushuntiradi.</p>
 </div></section>
 
 <section class="section section--alt" id="market-2026"><div class="container">
   <header class="section__header section__header--compact"><span class="section__eyebrow">UZ bozori</span>
   <h2 class="section__title">Welcome bonus bozori O'zbekiston — 2026 ko'rinishi</h2></header>
   <p>2026 yilda O'zbekiston o'yinchilari uchun onlayn kazino va bukmeker bozori UZS hisoblar, Humo va Uzcard hamda Payme va Click hamyonlariga siljigan. Brendlar nafaqat birinchi depozit foizi, balki FS soni, 2–4 bosqichli paketlar va past wagering li sport welcome bilan raqobatlashadi.</p>
-  <p>TOP-10 da odatiy kazino welcome — 5 dan 20 mln UZS gacha va 100–250 FS, slotlarda ×30–×40 wagering. FairPari to'rt depozitli struktura va fa_1635 promokodi bilan ajralib turadi; 1win mobil ilova va ×30 ga urg'u beradi; Mostbet va Pin-Up 250 FS taklif qiladi. 1xBet va Melbet sport va kriptoda kuchli, lekin kazino welcome og'irroq bo'lishi mumkin.</p>
-  <p>Alohida segment — faqat bukmekerlar: Linebet, Parimatch, Leon, Fonbet, Marathonbet, Betway. Ularning welcome stavkalarga yo'naltirilgan: ×5–×6 wagering, kichikroq UZS, lekin slotga nisbatan tezroq aylanma. Kazino-only brendlar (Vulkan Vegas, Joycasino, Fresh Casino) FS va turnirlar bilan raqobatlashadi, to'liq sport liniyasi yo'q.</p>
+  <p><strong>TOP-10 kazino welcome:</strong> <em>5–20 mln UZS</em> + <strong>100–250 FS</strong>, wagering <em>×30–×40</em>.</p>
+  <ul class="section-list">
+    <li><strong><a href="{prefix}fairpari/">FairPari</a></strong> — to'rt depozit, <code>fa_1635</code> promokodi, reyting yetakchisi</li>
+    <li><strong><a href="{prefix}1win/">1win</a></strong> — kuchli <em>mobil ilova</em>, wagering <em>×30</em></li>
+    <li><strong><a href="{prefix}mostbet/">Mostbet</a></strong> va <strong><a href="{prefix}pin-up/">Pin-Up</a></strong> — welcome da <strong>250 FS</strong> gacha</li>
+    <li><strong><a href="{prefix}1xbet/">1xBet</a></strong> va <strong><a href="{prefix}melbet/">Melbet</a></strong> — <em>sport</em> va <em>kripto</em> da kuchli</li>
+  </ul>
+  <p><strong>Faqat bukmekerlar</strong> — wagering <em>×5–×6</em>:</p>
+  <ul class="section-list">
+    <li><strong><a href="{prefix}linebet/">Linebet</a></strong>, <strong><a href="{prefix}parimatch/">Parimatch</a></strong>, <strong><a href="{prefix}leon/">Leon</a></strong>, <strong><a href="{prefix}fonbet/">Fonbet</a></strong> — <em>sport welcome</em>, tezroq aylanma</li>
+  </ul>
+  <p><strong>Kazino-only</strong> — to'liq sport liniyasiz <strong>FS</strong>:</p>
+  <ul class="section-list">
+    <li><strong><a href="{prefix}vulkan-vegas/">Vulkan Vegas</a></strong>, <strong><a href="{prefix}joycasino/">Joycasino</a></strong>, <strong><a href="{prefix}fresh-casino/">Fresh Casino</a></strong> — <em>slotlar</em> va <em>frispinlar</em> ustuvor</li>
+  </ul>
   <p>2026 trendi: o'yinchilar bonusning «to'liq narxini» — summa × wagering — hisoblashadi. Keshbek, reload va VIP welcome dan keyin ikkinchi qatlam. Batafsil: <a href="{prefix}welcome-bonus/">welcome bonuslar</a>, <a href="{prefix}kazino-bonuslari/">bonus turlari</a>, <a href="{prefix}depozitsiz-bonus/">depozitsiz aksiyalar</a>.</p>
 </div></section>
 
@@ -428,8 +510,7 @@ def index_extra_sections(lang: str) -> str:
   <tr><td><strong>Click</strong></td><td>Hamyon</td><td>Darhol</td><td>Qisman</td><td>FairPari, Melbet, Linebet, Spinbetter; Payme alternativasi</td></tr>
   <tr><td><strong>Kripto (USDT)</strong></td><td>Blokcheyn</td><td>Yuqori min</td><td>Hamyonga</td><td>1xBet, 22Bet, BC.Game; alohida kripto welcome</td></tr>
   </tbody></table>
-  <p>Welcome uchun tavsiya: rasmiy saytda ro'yxatdan o'ting, promokod kiriting (agar bor bo'lsa), PROMO da bonusni tanlang, keyin qoidalarda ko'rsatilgan usulda birinchi depozit. Yechish odatda hujjatlar tekshirilgach o'sha kanalga qaytadi. Depozit va yechish usuli mos kelmasligi — kechikishning tez-tez sababi.</p>
-  <p>Limitlar, komissiyalar va bonus bog'lanishi — <a href="{prefix}tolov-uz/">to'lovlar O'zbekiston</a> sahifasida. FairPari reytingda #1 qisman Humo + Payme + Click uchtaligini majburiy kriptosiz taklif qilishi sababli.</p>
+  <p>Welcome uchun tartib: ro'yxatdan o'tish, promokod, PROMO da bonus, qoidalarga muvofiq depozit. Yechish — KYC dan keyin o'sha kanalga. Batafsil — <a href="{prefix}tolov-uz/">to'lovlar O'zbekiston</a>. FairPari №1 qisman Humo + Payme + Click tufayli.</p>
 </div></section>
 
 <section class="section section--alt" id="fairpari-compare"><div class="container">
@@ -444,13 +525,6 @@ def index_extra_sections(lang: str) -> str:
   </tbody></table>
   </div>
   <p>FairPari 1win dan kazino welcome summasida oldinda; 1win ×30 va ilova ustuvor bo'lsa qiziqarli. 1xBet va Betwinner — kripto tarmoq; Mostbet va Pin-Up — FS va UZS muvozanati. Toza sport uchun Linebet va Parimatch; kripto slotlar uchun BC.Game (Humo yo'q).</p>
-</div></section>
-
-<section class="section" id="faq-index"><div class="container">
-  <header class="section__header section__header--compact"><span class="section__eyebrow">FAQ</span>
-  <h2 class="section__title">Reyting va UZ bonuslari bo'yicha tez-tez savollar</h2></header>
-  <div class="faq-list">{faq_block}</div>
-  <p style="margin-top:1.25rem">Ko'proq javoblar — <a href="{prefix}faq/">FAQ bo'limida</a> va yuqoridagi jadvaldagi har bir operator sharhida.</p>
 </div></section>
 
 <section class="section section--alt" id="hubs"><div class="container">

@@ -4,16 +4,23 @@
   var toggle = document.querySelector(".nav-toggle");
   var mobileNav = document.querySelector(".nav-mobile");
   if (toggle && mobileNav) {
+    function setNavOpen(open) {
+      toggle.setAttribute("aria-expanded", String(open));
+      mobileNav.classList.toggle("is-open", open);
+      document.body.classList.toggle("nav-open", open);
+    }
     toggle.addEventListener("click", function () {
-      var open = toggle.getAttribute("aria-expanded") === "true";
-      toggle.setAttribute("aria-expanded", String(!open));
-      mobileNav.classList.toggle("is-open", !open);
+      setNavOpen(toggle.getAttribute("aria-expanded") !== "true");
     });
-    mobileNav.querySelectorAll('a[href^="#"]').forEach(function (link) {
+    mobileNav.querySelectorAll("a").forEach(function (link) {
       link.addEventListener("click", function () {
-        toggle.setAttribute("aria-expanded", "false");
-        mobileNav.classList.remove("is-open");
+        setNavOpen(false);
       });
+    });
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && mobileNav.classList.contains("is-open")) {
+        setNavOpen(false);
+      }
     });
   }
 

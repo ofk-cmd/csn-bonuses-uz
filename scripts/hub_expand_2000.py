@@ -489,6 +489,53 @@ def _hub_pad_block(slug: str, lang: str, L: dict) -> str:
     return f'<section class="section section--alt prose" id="hub-pad"><h2>{title}</h2>{body}<p class="hub-pad-tail">{tail}</p></section>'
 
 
+def _pass4c_final_block(slug: str, lang: str, L: dict) -> str:
+    if slug != "tolov-uz":
+        return ""
+    if lang == "ru":
+        title = "Что запомнить о платежах в Узбекистане"
+        body = (
+            "<p>Для игрока из UZ способ оплаты не менее важен, чем цифра welcome на баннере. "
+            "<strong>Humo</strong> и <strong>Uzcard</strong> закрывают большинство депозитов в нашем TOP-20; "
+            "<strong>Payme</strong> и <strong>Click</strong> удобны с телефона, если пополняете счёт без карты под рукой. "
+            "Зачисление обычно занимает минуты, но бонус активируется только после выполнения условий PROMO — "
+            "промокода, выбора пакета и минимальной суммы.</p>"
+            "<p>Вывод проходит после верификации: паспорт или ID, иногда селфи. Заявку могут задержать, "
+            "если welcome ещё не отыгран или выбран другой канал, чем при пополнении. "
+            f'<a href="{L["fairpari"]}">FairPari</a>, <a href="{_brand_link("1win", lang)}">1win</a> и '
+            f'<a href="{_brand_link("mostbet", lang)}">Mostbet</a> чаще других упоминаются в отзывах '
+            "за стабильные выплаты на локальные карты.</p>"
+            "<p>Рабочий порядок для welcome: регистрация на официальном сайте → промокод "
+            "(для казино FairPari — <strong>fa_1635</strong>) → выбор пакета в PROMO → депозит выбранным методом. "
+            "Не переводите деньги по ссылкам из мессенджеров и не доверяйте «личным менеджерам» вне кассы оператора.</p>"
+            f'<p>Дальше: <a href="{L["welcome"]}">сравнение welcome</a>, '
+            f'<a href="{L["rating"]}">рейтинг TOP-20</a>, '
+            f'<a href="{L["types"]}">типы бонусов</a>. '
+            "18+, играйте ответственно.</p>"
+        )
+    else:
+        title = "O'zbekistonda to'lovlar haqida nimalarni eslab qolish kerak"
+        body = (
+            "<p>UZ o'yinchisi uchun to'lov usuli bannerdagi welcome raqamidan kam muhim emas. "
+            "<strong>Humo</strong> va <strong>Uzcard</strong> TOP-20 dagi depozitlarning ko'pchiligini qoplaydi; "
+            "<strong>Payme</strong> va <strong>Click</strong> telefondan to'ldirishda qulay. "
+            "Mablag' odatda daqiqalar ichida tushadi, lekin bonus faqat PROMO shartlari bajarilgach faollashadi — "
+            "promokod, paket tanlovi va minimal summa.</p>"
+            "<p>Yechish verifikatsiyadan keyin: pasport yoki ID, ba'zan selfi. So'rov kechikishi mumkin, "
+            "agar welcome tugallanmagan yoki depozitdan boshqa kanal tanlangan bo'lsa. "
+            f'<a href="{L["fairpari"]}">FairPari</a>, <a href="{_brand_link("1win", lang)}">1win</a> va '
+            f'<a href="{_brand_link("mostbet", lang)}">Mostbet</a> mahalliy kartalarga yechishda ko\'proq '
+            "ishonchli deb tilga olinadi.</p>"
+            "<p>Welcome uchun tartib: rasmiy saytda ro'yxatdan o'tish → promokod "
+            "(FairPari kazino — <strong>fa_1635</strong>) → PROMO da paket → tanlangan usulda depozit. "
+            "Telegram havolalari va operator kassasidan tashqari «menejerlar»ga pul yubormang.</p>"
+            f'<p>Keyingi qadamlar: <a href="{L["welcome"]}">welcome taqqoslash</a>, '
+            f'<a href="{L["rating"]}">TOP-20 reyting</a>, '
+            f'<a href="{L["types"]}">bonus turlari</a>. 18+.</p>'
+        )
+    return f'<section class="section prose" id="pass4c-final"><h2>{title}</h2>{body}</section>'
+
+
 def _hub_extra(slug: str, lang: str, L: dict) -> str:
     blocks = [
         _wagering_deep_block(lang, L),
@@ -503,6 +550,9 @@ def _hub_extra(slug: str, lang: str, L: dict) -> str:
     if tail:
         blocks.append(tail)
     blocks.append(_hub_pad_block(slug, lang, L))
+    final = _pass4c_final_block(slug, lang, L)
+    if final:
+        blocks.append(final)
     return "\n".join(blocks)
 
 
