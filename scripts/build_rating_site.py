@@ -445,7 +445,7 @@ def footer_block(lang: str, depth: int = 0) -> str:
 <a href="/ru/otvetstvennaya-igra">Ответственная игра</a>
 <a class="footer-lang" href="/">O'zbekcha</a>'''
         disc = "Независимый рейтинг казино и БК Узбекистана. Материалы носят информационный характер и не являются приглашением к игре."
-        sticky_title = 'Стартовый пакет FairPari <span class="bonus">20,2 млн UZS + 150 FS</span>'
+        sticky_title = 'Лучшее предложение: <span class="bonus">20 200 000 UZS + 150 FS</span>'
         sticky_btn = "Активировать"
         badge_alt = ("eCOGRA", "DMCA", "BeGambleAware")
     else:
