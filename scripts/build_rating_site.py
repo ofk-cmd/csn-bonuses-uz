@@ -491,7 +491,7 @@ def build_index(lang: str):
         url = f"{DOMAIN}/ru/"
         hero_h1 = "ТОП-20 бонусов казино и БК <em>Узбекистан 2026</em>"
         hero_sub = "Welcome-пакеты, wagering и Humo/Payme — независимый рейтинг casino.ru-стиля."
-        hero_btn = "Бонус FairPari №1"
+        hero_btn = "забрать лучший"
         img = "../assets/hero-bonus-light.webp"
         img_alt = "Бонусы казино Узбекистан"
         schema = json.dumps({
